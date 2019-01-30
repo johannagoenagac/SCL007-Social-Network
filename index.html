@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Social network</title>
-    <!-- Responsive Mobile-first -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Test-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
-    <!--Enlace hoja de estilos -->
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <!-- Menú del navegador-->
-      <div >
+
+<head>
+  <meta charset="utf-8">
+  <title>Social network</title>
+  <!-- Responsive Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Test-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
+  <!--Importa Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet"> 
+  <!--Enlace hoja de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <!-- Menú del navegador-->
+    <div class="container">
+      <nav class="navbar">
+        <a class="brand" id="navLogo">Food & Travel</a>
+        <a class="pageGuide" id="pageGuide"></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!--Contenido principal -->
+    <div id="root">
+      <!--Login - página 1-->
+      <div id="login">
       </div>
-    </header>
-    
-    <main>
-      <!--Contenido principal -->
-      <div id="root">
-        <!--Login - página 1-->
-        <div id="login">                
-        </div>
 
-        <!--Home - página2-->
-        <div id="home">
-        </div>
-        
-        <!--Perfil - página3-->
-        <div id="perfil">
-        </div>
+      <!--Home - página2-->
+      <div id="home">
+      </div>
 
-        <!--Post - página4-->
-        <div id="post">
-        </div>
-    </div>
-    </main>
+      <!--Profile - página3-->
+      <div id="profile">
+      </div>
 
-    <footer>
-      <!-- Pie de página -->
-    </footer>
-    <div>
-      <!-- Script de Frameworks-->
+      <!--Post - página4-->
+      <div id="post">
+      </div>
     </div>
-    <div>
-      <!--Script Archivo-->
-      <script src="data.js"></script>
-      <script src="main.js"></script>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="container">
+      <a class="icon" id="homeLogo" src=""></a>
+      <a class="icon" id="serachLogo" src=""></a>
+      <a class="icon" id="addLogo" src=""></a>
+      <a class="icon" id="recipeLogo" src=""></a>
+      <a class="icon" id="userLogo" src=""></a>
     </div>
-  </body>
+  </footer>
+  <div>
+    <!-- Script de Frameworks-->
+  </div>
+  <div>
+    <!--Script Archivo-->
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+  </div>
+</body>
+
 </html>
