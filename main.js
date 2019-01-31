@@ -1,28 +1,30 @@
 //Manejo del DOM
 
-const home = document.getElementById("homeLogo");
-const search = document.getElementById("searchLogo");
-const add = document.getElementById("addLogo");
-const recipe = document.getElementById("recipeLogo");
-const user = document.getElementById("userLogo");
-const pageGuide = document.getElementById("pageGuide");
+window.onload = () =>{
+    header.style.display = "block";
+    login.style.display = "none";
+    home.style.display = "none";
+    profile.style.display = "none";
+    recipe.style.display = "none";
+    search.style.display = "none";
+}
 
-home.addEventListener("click", () => {
+homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
 });
 
-search.addEventListener("click", () => {
+searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-add.addEventListener("click", () => {
+addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
 });
 
-recipe.addEventListener("click", () => {
+recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
 });
 
-user.addEventListener("click", () => {
+userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
 });

@@ -9,6 +9,26 @@
     justify-content: flex-start;
     align-items: center;
     display: flex;
+    color: white;
+}
+
+.navbar > a{
+    margin-right: .5rem;
+}
+
+.menuTabs{
+    font-size: 20px;
+    list-style: none;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.menuTabs > li{
+    padding: 0 1rem;
+}
+
+.menuTabs >li:active{
+    font-weight: bold;
 }
 
 .pageGuide{
@@ -16,6 +36,7 @@
     align-items: center;
     display: flex;
     margin-left: auto;
+    font-size: 20px;
 }
 
 .footer{
@@ -37,11 +58,10 @@
 }
 
 .icon{
-    height: auto;
-    width: 100%;
+    max-width: 100%;
     z-index: 3;
     cursor: pointer;
-    display: flex;
+    margin: 0 auto;
 }
 
 body {
@@ -52,13 +72,4 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-}
-
-a.brand{
-    color: white;
-}
-
-a#pageGuide.pageGuide{
-    color: white;
-    font-size: 20px;
 }
