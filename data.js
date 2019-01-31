@@ -1,7 +1,7 @@
 //Funciones - Aquí va la lógica
 //callback - función que se llamará dsps
 export const checkAuthStatus = (callback) => {
-  firebase.auth().onAuthStatusChanged((user)=>{
+  firebase.auth().onAuthStateChanged((user)=>{
     if(user){
       console.log("Hay un usuario > "+ JSON.stringify(user));
       callback(user);

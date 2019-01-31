@@ -1,13 +1,16 @@
 //Manejo del DOM
-import {checkOutStatus} from '../src/data.js';
+
+import {checkAuthStatus, registerUser} from '../src/data.js';
 
 window.onload = () =>{
 
     checkAuthStatus((user)=>{
         if(user){
-            //ocular o mostrar divs de login o de menu
+            auth.style.display = "none";
+            root.style.display = "block";
         }else{
-    //ocular o mostrar divs de login o de menu
+            auth.style.display = "block";
+            root.style.display = "none";
         }
     });
 
@@ -28,22 +31,22 @@ const recipe = document.getElementById("recipeLogo");
 const user = document.getElementById("userLogo");
 const pageGuide = document.getElementById("pageGuide");
 
-home.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
+// home.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Home";
+// });
 
-search.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
+// search.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Buscar";
+// });
 
-add.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
+// add.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Post";
+// });
 
-recipe.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
+// recipe.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Receta";
+// });
 
-user.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
+// user.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Perfil";
+// });
