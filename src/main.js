@@ -1,13 +1,29 @@
 //Manejo del DOM
 
+import {checkAuthStatus, registerUser} from '../src/data.js';
+
 window.onload = () =>{
-    header.style.display = "block";
-    login.style.display = "none";
-    home.style.display = "none";
-    profile.style.display = "none";
-    recipe.style.display = "none";
-    search.style.display = "none";
-}
+
+    checkAuthStatus((user)=>{
+        if(user){
+            header.style.display = "none";
+            auth.style.display = "none";
+            root.style.display = "block";
+        }else{
+            header.style.display = "none";
+            auth.style.display = "block";
+            root.style.display = "none";
+        }
+    });
+
+    const registerWithGoogle = () =>{
+        registerUser();
+    }
+
+    googleregistry.addEventListener('click',registerWithGoogle);
+   
+};
+
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -28,3 +44,4 @@ recipeLogo.addEventListener("click", () => {
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
 });
+
