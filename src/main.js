@@ -6,11 +6,9 @@ window.onload = () =>{
 
     checkAuthStatus((user)=>{
         if(user){
-            header.style.display = "none";
             auth.style.display = "none";
             root.style.display = "block";
         }else{
-            header.style.display = "none";
             auth.style.display = "block";
             root.style.display = "none";
         }
@@ -25,23 +23,30 @@ window.onload = () =>{
 };
 
 
-homeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
 
-searchLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
+const home = document.getElementById("homeLogo");
+const search = document.getElementById("searchLogo");
+const add = document.getElementById("addLogo");
+const recipe = document.getElementById("recipeLogo");
+const user = document.getElementById("userLogo");
+const pageGuide = document.getElementById("pageGuide");
 
-addLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
+// home.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Home";
+// });
 
-recipeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
+// search.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Buscar";
+// });
 
-userLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
+// add.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Post";
+// });
 
+// recipe.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Receta";
+// });
+
+// user.addEventListener("click", () => {
+//     pageGuide.innerHTML = "Perfil";
+// });
