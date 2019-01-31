@@ -1,0 +1,55 @@
+.navbar{
+    min-height: 1rem;
+    min-width: 100%;
+    position: sticky;
+    z-index: 2;
+    padding: .5rem;
+    background-color: #B71C1C;
+    font-size: 24px;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+}
+
+.pageGuide{
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+}
+
+.footer{
+    min-height: 1rem;
+    z-index: 2;
+    padding: .5rem;
+    background-color: #FCE4EC;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+
+.iconList{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.icon{
+    height: auto;
+    width: 100%;
+    z-index: 3;
+    cursor: pointer;
+    display: flex;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #E5E5E5;
+    font-family: 'Hind', sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
