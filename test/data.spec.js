@@ -1,5 +1,5 @@
+require("../src/data");
 const assert = require("chai").assert;
-global.window = global;
 
 
 describe("verificar email", () => {

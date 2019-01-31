@@ -18,43 +18,46 @@
     </header>
     
     <main>
-      <!--Contenido principal -->
-      <div id="root">
-        <!--Login - página 1-->
-        <section id="auth" class="auth">    
-          <h1>Aquí va el logo</h1>
-          <div>
-            <span>Inicia sesión</span> 
-          </div>
-          <div id="login" class="login">
-            <!--el action es para que el formulario no se recarge de nuevo-->
-            <form action="javascript:void(0)">
-              <div class="grid">
-                <div class="info-login">
-                  <input placeholder="Correo Electrónico" id="user" type="text">
-                  <input placeholder="Contraseña" id="password" type="password">
-                  <button id="enter-login" type="submit" >Ingresar</button>   
-                  <a href="#" class="forget">¿Olvidaste tu contraseña?</a>                 
-                </div>
+<!--Login - página 1-->
+    <div id="auth" class="auth">    
+        <h1>Aquí va el logo</h1>
+        <div>
+          <span>Inicia sesión</span> 
+        </div>
+        <div id="login" class="login">
+          <!--el action es para que el formulario no se recarge de nuevo-->
+          <form action="javascript:void(0)">
+            <div class="grid">
+              <div class="info-login">
+                <input placeholder="Correo Electrónico" id="user" type="text">
+                <input placeholder="Contraseña" id="password" type="password">
+                <button id="enter-login" type="submit" >Ingresar</button>   
+                <a href="#" class="forget">¿Olvidaste tu contraseña?</a>                 
               </div>
-            </form>
-          </div>
-          <div class="medium">
-              <hr class="line">
-              <span>o</span>
-              <hr class="line">
-          </div>
-          <div id="registry">
-            <button id="face-registry" type="submit">
+            </div>
+          </form>
+        </div>
+        <div class="medium">
+            <hr class="line">
+            <span>o</span>
+            <hr class="line">
+        </div>
+        <div id="registry">
+          <button id="face-registry" type="submit">
+            <span></span>
+            <span>Facebook</span>
+          </button>   
+          <button id="googleregistry" type="submit">
               <span></span>
-              <span>Facebook</span>
+              <span>Google</span>
             </button>   
-            <button id="g-registry" type="submit">
-                <span></span>
-                <span>Google</span>
-              </button>   
-          </div>
-        </section>
+        </div>
+      </div>  
+
+
+
+    <!--Contenido principal -->
+    <div id="root">
 
         <!--Home - página2-->
         <div id="home">
