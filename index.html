@@ -21,15 +21,47 @@
       <!--Contenido principal -->
       <div id="root">
         <!--Login - página 1-->
-        <div id="login">                
-        </div>
+        <section id="auth" class="auth">    
+          <h1>Aquí va el logo</h1>
+          <div>
+            <span>Inicia sesión</span> 
+          </div>
+          <div id="login" class="login">
+            <!--el action es para que el formulario no se recarge de nuevo-->
+            <form action="javascript:void(0)">
+              <div class="grid">
+                <div class="info-login">
+                  <input placeholder="Correo Electrónico" id="user" type="text">
+                  <input placeholder="Contraseña" id="password" type="password">
+                  <button id="enter-login" type="submit" >Ingresar</button>   
+                  <a href="#" class="forget">¿Olvidaste tu contraseña?</a>                 
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="medium">
+              <hr class="line">
+              <span>o</span>
+              <hr class="line">
+          </div>
+          <div id="registry">
+            <button id="face-registry" type="submit">
+              <span></span>
+              <span>Facebook</span>
+            </button>   
+            <button id="g-registry" type="submit">
+                <span></span>
+                <span>Google</span>
+              </button>   
+          </div>
+        </section>
 
         <!--Home - página2-->
         <div id="home">
         </div>
         
-        <!--Perfil - página3-->
-        <div id="perfil">
+        <!--Profile - página3-->
+        <div id="profile">
         </div>
 
         <!--Post - página4-->
@@ -42,12 +74,27 @@
       <!-- Pie de página -->
     </footer>
     <div>
-      <!-- Script de Frameworks-->
+      <!-- Script de Frameworks-->    
+      <!-- Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
+          authDomain: "f00dtravel.firebaseapp.com",
+          databaseURL: "https://f00dtravel.firebaseio.com",
+          projectId: "f00dtravel",
+          storageBucket: "f00dtravel.appspot.com",
+          messagingSenderId: "150049211228"
+        };
+        firebase.initializeApp(config);
+      </script>  
     </div>
     <div>
       <!--Script Archivo-->
-      <script src="data.js"></script>
-      <script src="main.js"></script>
+      <script src="data.js" type="module"></script>
+      <!--type="module" es para js moderno-->
+      <script src="main.js" type="module"></script>
     </div>
   </body>
 </html>
