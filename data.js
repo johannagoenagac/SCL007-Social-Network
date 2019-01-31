@@ -26,16 +26,16 @@ export const registerUser = () => {
         // The signed-in user info.
         var user = result.user;
      }).catch(function(error) {
-//         // Handle Errors here.
-//         let errorCode = error.code;
-//         let errorMessage = error.message;
-//         console.log(errorCode);
-//         console.log(errorMessage);
-//         // The email of the user's account used.
-//         let email = error.email;
-//         // The firebase.auth.AuthCredential type that was used.
-//         let credential = error.credential;
-//         // ...
+        // Handle Errors here.
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+        // The email of the user's account used.
+        let email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        let credential = error.credential;
+        // ...
      });
 }
 
