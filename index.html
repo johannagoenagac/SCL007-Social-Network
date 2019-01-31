@@ -1,53 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Social network</title>
-    <!-- Responsive Mobile-first -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Test-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
-    <!--Enlace hoja de estilos -->
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <!-- Menú del navegador-->
-      <div >
+
+<head>
+  <meta charset="utf-8">
+  <title>Social network</title>
+  <!-- Responsive Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Test-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
+  <!--Importa Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+  <!--Enlace hojas de estilos -->
+  <link rel="stylesheet" href="./style/style.css">
+  <link rel="stylesheet" href="./style/grid.css">
+
+</head>
+
+<body>
+  <header>
+    <!-- Menú del navegador-->
+    <div class="container">
+      <nav class="navbar">
+        <a class="brand" id="navLogo">Food & Travel</a>
+        <a class="pageGuide" id="pageGuide"></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!--Contenido principal -->
+    <div id="root">
+      <!--Login - página 1-->
+      <div id="login">
       </div>
-    </header>
-    
-    <main>
-      <!--Contenido principal -->
-      <div id="root">
-        <!--Login - página 1-->
-        <div id="login">                
-        </div>
 
-        <!--Home - página2-->
-        <div id="home">
+      <!--Home - página2-->
+      <div id="home">
+        <div class="container">
+          <div class="row">
+            <div class="col-l-12">
+            </div>
+          </div>
         </div>
-        
-        <!--Perfil - página3-->
-        <div id="perfil">
-        </div>
+      </div>
 
-        <!--Post - página4-->
-        <div id="post">
-        </div>
-    </div>
-    </main>
+      <!--Profile - página3-->
+      <div id="profile">
+      </div>
 
-    <footer>
-      <!-- Pie de página -->
-    </footer>
-    <div>
-      <!-- Script de Frameworks-->
+      <!--Post - página4-->
+      <div id="post">
+      </div>
     </div>
-    <div>
-      <!--Script Archivo-->
-      <script src="data.js"></script>
-      <script src="main.js"></script>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="container footer">
+    <div class="row iconList">
+      <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
     </div>
-  </body>
+  </footer>
+  <div>
+    <!-- Script de Frameworks-->
+  </div>
+  <div>
+    <!--Script Archivo-->
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+  </div>
+</body>
+
 </html>
