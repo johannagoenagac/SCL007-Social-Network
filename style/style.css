@@ -73,3 +73,79 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
+
+span{
+    color: #FCE4EC;
+    font-family: Open Sans,sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+}
+.medium{
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.line{
+    border: none;
+    border-bottom: 1px solid;
+    margin: 10px;
+    height: 1px;
+    -webkit-box-flex: 1;
+    flex: 1 0;
+    color: #FCE4EC;
+}
+
+.info-login{
+    width: 50%;
+    margin: 0px auto;
+    margin-top: 150px;
+    padding: 20px;
+}
+
+.info-login input{
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    outline: none;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.info-login button{
+    background: #BDBDBD;
+    border: 0px;
+    border-radius: 5px;
+    padding: 15px;
+    display: block;
+    width: 100%;
+}
+
+.forget{
+    color: #FCE4EC;
+    padding: 30px 0 20px 0;
+    display: block;
+    width: 100%;
+}
+
+.auth  {
+    background: #B71C1C;
+    padding: 0px;
+    margin: 0px;
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 18px;
+    text-align: center;
+    color: #212121;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr;
+}
