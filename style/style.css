@@ -1,5 +1,6 @@
 .navbar{
     min-height: 1rem;
+    min-width: 100%;
     position: sticky;
     z-index: 2;
     padding: .5rem;
@@ -10,6 +11,13 @@
     display: flex;
 }
 
+.pageGuide{
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+}
+
 .footer{
     min-height: 1rem;
     z-index: 2;
@@ -18,10 +26,22 @@
     justify-content: flex-start;
     align-items: center;
     display: flex;
+    position: absolute;
+    bottom: 0;
 }
+
+.iconList{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .icon{
-    min-height: 25px;
-    min-width: 25px;
+    height: auto;
+    width: 100%;
+    z-index: 3;
+    cursor: pointer;
+    display: flex;
 }
 
 body {
