@@ -56,9 +56,80 @@ body {
     background-size: cover;
 }
 
-a.brand{
-    color: white;
+.indexTitle{
+    margin: 0px auto;
+    padding-top: 4%;
+    color: #FCE4EC;
+    font-family: Open Sans,sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    display: block;
+    max-width: 100%;
+    text-align: center;
 }
+
+
+.medium{
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.line{
+    border: none;
+    border-bottom: 1px solid;
+    margin: 10px;
+    height: 1px;
+    -webkit-box-flex: 1;
+    flex: 1 0;
+    color: #FCE4EC;
+}
+
+.info-login{
+    margin: 0px auto;
+    margin-top: 10%;
+    display: block;
+}
+
+.info-login input{
+    display: block;
+    margin: 0px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    outline: none;
+    max-width: 100%;
+    margin-bottom: 20px;
+
+}
+
+#signInBtn{
+    text-align: center;
+}
+
+.signInBtn{
+    background: #BDBDBD;
+    border: 0px;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0px auto;
+    max-width: 100%;
+}
+
+.forget{
+    color: #FCE4EC;
+    padding: 30px 0 20px 0;
+    display: block;
+    width: 100%;
+}
+
+#loginPage{
+    background-color: #B71C1C;
+    background-repeat: no-repeat;
+    min-height: 100hv;
+    background-size: cover;
 
 #icon-user{
     margin-left: 10px;
@@ -125,4 +196,5 @@ a.brand{
     width: 90%;
     height: 150;
 }
+
 
