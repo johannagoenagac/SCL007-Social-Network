@@ -106,9 +106,6 @@ a.brand{
     font-size: 10px;
     color: white;
     border-radius: 5px;
-    
-   
-    
 }
 
 #post-form{
@@ -116,12 +113,16 @@ a.brand{
     display: block;
     margin: 0 auto;
     justify-content: center;
-    
 }
 
 #form-post{
     border: 1px solid #9e9e9e ;
-   margin:20px;
-   padding: 20px;
-    
+    margin:20px;
+    padding: 20px;
 }
+
+#content-image{
+    width: 90%;
+    height: 150;
+}
+
