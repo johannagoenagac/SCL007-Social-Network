@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
   <meta charset="utf-8">
   <title>Social network</title>
@@ -71,66 +72,109 @@
         </div>
       </div>
     </div>
-    </div>
-    <!--Contenido principal -->
-    <div id="root">
 
+    <!--Contenido principal -->
+  <div id="root" class="row">
       <!--Home - página2-->
+  
       <div id="home">
       </div>
-
+  
       <!--Profile - página3-->
       <div id="profile">
       </div>
-
+  
       <!--Post - página4-->
       <div id="post">
+        <!--Subir foto-->
+        <div id="Image-goup">
+          <div id="divInputLoad">
+  
+            <h1 id="go-up-text">Sube tu imagen</h1>
+  
+            <div id="divFileUpload">
+              <input id="file-upload" type="file" accept="image/*" />
+            </div>
+  
+            <div id="file-preview-zone"></div>
+          </div>
+        </div>
+  
+  
+        <!--Post create-->
+        <div id="postField">
+          <div id="post-form" class="container">
+            <div class="row">
+              <div class="col-s-10 col-m-10 col-l-10">
+                <form id="form-post" name="formulario" method="post" action="">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-s-6 col-m-2 col-l-2">
+                        <img id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
+                          alt="icon user">
+                      </div>
+                      <div class="col-s-6 col-m-6 col-l-6">
+                        <h1 id="user-name">Nombre usuario</h1>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-s-10 m-10 l-10">
+                        <textarea id="post-text" placeholder="Escribe tu post"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <input id="send" type="submit" value="Enviar">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
+  
       <!--Post - página5-->
       <div id="recipe">
       </div>
-
+  
       <!--Post - página6-->
       <div id="search">
       </div>
     </div>
+
   </main>
 
-  <footer id="footer" class="container footer">
+  <!-- Pie de página -->
+  <footer class="container footer">
     <div class="row iconList">
-      <a class="col-xs-3 col-s-4 col-m-4" id="homeLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="searchLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="addLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="recipeLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="userLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
     </div>
   </footer>
 
-  <div>
-    <!-- Script de Frameworks-->
-    <!-- Firebase-->
-    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
-        authDomain: "f00dtravel.firebaseapp.com",
-        databaseURL: "https://f00dtravel.firebaseio.com",
-        projectId: "f00dtravel",
-        storageBucket: "f00dtravel.appspot.com",
-        messagingSenderId: "150049211228"
-      };
-      firebase.initializeApp(config);
-    </script>
-  </div>
+  <!-- Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
+      authDomain: "f00dtravel.firebaseapp.com",
+      databaseURL: "https://f00dtravel.firebaseio.com",
+      projectId: "f00dtravel",
+      storageBucket: "f00dtravel.appspot.com",
+      messagingSenderId: "150049211228"
+    };
+    firebase.initializeApp(config);
+  </script>
 
-  <div>
-    <!--Script Archivo-->
-    <script src="data.js" type="module"></script>
-    <!--type="module" es para js moderno-->
-    <script src="main.js" type="module"></script>
-  </div>
+  <!--Script Archivo-->
+  <script src="data.js" type="module"></script>
+  <!--type="module" es para js moderno-->
+  <script src="main.js" type="module"></script>
 
 </body>
 
