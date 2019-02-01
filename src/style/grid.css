@@ -1,7 +1,5 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0
   }
 
 /*cada vez que utilize la clase container, tomara estos estilos*/
@@ -13,11 +11,11 @@
 
 .row::before, .row::after {
     content: "";
-    display: table;
+    clear: both;
 }
 
 .row::after {
-    clear: both;
+    display: table;
 }
 
 [class*="col-"] {
@@ -65,14 +63,6 @@
     .col-xs-12 {
         width: 100%;
     }
-
-    .footer{
-        display: block;
-    }
-
-    .menuTabs{
-        display: none;
-    }
 }
 
 @media only screen and (min-width: 576px) {
@@ -113,14 +103,6 @@
     .col-s-12 {
         width: 100%;
     }
-
-    .footer{
-        display: block;
-    }
-
-    .menuTabs{
-        display: none;
-    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -160,14 +142,6 @@
     }
     .col-m-12 {
         width: 100%;
-    }
-
-    .footer{
-        display: block;
-    }
-
-    .menuTabs{
-        display: none;
     }
 }
 
@@ -211,14 +185,6 @@
     }
 
     .footer{
-        display: none;
-    }
-
-    .menuTabs{
-        display: flex !important;
-    }
-
-    .pageGuide{
         display: none;
     }
 }
