@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
   <meta charset="utf-8">
   <title>Social network</title>
@@ -48,6 +49,8 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12 info-login">
+
+
                 <input placeholder="Correo Electrónico" id="user" type="text">
                 <input placeholder="Contraseña" id="password" type="password">
                 <div id="signInBtn">
@@ -55,48 +58,116 @@
                 </div>
                 <a href="#" class="forget">¿Olvidaste tu contraseña?</a>
               </div>
+
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="medium">
-        <hr class="line">
-        <span>o</span>
-        <hr class="line">
-      </div>
-      <div id="registry">
-        <button id="face-registry" type="submit">
-          <span></span>
-          <span>Facebook</span>
-        </button>
-        <button id="googleregistry" type="submit">
-          <span></span>
-          <span>Google</span>
-        </button>
-      </div>
-    </div>
-    </div>
-    <!--Contenido principal -->
-    <div id="root">
-        <!--Home - página2-->
+
+
+          </form>
+        </div>
+
+        <div class="medium">
+            <hr class="line">
+            <span>o</span>
+            <hr class="line">
+        </div>
+
+        <div id="registry">
+          <button id="face-registry" type="submit">
+            <span></span>
+            <span>Facebook</span>
+          </button>  
+
+          <button id="googleregistry" type="submit">
+              <span></span>
+              <span>Google</span>
+            </button>   
+        </div>
+    </div>  
+
+
+     <!--Home - página2-->
+
         <div id="home">
         </div>
-        
-        <!--Profile - página3-->
-        <div id="profile">
+
+     <!--Subir foto-->  
+     <div id="Image-goup">
+      <div id="divInputLoad">
+
+        <h1 id="go-up-text">Sube tu imagen</h1>
+
+        <div id="divFileUpload">
+            <input id="file-upload" type="file" accept="image/*" />
         </div>
 
-        <!--Post - página4-->
-        <div id="post">
-        </div>
+        <div id="file-preview-zone"></div>
+      
+      </div>
     </div>
-    </main>
 
-    <footer>
-      <!-- Pie de página -->
-    </footer>
-    <div>
-      <!-- Script de Frameworks-->    
+     
+     <!--Post create-->
+     <div id="post">
+      <div id="post-form" class="container">
+        <div class="row">
+          <div class="col-s-10 col-m-10 col-l-10">
+
+            <form id="form-post" name="formulario" method="post" action="">
+       
+              <div class="container">
+              <div class="row">
+
+                <div class="col-s-6 col-m-2 col-l-2" >
+                <img  id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png" alt="icon user">
+                </div>
+
+                <div class="col-s-6 col-m-6 col-l-6">
+                <h1 id="user-name">Nombre usuario</h1>
+                </div>
+
+              </div>
+              </div>
+            
+              
+             <div class="container">
+               <div class="row">
+
+                <div class="col-s-10 m-10 l-10">
+                <textarea id="post-text"placeholder="Escribe tu post"></textarea>
+                </div>
+               </div>
+              </div>
+           
+            
+                <input id="send" type="submit" value="Enviar">
+
+          
+             </form>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+         <!--Profile - página3-->
+      <div id="profile">
+      </div>
+
+        <!--Post - página5-->
+      <div id="recipe">
+      </div>
+
+      <!--Post - página6-->
+      <div id="search">
+      </div>
+
+
+  
+  </main>
+ 
+    
+    <!--Contenido principal -->
+    <div id="root" class="row"> </div>
+     
       <!-- Firebase-->
       <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
       <script>
@@ -111,12 +182,22 @@
         };
         firebase.initializeApp(config);
       </script>  
-    </div>
-    <div>
+   
       <!--Script Archivo-->
       <script src="data.js" type="module"></script>
       <!--type="module" es para js moderno-->
       <script src="main.js" type="module"></script>
-    </div>
+
+      <!-- Pie de página -->
+  <footer class="container footer">
+      <div class="row iconList">
+        <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
+      </div>
+     </footer>
+   
   </body>
 </html>
