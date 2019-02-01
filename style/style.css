@@ -75,12 +75,18 @@ body {
 }
 
 
-span{
+.indexTitle{
+    margin: 0px auto;
+    padding-top: 4%;
     color: #FCE4EC;
     font-family: Open Sans,sans-serif;
     font-weight: 700;
     font-size: 30px;
+    display: block;
+    max-width: 100%;
+    text-align: center;
 }
+
 .medium{
     -webkit-box-align: center;
     align-items: center;
@@ -100,29 +106,34 @@ span{
 }
 
 .info-login{
-    width: 50%;
     margin: 0px auto;
-    margin-top: 150px;
-    padding: 20px;
+    margin-top: 10%;
+    display: block;
 }
 
 .info-login input{
     display: block;
+    margin: 0px auto;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
     outline: none;
-    width: 100%;
+    max-width: 100%;
     margin-bottom: 20px;
+
 }
 
-.info-login button{
+#signInBtn{
+    text-align: center;
+}
+
+.signInBtn{
     background: #BDBDBD;
     border: 0px;
     border-radius: 5px;
     padding: 15px;
-    display: block;
-    width: 100%;
+    margin: 0px auto;
+    max-width: 100%;
 }
 
 .forget{
@@ -132,17 +143,12 @@ span{
     width: 100%;
 }
 
-.auth  {
-    background: #B71C1C;
-    padding: 0px;
-    margin: 0px;
-    font-family: Hind;
-    font-style: normal;
-    font-weight: normal;
-    line-height: normal;
-    font-size: 18px;
-    text-align: center;
-    color: #212121;
+#loginPage{
+    background-color: #B71C1C;
+    background-repeat: no-repeat;
+    min-height: 100hv;
+    background-size: cover;
+    
 }
 
 .grid{

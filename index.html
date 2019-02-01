@@ -31,20 +31,30 @@
 
   <main>
     <!--Login - página 1-->
-    <div id="auth" class="auth">
-      <h1>Aquí va el logo</h1>
-      <div>
-        <span>Inicia sesión</span>
+    <div class="container" id="loginPage">
+      <div id="auth" class="row">
+        <div class="col-xs-12">
+          <h1 class="indexTitle">Aquí va el logo</h1>
+        </div>
+        <div class="col-xs-12">
+          <div class="indexTitle">
+            <span>Inicia sesión</span>
+          </div>
+        </div>
       </div>
       <div id="login" class="login">
         <!--el action es para que el formulario no se recarge de nuevo-->
         <form action="javascript:void(0)">
-          <div class="grid">
-            <div class="info-login">
-              <input placeholder="Correo Electrónico" id="user" type="text">
-              <input placeholder="Contraseña" id="password" type="password">
-              <button id="enter-login" type="submit">Ingresar</button>
-              <a href="#" class="forget">¿Olvidaste tu contraseña?</a>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 info-login">
+                <input placeholder="Correo Electrónico" id="user" type="text">
+                <input placeholder="Contraseña" id="password" type="password">
+                <div id="signInBtn">
+                  <button class="signInBtn" id="enter-login" type="submit">Ingresar</button>
+                </div>
+                <a href="#" class="forget">¿Olvidaste tu contraseña?</a>
+              </div>
             </div>
           </div>
         </form>
@@ -65,7 +75,7 @@
         </button>
       </div>
     </div>
-
+    </div>
     <!--Contenido principal -->
     <div id="root">
 
