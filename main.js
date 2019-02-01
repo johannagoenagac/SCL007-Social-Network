@@ -6,13 +6,14 @@ window.onload = () =>{
 
     checkAuthStatus((user)=>{
         if(user){
-            header.style.display = "none";
             auth.style.display = "none";
             root.style.display = "block";
+            loginPage.style.display = "none";
         }else{
             header.style.display = "none";
             auth.style.display = "block";
             root.style.display = "none";
+            footer.style.display = "none"
         }
     });
 
