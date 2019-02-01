@@ -6,15 +6,19 @@ window.onload = () =>{
 
     checkAuthStatus((user)=>{
         if(user){
+            header.style.display = "block"
             auth.style.display = "none";
             root.style.display = "block";
             loginPage.style.display = "none";
+            post.style.display = "block";
         }else{
             header.style.display = "none";
             auth.style.display = "block";
             root.style.display = "none";
             footer.style.display = "none"
+            post.style.display = "none";
         }
+
     });
 
     const registerWithGoogle = () =>{
@@ -22,9 +26,32 @@ window.onload = () =>{
     }
 
     googleregistry.addEventListener('click',registerWithGoogle);
+
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+ 
+            reader.onload = function (e) {
+                var filePreview = document.createElement('img');
+                filePreview.id = 'file-preview';
+                //e.target.result contents the base64 data from the image uploaded
+                filePreview.src = e.target.result;
+                console.log(e.target.result);
+ 
+                var previewZone = document.getElementById('file-preview-zone');
+                previewZone.appendChild(filePreview);
+            }
+ 
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+ 
+    var fileUpload = document.getElementById('file-upload');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    }
    
 };
-
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -45,4 +72,3 @@ recipeLogo.addEventListener("click", () => {
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
 });
-
