@@ -66,9 +66,18 @@ span{
     font-size: 18px;
     text-align: center;
     color: #212121;
+    display: none;
 }
 
 .grid{
     display: grid;
     grid-template-columns: 1fr;
+}
+
+#post{
+    display: none;
+}
+
+#go-up-text{
+    font-size: 20px;
 }
