@@ -78,64 +78,45 @@
     </div>
     <!--Contenido principal -->
     <div id="root">
+        <!--Home - página2-->
+        <div id="home">
+        </div>
+        
+        <!--Profile - página3-->
+        <div id="profile">
+        </div>
 
-      <!--Home - página2-->
-      <div id="home">
-      </div>
-
-      <!--Profile - página3-->
-      <div id="profile">
-      </div>
-
-      <!--Post - página4-->
-      <div id="post">
-      </div>
-
-      <!--Post - página5-->
-      <div id="recipe">
-      </div>
-
-      <!--Post - página6-->
-      <div id="search">
-      </div>
+        <!--Post - página4-->
+        <div id="post">
+        </div>
     </div>
-  </main>
+    </main>
 
-  <footer id="footer" class="container footer">
-    <div class="row iconList">
-      <a class="col-xs-3 col-s-4 col-m-4" id="homeLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="searchLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="addLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="recipeLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
-      <a class="col-xs-3 col-s-4 col-m-4" id="userLogo"><img class="icon" src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
+    <footer>
+      <!-- Pie de página -->
+    </footer>
+    <div>
+      <!-- Script de Frameworks-->    
+      <!-- Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
+          authDomain: "f00dtravel.firebaseapp.com",
+          databaseURL: "https://f00dtravel.firebaseio.com",
+          projectId: "f00dtravel",
+          storageBucket: "f00dtravel.appspot.com",
+          messagingSenderId: "150049211228"
+        };
+        firebase.initializeApp(config);
+      </script>  
     </div>
-  </footer>
-
-  <div>
-    <!-- Script de Frameworks-->
-    <!-- Firebase-->
-    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
-        authDomain: "f00dtravel.firebaseapp.com",
-        databaseURL: "https://f00dtravel.firebaseio.com",
-        projectId: "f00dtravel",
-        storageBucket: "f00dtravel.appspot.com",
-        messagingSenderId: "150049211228"
-      };
-      firebase.initializeApp(config);
-    </script>
-  </div>
-
-  <div>
-    <!--Script Archivo-->
-    <script src="data.js" type="module"></script>
-    <!--type="module" es para js moderno-->
-    <script src="main.js" type="module"></script>
-  </div>
-
-</body>
-
+    <div>
+      <!--Script Archivo-->
+      <script src="data.js" type="module"></script>
+      <!--type="module" es para js moderno-->
+      <script src="main.js" type="module"></script>
+    </div>
+  </body>
 </html>

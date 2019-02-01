@@ -9,26 +9,6 @@
     justify-content: flex-start;
     align-items: center;
     display: flex;
-    color: white;
-}
-
-.navbar > a{
-    margin-right: .5rem;
-}
-
-.menuTabs{
-    font-size: 20px;
-    list-style: none;
-    flex-direction: row;
-    cursor: pointer;
-}
-
-.menuTabs > li{
-    padding: 0 1rem;
-}
-
-.menuTabs >li:active{
-    font-weight: bold;
 }
 
 .pageGuide{
@@ -36,7 +16,6 @@
     align-items: center;
     display: flex;
     margin-left: auto;
-    font-size: 20px;
 }
 
 .footer{
@@ -58,10 +37,11 @@
 }
 
 .icon{
-    max-width: 100%;
+    height: auto;
+    width: 100%;
     z-index: 3;
     cursor: pointer;
-    margin: 0 auto;
+    display: flex;
 }
 
 body {
@@ -73,7 +53,6 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
-
 
 .indexTitle{
     margin: 0px auto;
@@ -148,10 +127,3 @@ body {
     background-repeat: no-repeat;
     min-height: 100hv;
     background-size: cover;
-    
-}
-
-.grid{
-    display: grid;
-    grid-template-columns: 1fr;
-}
