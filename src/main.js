@@ -6,12 +6,19 @@ window.onload = () =>{
 
     checkAuthStatus((user)=>{
         if(user){
+            header.style.display = "block"
             auth.style.display = "none";
             root.style.display = "block";
+            loginPage.style.display = "none";
+            post.style.display = "block";
         }else{
-            auth.style.display = "none";
-             root.style.display = "none";
-         }
+            header.style.display = "none";
+            auth.style.display = "block";
+            root.style.display = "none";
+            footer.style.display = "none"
+            post.style.display = "none";
+        }
+
     });
 
     const registerWithGoogle = () =>{
@@ -19,39 +26,6 @@ window.onload = () =>{
     }
 
     googleregistry.addEventListener('click',registerWithGoogle);
-   
-};
-
-
-
-const home = document.getElementById("homeLogo");
-const search = document.getElementById("searchLogo");
-const add = document.getElementById("addLogo");
-const recipe = document.getElementById("recipeLogo");
-const user = document.getElementById("userLogo");
-const pageGuide = document.getElementById("pageGuide");
-
-home.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
-
-search.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
-
-add.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
-
-recipe.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
-
-user.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
-
-window.onload = () =>{
 
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -76,7 +50,25 @@ window.onload = () =>{
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
-
-
-    
+   
 };
+
+homeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Home";
+});
+
+searchLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Buscar";
+});
+
+addLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Post";
+});
+
+recipeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Receta";
+});
+
+userLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Perfil";
+});
