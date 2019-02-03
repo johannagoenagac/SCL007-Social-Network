@@ -1,31 +1,41 @@
 //Manejo del DOM
 
-import {checkAuthStatus, registerUser} from '../src/data.js';
+import {checkAuthStatus, registerUser, logoutUser} from '../src/data.js';
 
 window.onload = () =>{
-
+    //Verifica estado de conexión del usuario
     checkAuthStatus((user)=>{
         if(user){
-            header.style.display = "block"
-            auth.style.display = "none";
+            //Usuario logeado, muestra menú y home
+            header.style.display = "block";
+            footer.style.display = "block";
             root.style.display = "block";
-            loginPage.style.display = "none";
+            loginPage.style.display = 'none';
             post.style.display = "block";
+            if(user !== null){
+                let name = user.displayName.split(" ");
+                document.getElementById('user-name').innerHTML = name[0];
+            }
         }else{
+            //Muestra el login, ya que usuario no está logeado
+            loginPage.style.display = "block";
             header.style.display = "none";
-            auth.style.display = "block";
             root.style.display = "none";
-            footer.style.display = "none"
+            footer.style.display = 'none';
             post.style.display = "none";
         }
-
     });
-
+    //Llama a la función registro con Google
     const registerWithGoogle = () =>{
         registerUser();
     }
+    const logoutUsers = () =>{
+        logoutUser();
+    }
 
+    //Si hace click al botón Google, llama a la función registro con Google
     googleregistry.addEventListener('click',registerWithGoogle);
+    logout.addEventListener('click',logoutUsers);
 
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -41,7 +51,6 @@ window.onload = () =>{
                 var previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             }
- 
             reader.readAsDataURL(input.files[0]);
         }
     }
