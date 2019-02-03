@@ -17,9 +17,7 @@ window.onload = () =>{
     const registerWithGoogle = () =>{
         registerUser();
     }
-
     googleregistry.addEventListener('click',registerWithGoogle);
-   
 };
 
 
