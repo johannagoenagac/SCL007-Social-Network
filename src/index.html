@@ -12,6 +12,8 @@
   <!--Enlace hoja de estilos -->
   <link rel="stylesheet" href="./style/style.css">
   <link rel="stylesheet" href="./style/grid.css">
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script> 
 </head>
 
 <body>
@@ -54,7 +56,7 @@
                 <input placeholder="Correo Electrónico" id="user" type="text">
                 <input placeholder="Contraseña" id="password" type="password">
                 <div id="signInBtn">
-                  <button class="signInBtn" id="enter-login" type="submit">Ingresar</button>
+                  <button class="signInBtn" id="enter-login" type="submit" onclick="Start()">Ingresar</button>
                 </div>
                 <a href="#" class="forget">¿Olvidaste tu contraseña?</a>
               </div>
@@ -91,10 +93,11 @@
         </div>
 
      <!--Subir foto-->  
-     <div id="Image-goup">
+     <div id="image-goup">
+       
       <div id="divInputLoad">
 
-        <h1 id="go-up-text">Sube tu imagen</h1>
+        <h1 id="go-up-text">Sube tu foto de perfil</h1>
 
         <div id="divFileUpload">
             <input id="file-upload" type="file" accept="image/*" />
@@ -104,6 +107,8 @@
       
       </div>
     </div>
+
+    
 
      
      <!--Post create-->

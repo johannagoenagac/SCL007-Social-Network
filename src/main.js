@@ -72,10 +72,34 @@ window.onload = () =>{
         }
     }
  
-    var fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
+    // //Agregando colecciones
+    // var fileUpload = document.getElementById('file-upload');
+    // fileUpload.onchange = function (e) {
+    //     readFile(e.srcElement);
+    // }
+
+    // firebase.initializeApp({
+    //     apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
+    //     authDomain: "f00dtravel.firebaseapp.com",
+    //     projectId: "f00dtravel",
+    //   });
+      
+    //   // Initialize Cloud Firestore through Firebase
+    //   var db = firebase.firestore();
+
+    //  // Agregar colecciones
+    //   db.collection("users").add({
+    //     first: "Ada",
+    //     last: "Lovelace",
+    //     born: 1815
+    // })
+    // .then(function(docRef) {
+    //     console.log("Document written with ID: ", docRef.id);
+    // })
+    // .catch(function(error) {
+    //     console.error("Error adding document: ", error);
+    // });
+    
 
 
     
