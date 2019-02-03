@@ -13,14 +13,11 @@ window.onload = () =>{
             root.style.display = "none";
         }
     });
-
     const registerWithGoogle = () =>{
         registerUser();
     }
     googleregistry.addEventListener('click',registerWithGoogle);
 };
-
-
 
 const home = document.getElementById("homeLogo");
 const search = document.getElementById("searchLogo");

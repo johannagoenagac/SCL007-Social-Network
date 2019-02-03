@@ -1,103 +1,181 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Social network</title>
-    <!-- Responsive Mobile-first -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Test-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
-    <!--Enlace hoja de estilos -->
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <!-- Menú del navegador-->
-      <div >
-      </div>
-    </header>
-    
-    <main>
-<!--Login - página 1-->
-    <div id="auth" class="auth">    
-        <h1>Aquí va el logo</h1>
-        <div>
-          <span>Inicia sesión</span> 
+
+
+<head>
+  <meta charset="utf-8">
+  <title>Social network</title>
+  <!-- Responsive Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Test-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
+  <!--Enlace hoja de estilos -->
+  <link rel="stylesheet" href="./style/style.css">
+  <link rel="stylesheet" href="./style/grid.css">
+</head>
+
+<body>
+  <header id="header">
+    <!-- Menú del navegador-->
+    <div class="container">
+      <nav class="navbar">
+        <a class="brand" id="navLogo">Food & Travel</a>
+        <ul class="menuTabs">
+          <li id="homeTab">Home</li>
+          <li id="searchTab">Busqueda</li>
+          <li id="profileTab">Perfil</li>
+        </ul>
+        <a class="pageGuide" id="pageGuide"></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!--Login - página 1-->
+    <div class="container" id="loginPage">
+      <div id="auth" class="row">
+        <div class="col-xs-12">
+          <img class="indexLogo" src="./style/img/F&T_Logo.png">
         </div>
-        <div id="login" class="login">
-          <!--el action es para que el formulario no se recarge de nuevo-->
-          <form action="javascript:void(0)">
-            <div class="grid">
-              <div class="info-login">
+        <div class="col-xs-12">
+          <img class="indexTitle" src="./style/img/F&T_Name.png">
+        </div>
+      </div>
+      <div id="login" class="login">
+        <!--el action es para que el formulario no se recarge de nuevo-->
+        <form action="javascript:void(0)">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 info-login">
                 <input placeholder="Correo Electrónico" id="user" type="text">
                 <input placeholder="Contraseña" id="password" type="password">
-                <button id="enter-login" type="submit" >Ingresar</button>   
-                <a href="#" class="forget">¿Olvidaste tu contraseña?</a>                 
+                <div id="signInBtn">
+                  <button class="signInBtn" id="enter-login" type="submit">Ingresar</button>
+                </div>
+                <div class="forget">
+                  <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
               </div>
             </div>
-          </form>
+          </div>
+        </form>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="registry">
+              <button id="face-registry" type="submit" class="loginBtn loginBtn--facebook">Facebook</button>
+              <span> o </span>
+              <button id="googleregistry" type="submit" class="loginBtn loginBtn--google">Google</button>
+            </div>
+          </div>
         </div>
-        <div class="medium">
-            <hr class="line">
-            <span>o</span>
-            <hr class="line">
-        </div>
-        <div id="registry">
-          <button id="face-registry" type="submit">
-            <span></span>
-            <span>Facebook</span>
-          </button>   
-          <button id="googleregistry" type="submit">
-              <span></span>
-              <span>Google</span>
-            </button>   
-        </div>
-      </div>  
-
-
+      </div>
+    </div>
 
     <!--Contenido principal -->
-    <div id="root">
-
-        <!--Home - página2-->
-        <div id="home">
+  <div id="root" class="row">
+      <!--Home - página2-->
+  
+      <div id="home">
+      </div>
+  
+      <!--Profile - página3-->
+      <div id="profile">
+      </div>
+  
+      <!--Post - página4-->
+      <div id="post">
+        <!--Subir foto-->
+        <div id="Image-goup">
+          <div id="divInputLoad">
+  
+            <h1 id="go-up-text">Sube tu imagen</h1>
+  
+            <div id="divFileUpload">
+              <input id="file-upload" type="file" accept="image/*" />
+            </div>
+  
+            <div id="file-preview-zone"></div>
+          </div>
         </div>
-        
-        <!--Profile - página3-->
-        <div id="profile">
+  
+  
+        <!--Post create-->
+        <div id="postField">
+          <div id="post-form" class="container">
+            <div class="row">
+              <div class="col-s-10 col-m-10 col-l-10">
+                <form id="form-post" name="formulario" method="post" action="">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-s-6 col-m-2 col-l-2">
+                        <img id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
+                          alt="icon user">
+                      </div>
+                      <div class="col-s-6 col-m-6 col-l-6">
+                        <h1 id="user-name">Nombre usuario</h1>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-s-10 m-10 l-10">
+                        <textarea id="post-text" placeholder="Escribe tu post"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <input id="send" type="submit" value="Enviar">
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+  
+      <!--Post - página5-->
+      <div id="recipe">
+      </div>
+  
+      <!--Post - página6-->
+      <div id="search">
+      </div>
+    </div>
 
-        <!--Post - página4-->
-        <div id="post">
-        </div>
-    </div>
-    </main>
+  </main>
 
-    <footer>
-      <!-- Pie de página -->
-    </footer>
-    <div>
-      <!-- Script de Frameworks-->    
-      <!-- Firebase-->
-      <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-      <script>
-        // Initialize Firebase
-        var config = {
-          apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
-          authDomain: "f00dtravel.firebaseapp.com",
-          databaseURL: "https://f00dtravel.firebaseio.com",
-          projectId: "f00dtravel",
-          storageBucket: "f00dtravel.appspot.com",
-          messagingSenderId: "150049211228"
-        };
-        firebase.initializeApp(config);
-      </script>  
+  <!-- Pie de página -->
+  <footer class="container footer">
+    <div class="row iconList">
+      <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
+      <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
     </div>
-    <div>
-      <!--Script Archivo-->
-      <script src="data.js" type="module"></script>
-      <!--type="module" es para js moderno-->
-      <script src="main.js" type="module"></script>
-    </div>
-  </body>
+  </footer>
+
+  <!-- Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
+      authDomain: "f00dtravel.firebaseapp.com",
+      databaseURL: "https://f00dtravel.firebaseio.com",
+      projectId: "f00dtravel",
+      storageBucket: "f00dtravel.appspot.com",
+      messagingSenderId: "150049211228"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <!--Script Archivo-->
+  <script src="data.js" type="module"></script>
+  <!--type="module" es para js moderno-->
+  <script src="main.js" type="module"></script>
+
+</body>
+
 </html>
