@@ -8,14 +8,14 @@ window.onload = () =>{
         if(user){
             //Usuario logeado, muestra menú y home
             header.style.display = "block"
-            auth.style.display = "none";
+            footer.style.display = "block"
             root.style.display = "block";
             loginPage.style.display = "none";
             post.style.display = "block";
         }else{
             //Muestra el login, ya que usuario no está logeado
+            loginPage.style.display = "block";
             header.style.display = "none";
-            auth.style.display = "block";
             root.style.display = "none";
             footer.style.display = "none"
             post.style.display = "none";
@@ -26,8 +26,9 @@ window.onload = () =>{
         registerUser();
     }
     const logoutUsers = () =>{
-        logoutUser();
         
+        console.log("Se supone muestra el login, de nuevo");
+        logoutUser();
     }
 
     //Si hace click al botón Google, llama a la función registro con Google
