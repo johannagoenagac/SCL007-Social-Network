@@ -12,6 +12,12 @@ window.onload = () =>{
             root.style.display = "block";
             loginPage.style.display = "none";
             post.style.display = "block";
+            if(user !== null){
+                document.getElementById('user-name').innerHTML = user.displayName;
+            }
+
+
+
         }else{
             //Muestra el login, ya que usuario no está logeado
             loginPage.style.display = "block";
@@ -26,8 +32,6 @@ window.onload = () =>{
         registerUser();
     }
     const logoutUsers = () =>{
-        
-        console.log("Se supone muestra el login, de nuevo");
         logoutUser();
     }
 
@@ -49,7 +53,6 @@ window.onload = () =>{
                 var previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             }
- 
             reader.readAsDataURL(input.files[0]);
         }
     }
