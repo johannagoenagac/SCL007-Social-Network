@@ -7,23 +7,21 @@ window.onload = () =>{
     checkAuthStatus((user)=>{
         if(user){
             //Usuario logeado, muestra menú y home
-            header.style.display = "block"
-            footer.style.display = "block"
+            header.style.display = "block";
+            footer.style.display = "block";
             root.style.display = "block";
-            loginPage.style.display = "none";
+            loginPage.style.display = 'none';
             post.style.display = "block";
             if(user !== null){
-                document.getElementById('user-name').innerHTML = user.displayName;
+                let name = user.displayName.split(" ");
+                document.getElementById('user-name').innerHTML = name[0];
             }
-
-
-
         }else{
             //Muestra el login, ya que usuario no está logeado
             loginPage.style.display = "block";
             header.style.display = "none";
             root.style.display = "none";
-            footer.style.display = "none"
+            footer.style.display = 'none';
             post.style.display = "none";
         }
     });
