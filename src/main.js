@@ -1,57 +1,41 @@
 //Manejo del DOM
 
-import {checkAuthStatus, registerUser} from '../src/data.js';
+import {checkAuthStatus, registerUser, logoutUser} from '../src/data.js';
 
 window.onload = () =>{
-
+    //Verifica estado de conexión del usuario
     checkAuthStatus((user)=>{
         if(user){
-            auth.style.display = "none";
+            //Usuario logeado, muestra menú y home
+            header.style.display = "block";
+            footer.style.display = "block";
             root.style.display = "block";
+            loginPage.style.display = 'none';
+            post.style.display = "block";
+            if(user !== null){
+                let name = user.displayName.split(" ");
+                document.getElementById('user-name').innerHTML = name[0];
+            }
         }else{
-            auth.style.display = "none";
-             root.style.display = "none";
-         }
+            //Muestra el login, ya que usuario no está logeado
+            loginPage.style.display = "block";
+            header.style.display = "none";
+            root.style.display = "none";
+            footer.style.display = 'none';
+            post.style.display = "none";
+        }
     });
-
+    //Llama a la función registro con Google
     const registerWithGoogle = () =>{
         registerUser();
     }
+    const logoutUsers = () =>{
+        logoutUser();
+    }
 
+    //Si hace click al botón Google, llama a la función registro con Google
     googleregistry.addEventListener('click',registerWithGoogle);
-   
-};
-
-
-
-const home = document.getElementById("homeLogo");
-const search = document.getElementById("searchLogo");
-const add = document.getElementById("addLogo");
-const recipe = document.getElementById("recipeLogo");
-const user = document.getElementById("userLogo");
-const pageGuide = document.getElementById("pageGuide");
-
-home.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
-
-search.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
-
-add.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
-
-recipe.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
-
-user.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
-
-window.onload = () =>{
+    logout.addEventListener('click',logoutUsers);
 
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -67,11 +51,11 @@ window.onload = () =>{
                 var previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             }
- 
             reader.readAsDataURL(input.files[0]);
         }
     }
  
+<<<<<<< HEAD
     // //Agregando colecciones
     // var fileUpload = document.getElementById('file-upload');
     // fileUpload.onchange = function (e) {
@@ -100,7 +84,31 @@ window.onload = () =>{
     //     console.error("Error adding document: ", error);
     // });
     
-
-
-    
+=======
+    var fileUpload = document.getElementById('file-upload');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    }
+   
 };
+>>>>>>> 93c8663e544db87ec977a705c63f9108b53e3fdc
+
+homeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Home";
+});
+
+searchLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Buscar";
+});
+
+addLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Post";
+});
+
+recipeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Receta";
+});
+
+userLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Perfil";
+});
