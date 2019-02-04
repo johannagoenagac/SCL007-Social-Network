@@ -10,18 +10,19 @@ window.onload = () =>{
             header.style.display = "block";
             footer.style.display = "block";
             root.style.display = "block";
-            loginPage.style.display = 'none';
-            post.style.display = "block";
+            loginPage.style.display = "none";
+            post.style.display = "none";
             if(user !== null){
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];
             }
         }else{
             //Muestra el login, ya que usuario no está logeado
-            loginPage.style.display = "block";
             header.style.display = "none";
+            loginPage.style.display = "block";
+            auth.style.display = "block";
             root.style.display = "none";
-            footer.style.display = 'none';
+            footer.style.display = "none"
             post.style.display = "none";
         }
     });
@@ -33,9 +34,22 @@ window.onload = () =>{
         logoutUser();
     }
 
-    //Si hace click al botón Google, llama a la función registro con Google
-    googleregistry.addEventListener('click',registerWithGoogle);
-    logout.addEventListener('click',logoutUsers);
+  //Si hace click al botón Google, llama a la función registro con Google
+  googleregistry.addEventListener('click',registerWithGoogle);   
+  logout.addEventListener('click',logoutUsers);
+};
+
+homeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Home";
+});
+
+searchLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Buscar";
+});
+
+addLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Post";
+    post.style.display = "block";
 
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -55,7 +69,6 @@ window.onload = () =>{
         }
     }
  
-<<<<<<< HEAD
     // //Agregando colecciones
     // var fileUpload = document.getElementById('file-upload');
     // fileUpload.onchange = function (e) {
@@ -84,26 +97,12 @@ window.onload = () =>{
     //     console.error("Error adding document: ", error);
     // });
     
-=======
     var fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
    
 };
->>>>>>> 93c8663e544db87ec977a705c63f9108b53e3fdc
-
-homeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
-
-searchLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
-
-addLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
