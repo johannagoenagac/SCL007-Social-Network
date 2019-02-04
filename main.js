@@ -12,6 +12,7 @@ window.onload = () =>{
             root.style.display = "block";
             loginPage.style.display = 'none';
             post.style.display = "block";
+            //muestra el nombre
             if(user !== null){
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];
