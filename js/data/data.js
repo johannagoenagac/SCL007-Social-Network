@@ -1,9 +1,10 @@
-export const saveMeme = (memeTitle, memeImage, ownerName) => {
-    const newMemeKey = firebase.database().ref('meme/boasfdisfbsfahb').child('likes').push().key;
+export const savePost = (postImage, fullPostText, userID) => {
+    console.log(postImage, fullPostText, userID)
+    // const newPostKey = firebase.database().ref('timeline').child().push().key;
   
-    firebase.database().ref(`meme/${newMemeKey}`).set({
-      title : memeTitle,
-      image : memeImage,
-      owner : ownerName
-    });
+    // firebase.database().ref(`post/${newPostKey}`).set({
+    //   image : postImage,
+    //   text : postText,
+    //   useruid : userID
+    // });
   };
