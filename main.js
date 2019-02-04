@@ -18,6 +18,7 @@ window.onload = () => {
             if (user !== null) {
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name-marker').innerHTML = name[0];
+                document.getElementById('user-name').innerHTML = name[0];
             }
         } else {
             //Muestra el login, ya que usuario no está logeado

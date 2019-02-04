@@ -248,10 +248,10 @@ body{
 
 #user-name{
     font-size: 1rem;
-    
     max-width: 100%;
     display: block;
     margin: 0 auto;
+    font-family: sans-serif;
   
     
 }
@@ -325,3 +325,4 @@ h1{
 .alignment{
     align-self: center;
 }
+
