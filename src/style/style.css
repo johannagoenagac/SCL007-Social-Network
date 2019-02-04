@@ -16,6 +16,10 @@
     margin-right: .5rem;
 }
 
+#logout{
+    margin-left: auto;
+}
+
 .menuTabs{
     font-size: 20px;
     list-style: none;
@@ -27,7 +31,7 @@
     padding: 0 1rem;
 }
 
-.menuTabs >li:active{
+.menuTabs > li:active{
     font-weight: bold;
 }
 
@@ -76,10 +80,6 @@ body{
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
-}
-
-main{
-    padding-bottom: 3.5rem;
 }
 
 .indexLogo{

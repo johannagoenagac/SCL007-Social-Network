@@ -1,24 +1,25 @@
 //Manejo del DOM
 
-import {checkAuthStatus, registerUser, logoutUser} from '../src/data.js';
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../src/data.js';
 
-window.onload = () =>{
+const loginPage = document.getElementById("loginPage");
+
+
+window.onload = () => {
     //Verifica estado de conexión del usuario
-    checkAuthStatus((user)=>{
-        if(user){
+    checkAuthStatus((user) => {
+        if (user) {
             //Usuario logeado, muestra menú y home
             header.style.display = "block";
             footer.style.display = "block";
             root.style.display = "block";
-
             loginPage.style.display = "none";
             post.style.display = "none";
-
-            if(user !== null){
+            if (user !== null) {
                 let name = user.displayName.split(" ");
-                document.getElementById('user-name').innerHTML = name[0];
+                document.getElementById('user-name-marker').innerHTML = name[0];
             }
-        }else{
+        } else {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
             loginPage.style.display = "block";
@@ -29,16 +30,26 @@ window.onload = () =>{
         }
     });
     //Llama a la función registro con Google
-    const registerWithGoogle = () =>{
-        registerUser();
+
+    const registerWithFacebook = () => {
+        registerUserFacebook();
     }
-    const logoutUsers = () =>{
+
+    const registerWithGoogle = () => {
+        registerUserGoogle();
+    }
+    const logoutUsers = () => {
         logoutUser();
     }
 
-  //Si hace click al botón Google, llama a la función registro con Google
-  googleregistry.addEventListener('click',registerWithGoogle);   
-  logout.addEventListener('click',logoutUsers);
+    //Si hace click al botón Google, llama a la función registro con Google
+    googleRegistry.addEventListener('click', registerWithGoogle);
+
+    //Si hace click al botón Facebook, llama a la función registro con Facebook
+    facebookRegistry.addEventListener('click', registerWithFacebook);
+
+    //Si hace click al botón Logout, llama a la función Logout
+    logout.addEventListener('click', logoutUsers);
 };
 
 homeLogo.addEventListener("click", () => {
@@ -53,6 +64,29 @@ addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
 
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var filePreview = document.createElement('img');
+                filePreview.id = 'file-preview';
+                //e.target.result contents the base64 data from the image uploaded
+                filePreview.src = e.target.result;
+                console.log(e.target.result);
+
+                var previewZone = document.getElementById('file-preview-zone');
+                previewZone.appendChild(filePreview);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    var fileUpload = document.getElementById('file-upload');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    }
 });
 
 recipeLogo.addEventListener("click", () => {
@@ -62,41 +96,6 @@ recipeLogo.addEventListener("click", () => {
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
 });
-
-
-    //Funcion previw foto
-
-    window.onload =() =>{
-
-   
-        function readFile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-     
-                reader.onload = function (e) {
-                    var filePreview = document.createElement('img');
-                    filePreview.id = 'file-preview';
-                    //e.target.result contents the base64 data from the image uploaded
-                    filePreview.src = e.target.result;
-                    console.log(e.target.result);
-     
-                    var previewZone = document.getElementById('file-preview-zone');
-                    previewZone.appendChild(filePreview);
-                }
-     
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-     
-        var fileUpload = document.getElementById('file-upload');
-        fileUpload.onchange = function (e) {
-            readFile(e.srcElement);
-        }
-    
-};
-
-
-    
 
 
     // //Agregando colecciones
@@ -110,7 +109,7 @@ userLogo.addEventListener("click", () => {
     //     authDomain: "f00dtravel.firebaseapp.com",
     //     projectId: "f00dtravel",
     //   });
-      
+
     //   // Initialize Cloud Firestore through Firebase
     //   var db = firebase.firestore();
 
@@ -126,5 +125,3 @@ userLogo.addEventListener("click", () => {
     // .catch(function(error) {
     //     console.error("Error adding document: ", error);
     // });
-   
-
