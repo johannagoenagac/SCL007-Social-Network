@@ -37,25 +37,42 @@ window.onload = () =>{
     googleregistry.addEventListener('click',registerWithGoogle);
     logout.addEventListener('click',logoutUsers);
 
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
- 
-            reader.onload = function (e) {
-                var filePreview = document.createElement('img');
-                filePreview.id = 'file-preview';
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                console.log(e.target.result);
- 
-                var previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
+
+    //Funcion previw foto
+
+    window.onload =() =>{
+
+   
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+     
+                reader.onload = function (e) {
+                    var filePreview = document.createElement('img');
+                    filePreview.id = 'file-preview';
+                    //e.target.result contents the base64 data from the image uploaded
+                    filePreview.src = e.target.result;
+                    console.log(e.target.result);
+     
+                    var previewZone = document.getElementById('file-preview-zone');
+                    previewZone.appendChild(filePreview);
+                }
+     
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
+     
+        var fileUpload = document.getElementById('file-upload');
+        fileUpload.onchange = function (e) {
+            readFile(e.srcElement);
+        }
+    
+    
+        
+    };
+    
  
-<<<<<<< HEAD
+
     // //Agregando colecciones
     // var fileUpload = document.getElementById('file-upload');
     // fileUpload.onchange = function (e) {
@@ -84,14 +101,14 @@ window.onload = () =>{
     //     console.error("Error adding document: ", error);
     // });
     
-=======
+
     var fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
    
 };
->>>>>>> 93c8663e544db87ec977a705c63f9108b53e3fdc
+
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
