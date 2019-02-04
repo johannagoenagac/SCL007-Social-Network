@@ -10,9 +10,10 @@ window.onload = () =>{
             auth.style.display = "none";
             root.style.display = "block";
             loginPage.style.display = "none";
-            post.style.display = "block";
+            post.style.display = "none";
         }else{
             header.style.display = "none";
+            loginPage.style.display = "block";
             auth.style.display = "block";
             root.style.display = "none";
             footer.style.display = "none"
@@ -25,7 +26,20 @@ window.onload = () =>{
         registerUser();
     }
 
-    googleregistry.addEventListener('click',registerWithGoogle);
+    googleregistry.addEventListener('click',registerWithGoogle);   
+};
+
+homeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Home";
+});
+
+searchLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Buscar";
+});
+
+addLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Post";
+    post.style.display = "block";
 
     function readFile(input) {
         if (input.files && input.files[0]) {
@@ -50,19 +64,6 @@ window.onload = () =>{
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
-   
-};
-
-homeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
-
-searchLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
-
-addLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
 });
 
 recipeLogo.addEventListener("click", () => {
