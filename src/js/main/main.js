@@ -67,40 +67,44 @@ addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
 
-    //Funcion para cargar la imagen del post
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    // //Funcion para cargar la imagen del post
+    // function readFile(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
 
-            reader.onload = function (e) {
-                var filePreview = document.createElement('img');
-                filePreview.id = 'saveFilePreview';
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                console.log(e.target.result);
+    //         reader.onload = function (e) {
+    //             var filePreview = document.createElement('img');
+    //             filePreview.id = 'saveFilePreview';
+    //             //e.target.result contents the base64 data from the image uploaded
+    //             filePreview.src = e.target.result;
+    //             console.log(e.target.result);
 
-                var previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
-            }
+    //             var previewZone = document.getElementById('file-preview-zone');
+    //             previewZone.appendChild(filePreview);
+    //         }
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+    // }
 
-    var fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
+    // var fileUpload = document.getElementById('file-upload');
+    // fileUpload.onchange = function (e) {
+    //     readFile(e.srcElement);
+    // }
 
-    //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = () => {
-        const postImage = saveFilePreview.value;
-        const postText = postText.value;
-        const userID = firebase.auth().currentUser.uid;
-        savePost(postImage, postText, userID);
-    }
+    // //Funcion para subir la informacion del post a Firebase
+    // const savePostIntoDatabase = () => {
+    //     console.log(saveFilePreview)
+    //     console.log(postText)
+    //     const postImage = saveFilePreview;
+    //     const fullPostText = postText.value;
+    //     const userID = firebase.auth().currentUser.uid;
+    //     savePost(postImage, fullPostText, userID);
+    // }
 
-    send.addEventListener("click", savePostIntoDatabase);
+    send.addEventListener("click", () => {
+        console.log('sendBtn');
+    });
 });
 
 
