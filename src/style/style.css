@@ -83,33 +83,25 @@ body{
 }
 
 .indexLogo{
-
     margin: 0px auto;
     padding-top: 4%;
     color: #FCE4EC;
-    font-family: Open Sans,sans-serif;
-    font-weight: 700;
-    font-size: 30px;
     display: block;
-    max-width: 30%;
+    max-width: 10%;
     text-align: center;
 }
 
 .indexTitle{
     margin: 0px auto;
-    padding-top: 4%;
     color: #FCE4EC;
-    font-family: Open Sans,sans-serif;
-    font-weight: 700;
-    font-size: 30px;
     display: block;
-    max-width: 90%;
+    max-width: 30%;
     text-align: center;
 }
 
 .info-login{
     margin: 0px auto;
-    margin-top: 10%;
+    margin-top: 2rem;
     display: block;
 }
 
@@ -247,23 +239,19 @@ body{
 }
 
 #user-name{
-    font-size: 1rem;
-    
+    font-size: 1rem;  
     max-width: 100%;
     display: block;
     margin: 0 auto;
-  
-    
 }
 
-#post-text{
+#postText{
     width: 90%;
     height: 150px;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     justify-content: center;
-   
 }
 
 #send{
@@ -282,6 +270,10 @@ body{
     margin:0 auto;
     padding: 1rem;
     max-width: 80%;
+}
+
+main{
+    padding-bottom: 3.5rem;
 }
 
 #content-image{
