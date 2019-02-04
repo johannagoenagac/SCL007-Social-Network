@@ -51,24 +51,52 @@ addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
 
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
- 
-            reader.onload = function (e) {
-                var filePreview = document.createElement('img');
-                filePreview.id = 'file-preview';
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                console.log(e.target.result);
- 
-                var previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
+});
+
+recipeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Receta";
+});
+
+userLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Perfil";
+});
+
+
+    //Funcion previw foto
+
+    window.onload =() =>{
+
+   
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+     
+                reader.onload = function (e) {
+                    var filePreview = document.createElement('img');
+                    filePreview.id = 'file-preview';
+                    //e.target.result contents the base64 data from the image uploaded
+                    filePreview.src = e.target.result;
+                    console.log(e.target.result);
+     
+                    var previewZone = document.getElementById('file-preview-zone');
+                    previewZone.appendChild(filePreview);
+                }
+     
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
- 
+     
+        var fileUpload = document.getElementById('file-upload');
+        fileUpload.onchange = function (e) {
+            readFile(e.srcElement);
+        }
+    
+};
+
+
+    
+
+
     // //Agregando colecciones
     // var fileUpload = document.getElementById('file-upload');
     // fileUpload.onchange = function (e) {
@@ -96,18 +124,3 @@ addLogo.addEventListener("click", () => {
     // .catch(function(error) {
     //     console.error("Error adding document: ", error);
     // });
-    
-    var fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
-   
-});
-
-recipeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
-
-userLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
