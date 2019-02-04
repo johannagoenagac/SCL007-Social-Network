@@ -10,8 +10,10 @@ window.onload = () =>{
             header.style.display = "block";
             footer.style.display = "block";
             root.style.display = "block";
+
             loginPage.style.display = "none";
             post.style.display = "none";
+
             if(user !== null){
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];

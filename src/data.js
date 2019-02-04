@@ -1,5 +1,16 @@
 //Funciones - Aquí va la lógica
 //callback - función que se llamará dsps
+export const logoutUser = () =>{
+  firebase.auth().signOut()
+  .then(function() {
+    // Sign-out successful.
+    alert('Has cerrado sesion exitosamente');
+  })
+  .catch(function(error) {
+    alert('Ha ocurrido un error. Intenta nuevamente');
+  });
+}
+
 export const checkAuthStatus = (callback) => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -10,7 +21,7 @@ export const checkAuthStatus = (callback) => {
       callback(null);
     }
   });
-}
+};
 
 export const registerUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,7 +32,6 @@ export const registerUser = () => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           let token = result.credential.accessToken;
           console.log("Usuario registrado >"+ JSON.stringify(user));
-          // ...
         }
         // The signed-in user info.
         var user = result.user;
@@ -36,6 +46,10 @@ export const registerUser = () => {
         // The firebase.auth.AuthCredential type that was used.
         let credential = error.credential;
         // ...
+        if(errorCode === 'auth/account-exists-with-different-credential'){
+          alert('Usuario ya está registrado');
+        }
      });
-}
+};
+
 
