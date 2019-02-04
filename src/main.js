@@ -51,6 +51,16 @@ addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
 
+});
+
+recipeLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Receta";
+});
+
+userLogo.addEventListener("click", () => {
+    pageGuide.innerHTML = "Perfil";
+});
+
 
     //Funcion previw foto
 
@@ -81,15 +91,12 @@ addLogo.addEventListener("click", () => {
             readFile(e.srcElement);
         }
     
-    
-        
-    };
-    
- 
-<<<<<<< HEAD
+};
 
-=======
->>>>>>> a60e8acd7d5db3d55d2f0e2d8a3891152d64405c
+
+    
+
+
     // //Agregando colecciones
     // var fileUpload = document.getElementById('file-upload');
     // fileUpload.onchange = function (e) {
@@ -117,38 +124,5 @@ addLogo.addEventListener("click", () => {
     // .catch(function(error) {
     //     console.error("Error adding document: ", error);
     // });
-    
-<<<<<<< HEAD
-
-=======
->>>>>>> a60e8acd7d5db3d55d2f0e2d8a3891152d64405c
-    var fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
    
-};
-<<<<<<< HEAD
 
-
-homeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Home";
-});
-
-searchLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
-});
-
-addLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Post";
-});
-=======
->>>>>>> a60e8acd7d5db3d55d2f0e2d8a3891152d64405c
-
-recipeLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Receta";
-});
-
-userLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Perfil";
-});
