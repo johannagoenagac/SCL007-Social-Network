@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
   <!--Enlace hoja de estilos -->
   <link rel="stylesheet" href="./style/style.css">
-  <link rel="stylesheet" href="./style/grid.css">
+  <link rel="stylesheet" href="./style/grid.css"> 
 </head>
 
 <body>
@@ -19,10 +19,14 @@
     <!-- Menú del navegador-->
     <div class="container">
       <nav class="navbar">
+
         <a class="brand" id="navLogo">Food & Travel</a>
         <!--Cambiar este logout por un monito de after y before iniciada sesion-->
         <span id="logout">Logout</span>
         <span id="user-name"></span>
+        <a class="brand" id="navLogo"><img id="webVersion" src="./style/img/Food & Travel.png"><img id="mobileVersion"
+            src="./style/img/Isotipo.png"></a>
+
         <ul class="menuTabs">
           <li id="homeTab">Home</li>
           <li id="searchTab">Busqueda</li>
@@ -53,15 +57,17 @@
                 <input placeholder="Correo Electrónico" id="user" type="text">
                 <input placeholder="Contraseña" id="password" type="password">
                 <div id="signInBtn">
-                  <button class="signInBtn" id="enter-login" type="submit">Ingresar</button>
+                  <button class="signInBtn" id="enter-login" type="submit" onclick="Start()">Ingresar</button>
                 </div>
                 <div class="forget">
                   <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+        </div>
+
+       </form>
+        
       </div>
       <div class="container">
         <div class="row">
@@ -75,72 +81,85 @@
         </div>
       </div>
     </div>
-
-    <!--Contenido principal -->
-  <div id="root" class="row">
-      <!--Home - página2-->
   
+    <!--Contenido principal -->
+    <div id="root" class="row">
+      <!--Home - página2-->
+
       <div id="home">
       </div>
-  
+
       <!--Profile - página3-->
       <div id="profile">
       </div>
-  
+
       <!--Post - página4-->
       <div id="post">
         <!--Subir foto-->
-        <div id="Image-goup">
-          <div id="divInputLoad">
-  
-            <h1 id="go-up-text">Sube tu imagen</h1>
-  
-            <div id="divFileUpload">
-              <input id="file-upload" type="file" accept="image/*" />
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 id="go-up-text">Sube tu imagen</h1>
             </div>
-  
-            <div id="file-preview-zone"></div>
           </div>
         </div>
-  
-  
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 centered" id="file-preview-zone"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12" id="file-preview-zone">
+              <input id="file-upload" type="file" accept="image/*">
+            </div>
+          </div>
+        </div>
+
         <!--Post create-->
-        <div id="postField">
-          <div id="post-form" class="container">
-            <div class="row">
-              <div class="col-s-10 col-m-10 col-l-10">
-                <form id="form-post" name="formulario" method="post" action="">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-s-6 col-m-2 col-l-2">
-                        <img id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
-                          alt="icon user">
-                      </div>
-                      <div class="col-s-6 col-m-6 col-l-6">
-                        <h1 id="user-name">Nombre usuario</h1>
-                      </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-s-12 col-m-12 col-l-12">
+              <form id="form-post" name="formulario" method="post" action="">
+                <div class="container">
+                  <div class="row flexRow">
+                    <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                      <img id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
+                        alt="icon user">
+                    </div>
+                    <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
+                      <h1 id="user-name">Nombre usuario</h1>
                     </div>
                   </div>
-  
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-s-10 m-10 l-10">
-                        <textarea id="post-text" placeholder="Escribe tu post"></textarea>
-                      </div>
+                </div>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-s-12 m-12 l-12">
+                      <textarea id="post-text" placeholder="Escribe tu post"></textarea>
                     </div>
                   </div>
-                  <input id="send" type="submit" value="Enviar">
-                </form>
-              </div>
+               </div>
+                
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
+                      <input id="send" type="submit" value="Enviar">
+                    </div>
+                  </div>
+                </div>
+              </form>
+
             </div>
           </div>
         </div>
       </div>
-  
+
+
       <!--Post - página5-->
       <div id="recipe">
       </div>
-  
+
       <!--Post - página6-->
       <div id="search">
       </div>
@@ -163,6 +182,7 @@
 
   <!-- Firebase-->
   <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -178,7 +198,7 @@
 
   <!--Script Archivo-->
   <script src="data.js" type="module"></script>
-  <!--type="module" es para js moderno-->
+  <!--type="module" es para js moderno-->z
   <script src="main.js" type="module"></script>
 
 </body>
