@@ -102,7 +102,7 @@ addLogo.addEventListener("click", () => {
         readFile(e.srcElement);
     }
    
-};
+});
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
