@@ -1,6 +1,7 @@
 //Manejo del DOM
 
-import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../src/data.js';
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
+import { savePost } from '../data/data.js';
 
 const loginPage = document.getElementById("loginPage");
 
@@ -15,6 +16,7 @@ window.onload = () => {
             root.style.display = "block";
             loginPage.style.display = "none";
             post.style.display = "none";
+            profile.style.display = "none";
             if (user !== null) {
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name-marker').innerHTML = name[0];
@@ -27,6 +29,7 @@ window.onload = () => {
             root.style.display = "none";
             footer.style.display = "none"
             post.style.display = "none";
+            profile.style.display = "none";
         }
     });
     //Llama a la función registro con Google
@@ -64,13 +67,14 @@ addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
 
+    //Funcion para cargar la imagen del post
     function readFile(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 var filePreview = document.createElement('img');
-                filePreview.id = 'file-preview';
+                filePreview.id = 'saveFilePreview';
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
                 console.log(e.target.result);
@@ -87,7 +91,18 @@ addLogo.addEventListener("click", () => {
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
+
+    //Funcion para subir la informacion del post a Firebase
+    const savePostIntoDatabase = () => {
+        const postImage = saveFilePreview.value;
+        const postText = postText.value;
+        const userID = firebase.auth().currentUser.uid;
+        savePost(postImage, postText, userID);
+    }
+
+    send.addEventListener("click", savePostIntoDatabase);
 });
+
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
@@ -96,32 +111,3 @@ recipeLogo.addEventListener("click", () => {
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
 });
-
-
-    // //Agregando colecciones
-    // var fileUpload = document.getElementById('file-upload');
-    // fileUpload.onchange = function (e) {
-    //     readFile(e.srcElement);
-    // }
-
-    // firebase.initializeApp({
-    //     apiKey: "AIzaSyD1b9ekmHfKFDrVRZYArX9rF2tUbmWaWfc",
-    //     authDomain: "f00dtravel.firebaseapp.com",
-    //     projectId: "f00dtravel",
-    //   });
-
-    //   // Initialize Cloud Firestore through Firebase
-    //   var db = firebase.firestore();
-
-    //  // Agregar colecciones
-    //   db.collection("users").add({
-    //     first: "Ada",
-    //     last: "Lovelace",
-    //     born: 1815
-    // })
-    // .then(function(docRef) {
-    //     console.log("Document written with ID: ", docRef.id);
-    // })
-    // .catch(function(error) {
-    //     console.error("Error adding document: ", error);
-    // });
