@@ -1,6 +1,9 @@
 //Manejo del DOM
 
-import { checkAuthStatus, registerUser, logoutUser } from '../src/data.js';
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../src/data.js';
+
+const loginPage = document.getElementById("loginPage");
+
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -14,7 +17,7 @@ window.onload = () => {
             post.style.display = "none";
             if (user !== null) {
                 let name = user.displayName.split(" ");
-                document.getElementById('user-name').innerHTML = name[0];
+                document.getElementById('user-name-marker').innerHTML = name[0];
             }
         } else {
             //Muestra el login, ya que usuario no está logeado
@@ -27,15 +30,25 @@ window.onload = () => {
         }
     });
     //Llama a la función registro con Google
+
+    const registerWithFacebook = () => {
+        registerUserFacebook();
+    }
+
     const registerWithGoogle = () => {
-        registerUser();
+        registerUserGoogle();
     }
     const logoutUsers = () => {
         logoutUser();
     }
 
     //Si hace click al botón Google, llama a la función registro con Google
-    googleregistry.addEventListener('click', registerWithGoogle);
+    googleRegistry.addEventListener('click', registerWithGoogle);
+
+    //Si hace click al botón Facebook, llama a la función registro con Facebook
+    facebookRegistry.addEventListener('click', registerWithFacebook);
+
+    //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
 };
 

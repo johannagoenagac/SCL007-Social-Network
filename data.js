@@ -1,5 +1,16 @@
 //Funciones - Aquí va la lógica
 //callback - función que se llamará dsps
+export const logoutUser = () =>{
+  firebase.auth().signOut()
+  .then(function() {
+    // Sign-out successful.
+    alert('Has cerrado sesion exitosamente');
+  })
+  .catch(function(error) {
+    alert('Ha ocurrido un error. Intenta nuevamente');
+  });
+}
+
 export const checkAuthStatus = (callback) => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
@@ -10,9 +21,9 @@ export const checkAuthStatus = (callback) => {
       callback(null);
     }
   });
-}
+};
 
-export const registerUser = () => {
+export const registerUserGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithRedirect(provider)
     .then(function(result) {
@@ -21,7 +32,6 @@ export const registerUser = () => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           let token = result.credential.accessToken;
           console.log("Usuario registrado >"+ JSON.stringify(user));
-          // ...
         }
         // The signed-in user info.
         var user = result.user;
@@ -36,7 +46,34 @@ export const registerUser = () => {
         // The firebase.auth.AuthCredential type that was used.
         let credential = error.credential;
         // ...
+        if(errorCode === 'auth/account-exists-with-different-credential'){
+          alert('Usuario ya está registrado');
+        }
      });
-}
+};
+
+export const registerUserFacebook = () => {
+  const provider = new firebase.auth.FacebookAuthProvider();
+  firebase.auth().signInWithRedirect(provider);
+  firebase.auth().getRedirectResult().then(function(result) {
+    if (result.credential) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // ...
+    }
+    // The signed-in user info.
+    var user = result.user;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+};
+
 
 

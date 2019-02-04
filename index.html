@@ -9,9 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Test-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
+  <!--Importa Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
   <!--Enlace hoja de estilos -->
   <link rel="stylesheet" href="./style/style.css">
-  <link rel="stylesheet" href="./style/grid.css"> 
+  <link rel="stylesheet" href="./style/grid.css">
 </head>
 
 <body>
@@ -19,8 +21,11 @@
     <!-- Menú del navegador-->
     <div class="container">
       <nav class="navbar">
+
+        <!--Cambiar este logout por un monito de after y before iniciada sesion-->
         <a class="brand" id="navLogo"><img id="webVersion" src="./style/img/Food & Travel.png"><img id="mobileVersion"
             src="./style/img/Isotipo.png"></a>
+
         <ul class="menuTabs">
           <li id="homeTab">Home</li>
           <li id="searchTab">Busqueda</li>
@@ -65,9 +70,9 @@
         <div class="row">
           <div class="col-xs-12">
             <div id="registry">
-              <button id="face-registry" type="submit" class="loginBtn loginBtn--facebook">Facebook</button>
+              <button id="facebookRegistry" type="submit" class="loginBtn loginBtn--facebook">Facebook</button>
               <span> o </span>
-              <button id="googleregistry" type="submit" class="loginBtn loginBtn--google">Google</button>
+              <button id="googleRegistry" type="submit" class="loginBtn loginBtn--google">Google</button>
             </div>
           </div>
         </div>
@@ -83,6 +88,9 @@
 
       <!--Profile - página3-->
       <div id="profile">
+        <button type="button" id="logout">
+          <span>Logout, <span id="user-name-marker"></span></span>
+        </button>
       </div>
 
       <!--Post - página4-->
@@ -159,23 +167,18 @@
 
   <!-- Pie de página -->
   <div id="footer">
-  <footer class="container footer">
-    <div class="row iconList">
-      <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
-      <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
-      <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
-      <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
-      <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
-    </div>
+    <footer class="container footer">
+      <div class="row iconList">
+        <a class="icon col-xs-3 col-s-4" id="homeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/home.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="searchLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/music-searcher.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="addLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/add-button-inside-black-circle.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="recipeLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/hot-soup-bowl.png"></a>
+        <a class="icon col-xs-3 col-s-4" id="userLogo"><img src="https://raw.githubusercontent.com/VeronicaManchola/SCL007-Social-Network/master/src/style/img/user.png"></a>
+      </div>
   </div>
   </footer>
 
-  <!-- Firebase App is always required and must be first -->
-  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-
-  <!-- Firebase-->
-  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
   <script>
     // Initialize Firebase
     var config = {
