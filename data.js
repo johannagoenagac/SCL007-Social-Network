@@ -3,7 +3,7 @@
 export const checkAuthStatus = (callback) => {
   firebase.auth().onAuthStateChanged((user)=>{
     if(user){
-      console.log("Hay un usuario > "+ JSON.stringify(user));
+      //console.log("Hay un usuario > "+ JSON.stringify(user));
       callback(user);
     }else{
       console.log("No está logeado")
