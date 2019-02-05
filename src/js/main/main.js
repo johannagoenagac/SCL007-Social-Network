@@ -60,14 +60,12 @@ searchLogo.addEventListener("click", () => {
 addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     post.style.display = "block";
-
+    var filePreview = document.createElement('img');
     //Funcion para cargar la imagen del post
     function readFile(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
-                var filePreview = document.createElement('img');
                 filePreview.id = 'saveFilePreview';
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
@@ -78,12 +76,10 @@ addLogo.addEventListener("click", () => {
             reader.readAsDataURL(input.files[0]);
         }
     }
-
     var fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
-
     //Funcion para subir la informacion del post a Firebase
     const savePostIntoDatabase = () => {
         console.log('savefilepreview')
@@ -92,7 +88,6 @@ addLogo.addEventListener("click", () => {
         const userID = firebase.auth().currentUser.uid;
         savePost(postImage, fullPostText, userID);
     }
-
     send.addEventListener("click", (event) => {
         event.preventDefault();
         savePostIntoDatabase();
