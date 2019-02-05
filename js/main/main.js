@@ -107,4 +107,7 @@ recipeLogo.addEventListener("click", () => {
 
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
+    home.style.display = "none";
+   logout.style.display = "block";
+   profile.style.display = "block";
 });

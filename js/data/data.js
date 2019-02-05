@@ -8,6 +8,13 @@ export const savePost = (postImage, fullPostText, userID) => {
       text : fullPostText,
       useruid : userID
     });
+
+    fire.database().ref(`profile/${newPostKey}`).set({
+      image : postImage,
+      text : fullPostText,
+      useruid : userID
+    });
+   
     // firebase.database().ref(`profile/${userID}`).set({
     //   image : postImage,
     //   text : fullPostText
