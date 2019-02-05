@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
-import { savePost } from '../data/data.js';
+import { savePost, readPost, likePost } from '../data/data.js';
 
 const loginPage = document.getElementById("loginPage");
 
@@ -22,6 +22,7 @@ window.onload = () => {
                 document.getElementById('user-name-marker').innerHTML = name[0];
                 document.getElementById('user-name').innerHTML = name[0];
             }
+            readPostFromDatabase();
         } else {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
@@ -56,9 +57,55 @@ window.onload = () => {
     logout.addEventListener('click', logoutUsers);
 };
 
+const readPostFromDatabase = () => {
+    readPost((post) => {
+        postContainer.innerHTML =
+            `<div class="formPost">
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 centered">
+                        <img class="cardImage" src="${post.val().image}"/>
+                    </div>
+                </div>
+                </div>
+                <div class="container">
+                    <div class="row inlineFlexRow">
+                        <div class="col-lg-1">
+                            <button class="fas fa-heart cardIcons"></button>
+                        </div>
+                        <div class="col-lg-1">
+                            <i class="far fa-comment cardIcons"></i>
+                        </div>
+                        <div class="col-lg-1">
+                            <i class="fas fa-share cardIcons"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>${post.val().text}</p>
+                    </div>
+                </div>
+                </div>
+            </div>` + postContainer.innerHTML;
+        homeFinishedLoading(post.key, post.val().useruid);
+    });
+}
+
+const homeFinishedLoading = (postID, userID) =>{
+    pageGuide.innerHTML = "Home";
+    home.style.display = "block";
+    post.style.display = "none";
+    likePost(postID, userID);
+}
+
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
+    home.style.display = "block";
+    post.style.display = "none";
 });
+
 
 searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
@@ -66,45 +113,46 @@ searchLogo.addEventListener("click", () => {
 
 addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
+    home.style.display = "none";
     post.style.display = "block";
 
-    // //Funcion para cargar la imagen del post
-    // function readFile(input) {
-    //     if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
+    //Funcion para cargar la imagen del post
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    //         reader.onload = function (e) {
-    //             var filePreview = document.createElement('img');
-    //             filePreview.id = 'saveFilePreview';
-    //             //e.target.result contents the base64 data from the image uploaded
-    //             filePreview.src = e.target.result;
-    //             console.log(e.target.result);
+            reader.onload = function (e) {
+                var filePreview = document.createElement('img');
+                filePreview.id = 'saveFilePreview';
+                filePreview.setAttribute("class", "cardImage");
+                //e.target.result contents the base64 data from the image uploaded
+                filePreview.src = e.target.result;
+                console.log(e.target.result);
 
-    //             var previewZone = document.getElementById('file-preview-zone');
-    //             previewZone.appendChild(filePreview);
-    //         }
+                var previewZone = document.getElementById('file-preview-zone');
+                previewZone.appendChild(filePreview);
+            }
 
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
-    // }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-    // var fileUpload = document.getElementById('file-upload');
-    // fileUpload.onchange = function (e) {
-    //     readFile(e.srcElement);
-    // }
+    var fileUpload = document.getElementById('file-upload');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    }
 
-    // //Funcion para subir la informacion del post a Firebase
-    // const savePostIntoDatabase = () => {
-    //     console.log(saveFilePreview)
-    //     console.log(postText)
-    //     const postImage = saveFilePreview;
-    //     const fullPostText = postText.value;
-    //     const userID = firebase.auth().currentUser.uid;
-    //     savePost(postImage, fullPostText, userID);
-    // }
+    //Funcion para subir la informacion del post a Firebase
+    const savePostIntoDatabase = () => {
+        const postImage = saveFilePreview.src;
+        const fullPostText = postText.value;
+        const userID = firebase.auth().currentUser.uid;
+        savePost(postImage, fullPostText, userID);
+    }
 
-    send.addEventListener("click", () => {
-        console.log('sendBtn');
+    send.addEventListener("click", (event) => {
+        event.preventDefault();
+        savePostIntoDatabase();
     });
 });
 
@@ -115,4 +163,8 @@ recipeLogo.addEventListener("click", () => {
 
 userLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Perfil";
+    home.style.display = "none";
+    logout.style.display = "block";
+    profile.style.display = "block";
 });
+

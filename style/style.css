@@ -239,20 +239,11 @@ body{
 }
 
 #user-name{
-<<<<<<< HEAD
     font-size: 1rem;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     font-family: sans-serif;
-  
-    
-=======
-    font-size: 1rem;  
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
->>>>>>> 12268802f407c7beae8f17a4625e9e4c9d897d87
 }
 
 #postText{
@@ -275,9 +266,9 @@ body{
     font-size: 16px;
 }
 
-#form-post{
+.formPost{
     border: 1px solid #9e9e9e ;
-    margin:0 auto;
+    margin:1rem auto;
     padding: 1rem;
     max-width: 80%;
 }
@@ -311,9 +302,13 @@ h1{
     width: 80%;
 }
 
-#file-preview{
+.cardImage{
     max-width: 50%;
     margin: 0 auto;
+}
+
+.cardIcons{
+    cursor: pointer;
 }
 
 .centered{
@@ -322,6 +317,10 @@ h1{
 
 .flexRow{
     display: flex;
+}
+
+.inlineFlexRow{
+    display: inline-flex;
 }
 
 .alignment{
