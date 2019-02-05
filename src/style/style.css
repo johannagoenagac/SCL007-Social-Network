@@ -239,20 +239,10 @@ body{
 }
 
 #user-name{
-<<<<<<< HEAD
-    font-size: 1rem;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
-    font-family: sans-serif;
-  
-    
-=======
     font-size: 1rem;  
     max-width: 100%;
     display: block;
     margin: 0 auto;
->>>>>>> 12268802f407c7beae8f17a4625e9e4c9d897d87
 }
 
 #postText{
