@@ -238,15 +238,15 @@ body{
     
 }
 
-#user-name{
-    font-size: 1rem;
+#user-name, #fullName{
+    font-size: 150%;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     font-family: sans-serif;
 }
 
-#postText{
+#postText, #biography{
     width: 90%;
     height: 150px;
     max-width: 100%;
@@ -255,20 +255,20 @@ body{
     justify-content: center;
 }
 
-#send{
+#send, #logout{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
     margin: 0 auto;
     display: block;
     height: 3rem;
-    width: 6rem;
+    width: 7rem;
     font-size: 16px;
 }
 
-#form-post{
+.formPost{
     border: 1px solid #9e9e9e ;
-    margin:0 auto;
+    margin:1rem auto;
     padding: 1rem;
     max-width: 80%;
 }
@@ -302,9 +302,20 @@ h1{
     width: 80%;
 }
 
-#file-preview{
+.cardImage{
     max-width: 50%;
     margin: 0 auto;
+}
+
+.cardProfileImage{
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 100%;
+    
+}
+
+.cardIcons{
+    cursor: pointer;
 }
 
 .centered{
@@ -315,7 +326,10 @@ h1{
     display: flex;
 }
 
+.inlineFlexRow{
+    display: inline-flex;
+}
+
 .alignment{
     align-self: center;
 }
-
