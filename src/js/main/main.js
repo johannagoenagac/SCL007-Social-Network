@@ -59,6 +59,7 @@ window.onload = () => {
 
 const readPostFromDatabase = () => {
     readPost((post) => {
+        console.log(countpost.val().likes)
         postContainer.innerHTML =
             `<div class="formPost">
                 <div class="container">
@@ -72,6 +73,7 @@ const readPostFromDatabase = () => {
                     <div class="row inlineFlexRow">
                         <div class="col-lg-1">
                             <button class="fas fa-heart cardIcons" id="${post.key}"></button>
+                            <span></span>
                         </div>
                         <div class="col-lg-1">
                             <i class="far fa-comment cardIcons"></i>
