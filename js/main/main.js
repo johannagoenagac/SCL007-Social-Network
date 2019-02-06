@@ -100,6 +100,7 @@ userLogo.addEventListener("click", (event) => {
     event.preventDefault();
     pageGuide.innerHTML = "Perfil";
     home.style.display = "none";
+
     post.style.display = "none";
     profile.style.display = "block";
     let showImg = '';
@@ -146,4 +147,5 @@ userLogo.addEventListener("click", (event) => {
     
 
     
+
 });
