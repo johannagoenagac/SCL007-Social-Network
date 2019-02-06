@@ -49,7 +49,7 @@ window.onload = () => {
 
 const readPostFromDatabase = () => {
     readPost((post) => {
-        console.log(countpost.val().likes)
+        console.log(post.val().likes)
         postContainer.innerHTML =
             `<div class="formPost">
                 <div class="container">
@@ -122,7 +122,6 @@ homeLogo.addEventListener("click", () => {
     post.style.display = "none";
 });
 
-
 searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
@@ -193,12 +192,16 @@ userLogo.addEventListener("click", (event) => {
     <div class="row flexRow">
         <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
             <img class="cardProfileImage" src=${showImg}></img>
-            <button type="button" id="logout">
-                <span>Cierra sesión <span id="user-name-marker"></span></span>
-            </button>
         </div>
         <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
             <span id="fullName">${nameUser}</span>
+        </div>
+    </div>
+    <div class="row flexrow">
+        <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+            <button type="button" id="logout">
+                <span>Cierra sesión <span id="user-name-marker"></span></span>
+            </button>
         </div>
     </div>
     </section>
@@ -222,9 +225,4 @@ userLogo.addEventListener("click", (event) => {
     }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
-    
-
-    
-
-
 });
