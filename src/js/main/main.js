@@ -127,17 +127,20 @@ userLogo.addEventListener("click", (event) => {
         <div class="row container">
             <div class="col-s-12 m-12 l-12">
                 <textarea id="biography" class = "biography" placeholder="Escribenos de ti"></textarea>
+                <button type="button" id="sendBiography">
+                    <span>Editar biografía</span>
+                </button>
             </div>
         </div>
     </section>
     <section id = "">
-
-    </section>
-     `
+    </section>`
 
      
     //Llama a la función de cierre sesión
-    const logoutUsers = () => { logoutUser(); }
+    const logoutUsers = () => { 
+        logoutUser(); 
+    }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
     
