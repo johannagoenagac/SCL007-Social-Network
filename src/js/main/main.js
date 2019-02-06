@@ -103,11 +103,19 @@ userLogo.addEventListener("click", (event) => {
     post.style.display = "none";
     profile.style.display = "block";
     let showImg = '';
+    //Verifica si el usuario tiene imagen de perfil
     if(userImg === undefined){
         showImg = "style/img/user.png";
     }else{
         showImg = userImg;
-    }                  
+    }
+
+    // if(){
+
+    // }else{
+
+    // }
+
 
     profile.innerHTML = `
     <section id = "userInfo">
@@ -143,7 +151,4 @@ userLogo.addEventListener("click", (event) => {
     }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
-    
-
-    
 });
