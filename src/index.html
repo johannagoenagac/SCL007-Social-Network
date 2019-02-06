@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
   <!--Importa Google Fonts-->
   <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+  <!--Importa Iconos de Fontawesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!--Enlace hoja de estilos -->
   <link rel="stylesheet" href="./style/style.css">
   <link rel="stylesheet" href="./style/grid.css">
@@ -82,12 +84,18 @@
       </div>
     </div>
 
-  
+
     <!--Contenido principal -->
     <div id="root" class="row">
       <!--Home - página2-->
 
       <div id="home">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12" id="postContainer">
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Profile - página3-->
@@ -96,16 +104,16 @@
 
       <!--Post - página4-->
       <div id="post">
-        
+
         <!--Post create-->
         <div class="container">
           <div class="row">
             <div class="col-s-12 col-m-12 col-l-12">
-              <form id="form-post" name="formulario" method="post" action="">
+              <form class="formPost" name="formulario" method="post" action="" autocomplete="off">
                 <div class="container">
                   <div class="row flexRow">
                     <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                      <img id="icon-user" class="resonsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
+                      <img id="icon-user" class="responsive-img" src="http://subirimagen.me/uploads/20190131084141.png"
                         alt="icon user">
                     </div>
                     <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
@@ -113,7 +121,6 @@
                     </div>
                   </div>
                 </div>
-
                 <!--Subir foto-->
                 <div class="container">
                   <div class="row">
