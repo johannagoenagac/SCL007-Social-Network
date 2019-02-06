@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
-import { savePost, readPost, likePost } from '../data/data.js';
+import { savePost, readPost, saveLikePost } from '../data/data.js';
 
 const loginPage = document.getElementById("loginPage");
 
@@ -71,7 +71,7 @@ const readPostFromDatabase = () => {
                 <div class="container">
                     <div class="row inlineFlexRow">
                         <div class="col-lg-1">
-                            <button class="fas fa-heart cardIcons"></button>
+                            <button class="fas fa-heart cardIcons" id="${post.key}"></button>
                         </div>
                         <div class="col-lg-1">
                             <i class="far fa-comment cardIcons"></i>
@@ -89,16 +89,40 @@ const readPostFromDatabase = () => {
                 </div>
                 </div>
             </div>` + postContainer.innerHTML;
-        homeFinishedLoading(post.key, post.val().useruid);
+
+        homeFinishedLoading();
+
+        const like = document.getElementsByClassName("fa-heart");
+
+        for(let i = 0; i < like.length; i++){
+            like[i].addEventListener("click", () =>{
+                saveLikePost(like[i].id);
+            });
+        }
+
+        
     });
 }
 
-const homeFinishedLoading = (postID, userID) =>{
+const homeFinishedLoading = () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
-    likePost(postID, userID);
 }
+
+// const likePost = (postID, userID) => {
+
+//     console.log(postID)
+
+//     like.addEventListener("click",() => {
+//         console.log("click" + like)
+//         saveLikePost(postID, userID)
+//     })
+// }
+//     for (let i = 0; i < like.length; i++) {
+
+
+// }
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -114,6 +138,7 @@ searchLogo.addEventListener("click", () => {
 addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
+
     post.style.display = "block";
 
     //Funcion para cargar la imagen del post
