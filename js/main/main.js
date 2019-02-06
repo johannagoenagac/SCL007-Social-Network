@@ -100,6 +100,7 @@ userLogo.addEventListener("click", (event) => {
     event.preventDefault();
     pageGuide.innerHTML = "Perfil";
     home.style.display = "none";
+
     post.style.display = "none";
     profile.style.display = "block";
     let showImg = '';
@@ -151,4 +152,11 @@ userLogo.addEventListener("click", (event) => {
     }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
+<<<<<<< HEAD
+=======
+    
+
+    
+
+>>>>>>> 1c361d3027bb7412287ee8e38b1d1251e89f1f25
 });
