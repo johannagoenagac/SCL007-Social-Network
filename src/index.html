@@ -12,7 +12,8 @@
   <!--Importa Google Fonts-->
   <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
   <!--Importa Iconos de Fontawesome-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
   <!--Enlace hoja de estilos -->
   <link rel="stylesheet" href="./style/style.css">
   <link rel="stylesheet" href="./style/grid.css">
@@ -49,8 +50,51 @@
           <img class="indexTitle" src="./style/img/F&T_Name.png">
         </div>
       </div>
+
       <div id="login" class="login">
         <!--el action es para que el formulario no se recarge de nuevo-->
+        <form action="javascript:void(0)">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 info-login">
+                <input placeholder="Correo Electrónico" id="emailTextfield" type="email">
+                <input placeholder="Contraseña" id="passwordTextfield" type="password">
+                
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xs-6 col-s-6">
+
+                      <div id="signInBtn">
+                       <button class="signInBtn" id="loginButton" type="submit">Ingresar</button>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+
+            <div class="container">
+              <div class="row">
+               <div class="col-xs-6 col-s-6">
+                <div id="register">
+                  <button id="goRegister" type="submit">Registrate</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+                <div class="forget">
+                  <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+      <!--<div id="login" class="login">
+        
         <form action="javascript:void(0)">
           <div class="container">
             <div class="row">
@@ -70,7 +114,7 @@
             </div>
           </div>
         </form>
-      </div>
+      </div>-->
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -79,6 +123,26 @@
               <span> o </span>
               <button id="googleRegistry" type="submit" class="loginBtn loginBtn--google">Google</button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Formulario de Registro-->
+
+    <div class="container" id="registerForm">
+      <div class="row">
+        <div class=" col-xs-12 col-l-12">
+
+          <div class="formStyle">
+
+            <form id='register-form' action="javascript:void(0)" method='post'>
+              <h1 id="welcomeText">Bienvenidos!</h1>
+              <!--<input id="registerUser"type="text" placeholder="Username" required>-->
+              <input id="registerEmail" type="email" placeholder="Ingresa tu email" required>
+              <input id="registerPassword" type="password" placeholder="Crea tu password" required>
+              <button id="registerButton" type='submit'>Registrarse</button>
+            </form>
           </div>
         </div>
       </div>
@@ -153,7 +217,7 @@
           </div>
         </div>
       </div>
-      
+
       <!--Post - página5-->
       <div id="recipe">
       </div>
