@@ -6,7 +6,6 @@ export const savePost = (postImage, fullPostText, userID) => {
     image: postImage,
     text: fullPostText,
     useruid: userID,
-    likes: 0
   });
 };
 
@@ -17,27 +16,19 @@ export const readPost = (onPostChange) => {
   });
 };
 
-export const likePost = (postID, userID) => {
-  
-  const like = document.getElementsByClassName("fa-heart");
+export const saveLikePost = (postID) => {
 
-  let postRef = firebase.database().ref('timeline/' + postID);
-  console.log("el post ref es" + postRef)
+  let userID = firebase.auth().currentUser.uid;
+  let postRef = firebase.database().ref(`timeline`);
 
-  for (let i = 0; i < like.length; i++) {
-    like[i].onclick = () => {
+  postRef.once("value", function (snapshot) {
 
+    let likeExists = snapshot.child(postID).child("likes").child(userID).val();
 
-        // A post entry.
-        let likesCount = {
-          likes: 1
-        };
-      
-        // Write the new post's data simultaneously in the posts list and the user's post list.
-        var updates = {};
-        updates['/timeline/' + postID + '/likes/'] = likesCount;
-      
-        return firebase.database().ref().update(updates);
+    if (likeExists === null) {
+      postRef.child(postID).child("likes").child(userID).set(1)
+    } else {
+      postRef.child(postID).child("likes").child(userID).remove();
     }
-  }
+  });
 }
