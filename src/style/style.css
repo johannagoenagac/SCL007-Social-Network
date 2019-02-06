@@ -238,15 +238,16 @@ body{
     
 }
 
-#user-name{
-    font-size: 1rem;
+
+#user-name, #fullName{
+    font-size: 150%;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     font-family: sans-serif;
 }
 
-#postText{
+#postText, #biography{
     width: 90%;
     height: 150px;
     max-width: 100%;
@@ -255,14 +256,14 @@ body{
     justify-content: center;
 }
 
-#send{
+#send, #logout, #sendBiography{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
     margin: 0 auto;
     display: block;
     height: 3rem;
-    width: 6rem;
+    width: 7rem;
     font-size: 16px;
 }
 
@@ -307,6 +308,15 @@ h1{
     margin: 0 auto;
 }
 
+
+.cardProfileImage{
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 100%;
+    
+}
+
+
 .cardIcons{
     cursor: pointer;
 }
@@ -326,4 +336,3 @@ h1{
 .alignment{
     align-self: center;
 }
-
