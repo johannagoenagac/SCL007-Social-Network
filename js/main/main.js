@@ -88,32 +88,35 @@ const readPostFromDatabase = () => {
             `<div class="formPost">
                 <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 centered">
+                    <div class="col-l-12 centered">
                         <img class="cardImage" src="${post.val().image}"/>
                     </div>
                 </div>
                 </div>
                 <div class="container">
                     <div class="row inlineFlexRow">
-                        <div class="col-lg-1">
+                        <div class="col-l-1">
                             <button class="fas fa-heart cardIcons" id="${post.key}"></button>
                             <span></span>
                         </div>
-                        <div class="col-lg-1">
-                            <i class="far fa-comment cardIcons"></i>
                         </div>
-                        <div class="col-lg-1">
-                            <i class="fas fa-share cardIcons"></i>
-                        </div>
-                    </div>
                 </div>
-                <div class="container">
+
+               
+             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-l-12">
                         <p>${post.val().text}</p>
                     </div>
                 </div>
                 </div>
+
+              <div class="container"> 
+
+             <textarea id="comments" placeholder="Agrega tu comentario" size="30" maxlength="300">
+               
+             </textarea>
+              </div>    
             </div>` + postContainer.innerHTML;
 
         homeFinishedLoading();
