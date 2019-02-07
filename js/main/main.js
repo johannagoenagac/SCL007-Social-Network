@@ -1,11 +1,13 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost } from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography} from '../data/data.js';
+
 
 const loginPage = document.getElementById("loginPage");
 let nameUser = '';
 let userImg = '';
+
 window.onload = () => {
     //Verifica estado de conexión del usuario
     checkAuthStatus((user) => {
@@ -25,6 +27,7 @@ window.onload = () => {
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];
             }
+            
             readPostFromDatabase();
         } else {
             //Muestra el login, ya que usuario no está logeado
@@ -39,15 +42,16 @@ window.onload = () => {
     });
     //Llama a la función registro con Google, facebook
     const registerWithFacebook = () => { registerUserFacebook(); }
-    const registerWithGoogle = () => { registerUserGoogle(); }
-    
-
+    const registerWithGoogle = () => { registerUserGoogle(); }   
+                 
     //Si hace click al botón Google, llama a la función registro con Google
     googleRegistry.addEventListener('click', registerWithGoogle);
 
     //Si hace click al botón Facebook, llama a la función registro con Facebook
     facebookRegistry.addEventListener('click', registerWithFacebook);
 };
+
+
 
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
@@ -84,6 +88,7 @@ goRegister.addEventListener("click", (event)=>{
 const readPostFromDatabase = () => {
     readPost((post) => {
         console.log(post.val().likes)
+
         postContainer.innerHTML =
             `<div class="formPost">
                 <div class="container">
@@ -128,8 +133,6 @@ const readPostFromDatabase = () => {
                 saveLikePost(like[i].id);
             });
         }
-
-        
     });
 }
 
@@ -159,7 +162,6 @@ homeLogo.addEventListener("click", () => {
     post.style.display = "none";
 });
 
-
 searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
@@ -167,18 +169,14 @@ searchLogo.addEventListener("click", () => {
 addLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
-
     post.style.display = "block";
-
-
-
     profile.style.display = "none";
-    var filePreview = document.createElement('img');
+    let filePreview = document.createElement('img');
 
     //Funcion para cargar la imagen del post
     function readFile(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            let reader = new FileReader();
 
             reader.onload = function (e) {
                 filePreview.id = 'saveFilePreview';
@@ -186,14 +184,14 @@ addLogo.addEventListener("click", () => {
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
                 console.log(e.target.result);
-                var previewZone = document.getElementById('file-preview-zone');
+                let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    var fileUpload = document.getElementById('file-upload');
+    let fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
@@ -217,56 +215,97 @@ recipeLogo.addEventListener("click", () => {
 
 userLogo.addEventListener("click", (event) => {
     event.preventDefault();
+    
     pageGuide.innerHTML = "Perfil";
     home.style.display = "none";
-
     post.style.display = "none";
     profile.style.display = "block";
-    let showImg = '';
-    if(userImg === undefined){
-        showImg = "style/img/user.png";
-    }else{
-        showImg = userImg;
-    }                  
+    let bioContentProfile = '';
+    let bioText = null;
+    const searchBiography = () => { searchForBiography((bio) =>{
+        console.log('Que me devuelve??');
+        console.log(bio);
+        if (bio !== null){
+            //Hay bio
+            bioText = bio.texto;
+        }
+        asigna();        
+    });};
+    searchBiography();
 
-    profile.innerHTML = `
-    <section id = "userInfo">
-    <div class="row flexRow">
-        <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-            <img class="cardProfileImage" src=${showImg}></img>
-            <button type="button" id="logout">
-                <span>Cierra sesión <span id="user-name-marker"></span></span>
-            </button>
+    function asigna() {
+        console.log(bioText)    
+        if (bioText === null){
+            bioContentProfile = `
+                <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;  
+        }else{
+            console.log(bioText);
+            bioContentProfile = `
+                <span class = "biography">${bioText}</span>`;  
+        }
+        showProfile(); 
+    }
+
+    function showProfile () {
+    
+        let showImg = '';
+        if(userImg === undefined){
+            showImg = "style/img/user.png";
+        }else{
+            showImg = userImg;
+        }
+        
+        profile.innerHTML = `
+        <section id = "userInfo">
+        <div class="row flexRow">
+            <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                <img class="cardProfileImage" src=${showImg}></img>
+            </div>
+            <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
+                <span id="fullName">${nameUser}</span>
+            </div>
         </div>
-        <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
-            <span id="fullName">${nameUser}</span>
-        </div>
-    </div>
-    </section>
-    <section id = "userbiography">
-        <div class="row container">
-            <div class="col-s-12 m-12 l-12">
-                <textarea id="biography" class = "biography" placeholder="Escribenos de ti"></textarea>
-                <button type="button" id="sendBiography">
-                    <span>Editar biografía</span>
+        <div class="row flexrow">
+            <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                <button type="button" id="logout">
+                    <span>Cierra sesión <span id="user-name-marker"></span></span>
                 </button>
             </div>
         </div>
-    </section>
-    <section id = "">
-    </section>`
+        </section>
+        <section id = "userbiography">
+            <div class="row container">
+                <div class="col-s-12 m-12 l-12"> 
+                    ${bioContentProfile}
+                    <button type="button" id="sendBiography">
+                        <span>Agregar biografía</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section id = "">
+        </section>`
 
-     
-    //Llama a la función de cierre sesión
-    const logoutUsers = () => { 
-        logoutUser(); 
+        
+        //Si no tiene biografía, agrega una a firebase
+        sendBiography.addEventListener("click",(event) => {
+            event.preventDefault();
+            if(biographyText.value === ''){
+                alert("Por favor, ¡escríbenos de ti!");
+            } else {
+                //Llamo a la función que agrega la biografía
+                //Tiene que mostrar la bio y boton editar
+                const addingBio = () => { addBiography(biographyText.value);}
+                addingBio();
+            };
+        });
+        
+        //Llama a la función de cierre sesión
+        const logoutUsers = () => { logoutUser(); }
+        //Si hace click al botón Logout, llama a la función Logout
+        logout.addEventListener('click', logoutUsers);
     }
-    //Si hace click al botón Logout, llama a la función Logout
-    logout.addEventListener('click', logoutUsers);
     
 
     
-
-
 });
-
