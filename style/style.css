@@ -247,7 +247,7 @@ body{
     font-family: sans-serif;
 }
 
-#postText, #biography{
+#postText, #biographyText{
     width: 90%;
     height: 150px;
     max-width: 100%;
