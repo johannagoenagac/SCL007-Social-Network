@@ -1,7 +1,8 @@
 //Manejo del DOM
 
-import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
 import { savePost, readPost, saveLikePost, searchForBiography, addBiography} from '../data/data.js';
+
 
 const loginPage = document.getElementById("loginPage");
 let nameUser = '';
@@ -18,6 +19,7 @@ window.onload = () => {
             loginPage.style.display = "none";
             post.style.display = "none";
             profile.style.display = "none";
+            registerForm.style.display = "none";
             //Muestra nombre del usuario
             if (user !== null) {
                 nameUser = user.displayName;
@@ -35,6 +37,7 @@ window.onload = () => {
             footer.style.display = "none"
             post.style.display = "none";
             profile.style.display = "none";
+            registerForm.style.display ="none";
         }
     });
     //Llama a la función registro con Google, facebook
@@ -49,9 +52,43 @@ window.onload = () => {
 };
 
 
+
+const registerWithEmailAndPassword = () => {
+    const emailFromUser = registerEmail.value;
+   const passwordFromUser = registerPassword.value;
+   registerUser(emailFromUser, passwordFromUser);
+   
+};
+
+const loginUserWithEmailAndPassword = () => {
+    const emailFromUser = emailTextfield.value;
+    const passwordFromUser = passwordTextfield.value;
+    loginUser(emailFromUser, passwordFromUser);
+};
+
+
+registerButton.addEventListener('click', (event)=>{
+event.preventDefault();
+registerWithEmailAndPassword();
+// registerWithUserName();
+});
+
+
+
+loginButton.addEventListener('click', loginUserWithEmailAndPassword);
+
+goRegister.addEventListener("click", (event)=>{
+    event.preventDefault();
+    registerForm.style.display = "block";
+    loginPage.style.display = "none";
+    });
+
+
+
 const readPostFromDatabase = () => {
     readPost((post) => {
-        // console.log(post.val().likes)
+        console.log(post.val().likes)
+
         postContainer.innerHTML =
             `<div class="formPost">
                 <div class="container">
