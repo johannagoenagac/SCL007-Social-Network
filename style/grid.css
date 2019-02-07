@@ -74,6 +74,10 @@
         height: 25px;
     }
 
+    .formStyle{
+        max-width: 100%;
+    }
+
     .footer{
         display: block;
     }
@@ -81,6 +85,7 @@
     .menuTabs{
         display: none;
     }
+
 }
 
 @media only screen and (min-width: 576px) {
@@ -130,6 +135,10 @@
     #webVersion{
         display: none;
         height: 25px;
+    }
+
+    .formStyle{
+        max-width: 100%;
     }
 
     .footer{
@@ -194,6 +203,10 @@
         display: block;
     }
 
+    .formStyle{
+        max-width: 60%;
+    }
+
     .menuTabs{
         display: none;
 }
@@ -254,6 +267,10 @@
   
     .footer{
         display: none;
+    }
+
+    .formStyle{
+        max-width: 60%;
     }
 
     .menuTabs{
