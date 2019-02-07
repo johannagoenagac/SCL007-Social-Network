@@ -125,6 +125,8 @@ body{
     padding: 15px;
     margin: 0px auto;
    max-width: 100%;
+   text-align: center;
+   
 }
 
 #signInBtn, #register{
@@ -147,8 +149,6 @@ body{
 #registry{
     text-align: center;
 }
-
-
 
 #emailTextfield, #passwordTextfield{
     width: 60%;
@@ -266,6 +266,8 @@ body{
     justify-content: center;
 }
 
+
+
 #send, #logout, #sendBiography{
     background-color: #B71C1C;
     color: white;
@@ -282,6 +284,15 @@ body{
     margin:1rem auto;
     padding: 1rem;
     max-width: 80%;
+}
+
+#comments{
+    background-image: url("http://subirimagen.me/uploads/20190206145624.png");
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background-position: left center;
 }
 
 main{
