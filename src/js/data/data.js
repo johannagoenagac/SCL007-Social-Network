@@ -1,29 +1,44 @@
-
-export const addBiography = (textBiography, uid) => {
-
+//Agrega biografía a perfil de usuario
+export const addBiography = (textBio) => {
+  const uid = firebase.auth().currentUser.uid;
+  firebase.database().ref(`profile/${uid}/biography`).set({
+    texto: textBio
+  });
+  console.log('Agregado??');
 };
 
-export const savePost = (postImage, fullPostText, userID) => {
-  const newPostKey = firebase.database().ref('post').push().key;
 
+
+//Verifica si hay una biografía en la data
+export const searchForBiography = (textBio) => {
+  const uid = firebase.auth().currentUser.uid;
+  firebase.database().ref(`profile/${uid}/biography`).once('value')
+  .then(function(snapshot) {    
+    textBio(snapshot.val());
+    // console.log(snapshot.val());
+  })
+};
+
+//Sube información de post a firebase database
+export const savePost = (postImage, fullPostText, userID) => {  
+
+  const newPostKey = firebase.database().ref('post').push().key;
 
   //sube información a firebase database
   firebase.database().ref(`timeline/${newPostKey}`).set({
     image: postImage,
     text: fullPostText,
     useruid: userID,
-    likes: 0
+ 
   });
 
   firebase.database().ref(`profile/${userID}/post`).child(`${newPostKey}`).set({
 
+    image : postImage,
+    text : fullPostText,
 
-    image: postImage,
-    text: fullPostText,
-    likes: 0
   });
 };
-
 
 export const readPost = (onPostChange) => {
   let postRef = firebase.database().ref('timeline');
@@ -33,7 +48,6 @@ export const readPost = (onPostChange) => {
 };
 
 export const saveLikePost = (postID) => {
-
   let userID = firebase.auth().currentUser.uid;
   let postRef = firebase.database().ref(`timeline`);
 
