@@ -215,10 +215,9 @@ userLogo.addEventListener("click", (event) => {
     post.style.display = "none";
     profile.style.display = "block";
     let bioContentProfile = '';
+    let bioTextButton = '';
     let bioText = null;
     const searchBiography = () => { searchForBiography((bio) =>{
-        console.log('Que me devuelve??');
-        console.log(bio);
         if (bio !== null){
             //Hay bio
             bioText = bio.texto;
@@ -227,21 +226,20 @@ userLogo.addEventListener("click", (event) => {
     });};
     searchBiography();
 
-    function asigna() {
-        console.log(bioText)    
+    function asigna() {  
         if (bioText === null){
             bioContentProfile = `
-                <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;  
+            <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;  
+            bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
         }else{
             console.log(bioText);
-            bioContentProfile = `
-                <span class = "biography">${bioText}</span>`;  
+            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
+            bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
         showProfile(); 
     }
 
     function showProfile () {
-    
         let showImg = '';
         if(userImg === undefined){
             showImg = "style/img/user.png";
@@ -273,27 +271,31 @@ userLogo.addEventListener("click", (event) => {
             <div class="row container">
                 <div class="col-s-12 m-12 l-12"> 
                     ${bioContentProfile}
-                    <button type="button" id="sendBiography">
-                        <span>Agregar biografía</span>
+                    <button type="button" id="biography">
+                        ${bioTextButton}
                     </button>
                 </div>
             </div>
         </section>
         <section id = "">
-        </section>`
-
+        </section>`;
         
         //Si no tiene biografía, agrega una a firebase
-        sendBiography.addEventListener("click",(event) => {
+        biography.addEventListener("click",(event) => {
             event.preventDefault();
-            if(biographyText.value === ''){
-                alert("Por favor, ¡escríbenos de ti!");
-            } else {
-                //Llamo a la función que agrega la biografía
-                //Tiene que mostrar la bio y boton editar
-                const addingBio = () => { addBiography(biographyText.value);}
-                addingBio();
-            };
+            if (textAtButton.innerHTML === 'Agregar biografía'){
+                if(biographyText.value === ''){
+                    alert("Por favor, ¡escríbenos de ti!");
+                } else {
+                    //Llamo a la función que agrega la biografía
+                    //Tiene que mostrar la bio y boton editar
+                    const addingBio = () => { addBiography(biographyText.value);}
+                    addingBio();
+                    searchBiography();
+                };
+            }else{
+                console.log('Aqui edito');
+            }
         });
         
         //Llama a la función de cierre sesión
