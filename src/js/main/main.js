@@ -3,7 +3,6 @@
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
 import { savePost, readPost, saveLikePost } from '../data/data.js';
 
-const loginPage = document.getElementById("loginPage");
 let nameUser = '';
 let userImg = '';
 window.onload = () => {
@@ -20,7 +19,7 @@ window.onload = () => {
             //Muestra nombre del usuario
             if (user !== null) {
                 nameUser = user.displayName;
-                userImg = user.photoURL;                
+                userImg = user.photoURL;
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];
             }
@@ -38,7 +37,7 @@ window.onload = () => {
     //Llama a la función registro con Google, facebook
     const registerWithFacebook = () => { registerUserFacebook(); }
     const registerWithGoogle = () => { registerUserGoogle(); }
-    
+
 
     //Si hace click al botón Google, llama a la función registro con Google
     googleRegistry.addEventListener('click', registerWithGoogle);
@@ -48,51 +47,60 @@ window.onload = () => {
 };
 
 const readPostFromDatabase = () => {
-    readPost((post) => {
-        console.log(countpost.val().likes)
-        postContainer.innerHTML =
-            `<div class="formPost">
-                <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 centered">
-                        <img class="cardImage" src="${post.val().image}"/>
-                    </div>
-                </div>
-                </div>
-                <div class="container">
-                    <div class="row inlineFlexRow">
-                        <div class="col-lg-1">
-                            <button class="fas fa-heart cardIcons" id="${post.key}"></button>
-                            <span></span>
-                        </div>
-                        <div class="col-lg-1">
-                            <i class="far fa-comment cardIcons"></i>
-                        </div>
-                        <div class="col-lg-1">
-                            <i class="fas fa-share cardIcons"></i>
+    readPost((posts) => {
+        postContainer.innerHTML = "";
+
+        const printPosts = (posts) => {
+            Object.entries(posts.val()).forEach(post => {
+                let id = Object.values(post)[0];
+                let extractedData = Object.values(post)[1];
+                const extractedLikes =  extractedData.likes ? Object.entries(extractedData.likes) : 0;
+                const likes = extractedLikes.length ? extractedLikes.length : 0;
+
+                postContainer.innerHTML =
+                    `<div class="formPost">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-l-12 centered">
+                            <img class="cardImage" src="${extractedData.image}"/>
                         </div>
                     </div>
-                </div>
-                <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p>${post.val().text}</p>
                     </div>
-                </div>
-                </div>
-            </div>` + postContainer.innerHTML;
-
-        homeFinishedLoading();
-
-        const like = document.getElementsByClassName("fa-heart");
-
-        for(let i = 0; i < like.length; i++){
-            like[i].addEventListener("click", () =>{
-                saveLikePost(like[i].id);
+                    <div class="container">
+                        <div class="row inlineFlexRow">
+                            <div class="col-l-4">
+                                <i class="fas fa-heart cardIcons" id="${id}"><a>${likes}</a></i>
+                            </div>
+                            <div class="col-l-4">
+                                <i class="far fa-comment cardIcons"></i>
+                            </div>
+                            <div class="col-l-4">
+                                <i class="fas fa-share cardIcons"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-l-12">
+                            <p>${extractedData.text}</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>` + postContainer.innerHTML;
             });
+
+            const like = document.getElementsByClassName("fa-heart");
+
+            for (let i = 0; i < like.length; i++) {
+                like[i].addEventListener("click", () => {
+                    saveLikePost(like[i].id);
+                });
+            }
         }
 
-        
+        printPosts(posts)
+
+        homeFinishedLoading();
     });
 }
 
@@ -101,20 +109,6 @@ const homeFinishedLoading = () => {
     home.style.display = "block";
     post.style.display = "none";
 }
-
-// const likePost = (postID, userID) => {
-
-//     console.log(postID)
-
-//     like.addEventListener("click",() => {
-//         console.log("click" + like)
-//         saveLikePost(postID, userID)
-//     })
-// }
-//     for (let i = 0; i < like.length; i++) {
-
-
-// }
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -145,7 +139,7 @@ addLogo.addEventListener("click", () => {
 
             reader.onload = function (e) {
                 filePreview.id = 'saveFilePreview';
-                 filePreview.setAttribute("class", "cardImage");
+                filePreview.setAttribute("class", "cardImage");
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
                 console.log(e.target.result);
@@ -160,7 +154,7 @@ addLogo.addEventListener("click", () => {
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
-   //Funcion para subir la informacion del post a Firebase
+    //Funcion para subir la informacion del post a Firebase
     const savePostIntoDatabase = () => {
 
         const postImage = saveFilePreview.src;
@@ -168,7 +162,7 @@ addLogo.addEventListener("click", () => {
         const userID = firebase.auth().currentUser.uid;
         savePost(postImage, fullPostText, userID);
     }
-   send.addEventListener("click", (event) => {
+    send.addEventListener("click", (event) => {
         event.preventDefault();
         savePostIntoDatabase();
     });
@@ -186,11 +180,11 @@ userLogo.addEventListener("click", (event) => {
     post.style.display = "none";
     profile.style.display = "block";
     let showImg = '';
-    if(userImg === undefined){
+    if (userImg === undefined) {
         showImg = "style/img/user.png";
-    }else{
+    } else {
         showImg = userImg;
-    }                  
+    }
 
     profile.innerHTML = `
     <section id = "userInfo">
@@ -219,16 +213,16 @@ userLogo.addEventListener("click", (event) => {
     <section id = "">
     </section>`
 
-     
+
     //Llama a la función de cierre sesión
-    const logoutUsers = () => { 
-        logoutUser(); 
+    const logoutUsers = () => {
+        logoutUser();
     }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
-    
 
-    
+
+
 
 
 });
