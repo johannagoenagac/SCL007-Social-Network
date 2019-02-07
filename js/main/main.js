@@ -199,7 +199,7 @@ userLogo.addEventListener("click", (event) => {
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
         }else{
             console.log(bioText);
-            bioContentProfile = `<span class = "biography">${bioText}</span>`;  
+            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
             bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
         showProfile(); 
@@ -255,6 +255,7 @@ userLogo.addEventListener("click", (event) => {
                     //Tiene que mostrar la bio y boton editar
                     const addingBio = () => { addBiography(biographyText.value);}
                     addingBio();
+                    searchBiography();
                 };
             }else{
                 console.log('Aqui edito');
