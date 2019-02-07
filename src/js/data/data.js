@@ -2,19 +2,19 @@
 export const addBiography = (textBio) => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`profile/${uid}/biography`).set({
-    text: textBio
+    texto: textBio
   });
   console.log('Agregado??');
 };
 
 //Verifica si hay una biografía en la data
-export const searchForBiography = () => {
+export const searchForBiography = (textBio) => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`profile/${uid}/biography`).once('value')
-  .then(function(snapshot) {
-    let bioExists = snapshot.val();
-    console.log(bioExists);
-  });
+  .then(function(snapshot) {    
+    textBio(snapshot.val());
+    // console.log(snapshot.val());
+  })
 };
 
 //Sube información de post a firebase database
