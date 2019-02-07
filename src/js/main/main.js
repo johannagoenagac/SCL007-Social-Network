@@ -137,9 +137,7 @@ const readPostFromDatabase = () => {
                 });
             }
         }
-
-        printPosts(posts)
-
+        printPosts(posts);
         homeFinishedLoading();
     });
 }
@@ -165,6 +163,7 @@ addLogo.addEventListener("click", () => {
     home.style.display = "none";
     post.style.display = "block";
     profile.style.display = "none";
+    clearPostInformation();  
     let filePreview = document.createElement('img');
 
     //Funcion para cargar la imagen del post
@@ -189,6 +188,10 @@ addLogo.addEventListener("click", () => {
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
     }
+    function clearPostInformation(){
+        saveFilePreview.src = "";
+        postText.value = "";
+    };
     //Funcion para subir la informacion del post a Firebase
     const savePostIntoDatabase = () => {
 
@@ -200,6 +203,7 @@ addLogo.addEventListener("click", () => {
     send.addEventListener("click", (event) => {
         event.preventDefault();
         savePostIntoDatabase();
+        clearPostInformation();
     });
 });
 
@@ -245,7 +249,7 @@ userLogo.addEventListener("click", (event) => {
             showImg = "style/img/user.png";
         }else{
             showImg = userImg;
-        }
+        };
         
         profile.innerHTML = `
         <section id = "userInfo">
@@ -265,7 +269,6 @@ userLogo.addEventListener("click", (event) => {
         </div>
             </div>
         </div>
-       
         </section>
         <section id = "userbiography">
             <div class="row container">
@@ -303,7 +306,4 @@ userLogo.addEventListener("click", (event) => {
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
-    
-
-    
 });
