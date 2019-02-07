@@ -1,11 +1,12 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, addBiography} from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography} from '../data/data.js';
 
 const loginPage = document.getElementById("loginPage");
 let nameUser = '';
 let userImg = '';
+
 window.onload = () => {
     //Verifica estado de conexión del usuario
     checkAuthStatus((user) => {
@@ -38,8 +39,8 @@ window.onload = () => {
     });
     //Llama a la función registro con Google, facebook
     const registerWithFacebook = () => { registerUserFacebook(); }
-    const registerWithGoogle = () => { registerUserGoogle(); }    
-
+    const registerWithGoogle = () => { registerUserGoogle(); }   
+                 
     //Si hace click al botón Google, llama a la función registro con Google
     googleRegistry.addEventListener('click', registerWithGoogle);
 
@@ -47,9 +48,10 @@ window.onload = () => {
     facebookRegistry.addEventListener('click', registerWithFacebook);
 };
 
+
 const readPostFromDatabase = () => {
     readPost((post) => {
-        console.log(post.val().likes)
+        // console.log(post.val().likes)
         postContainer.innerHTML =
             `<div class="formPost">
                 <div class="container">
@@ -177,31 +179,62 @@ userLogo.addEventListener("click", (event) => {
     home.style.display = "none";
     post.style.display = "none";
     profile.style.display = "block";
+    let bioContentProfile = '';
+    let bioText = null;
+    //Llama a la función que busca si el usuario actual, tiene biografía agregada o no
+    // const searchBiography = () => { 
+    //     searchForBiography((bio) => {
+    //         console.log('Que me devuelve??');
+    //         console.log(bio);
+    //         if(bio === null){
+    //             //No hay biografía
+    //             bioContentProfile = `
+    //             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>
+    //             <!-- <button type="button" id="sendBiography">
+    //                 <span>Agregar biografía</span>
+    //             </button> -->
+    //             `;     
+    //         }else{
+    //             //si hay biografia
+    //             bioContentProfile = `
+    //             <span class = "biography">${bio.texto}</span>
+    //             <button type="button" id="editBiography">
+    //                 <span>Editar biografía</span>
+    //             </button>`;
+    //         }
+    //     });
+    // }           
+    // searchBiography();  
+    const searchBiography = () => { searchForBiography((bio) =>{
+        console.log('Que me devuelve??');
+        console.log(bio);
+        if (bio !== null){
+            //Hay bio
+            bioText = bio.texto;
+        }
+        asigna();
+    });};
+    searchBiography();
+
+    console.log(bioText)
+    function asigna () {
+        if (bioText === null){
+            bioContentProfile = `
+                <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;     
+        }else{
+            console.log(bioText);
+            bioContentProfile = `
+                <span class = "biography">${bioText}</span>`;           
+        }
+    }
+    
+    
     let showImg = '';
     if(userImg === undefined){
         showImg = "style/img/user.png";
     }else{
         showImg = userImg;
     }     
-    //Llama a la función que busca si el usuario actual, tiene biografía agregada o no
-    const searchBiography = () => { addBiography(); }
-    let flagBiography = searchBiography();
-    let bioContentProfile = '';
-    if (flagBiography === undefined){
-        bioContentProfile = `
-        <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>
-        <button type="button" id="sendBiography">
-            <span>Agregar biografía</span>
-        </button>`;
-    }else{
-        bioContentProfile = `
-        <span> Aqui va la bio</span>
-        <button type="button" id="sendBiography">
-            <span>Editar biografía</span>
-        </button>`;
-    }
-    console.log(flagBiography)
-    
     profile.innerHTML = `
     <section id = "userInfo">
     <div class="row flexRow">
@@ -222,21 +255,32 @@ userLogo.addEventListener("click", (event) => {
     </section>
     <section id = "userbiography">
         <div class="row container">
-            <div class="col-s-12 m-12 l-12"> ${bioContentProfile}</div>
+            <div class="col-s-12 m-12 l-12"> 
+                ${bioContentProfile}
+                <button type="button" id="sendBiography">
+                    <span>Agregar biografía</span>
+                </button>
+            </div>
         </div>
     </section>
     <section id = "">
     </section>`
+    
+    //Si no tiene biografía, agrega una a firebase
+    sendBiography.addEventListener("click",(event) => {
+        event.preventDefault();
+        if(biographyText.value === ''){
+            alert("Por favor, ¡escríbenos de ti!");
+        } else {
+            //Llamo a la función que agrega la biografía
+            //Tiene que mostrar la bio y boton editar
+            const addingBio = () => { addBiography(biographyText.value);}
+            addingBio();
+        }         
+    });
 
     //Llama a la función de cierre sesión
     const logoutUsers = () => { logoutUser(); }
     //Si hace click al botón Logout, llama a la función Logout
     logout.addEventListener('click', logoutUsers);
-
-    //Si no tiene biografía, agrega una a firebase
-    sendBiography.addEventListener("click",(event) => {
-        event.preventDefault();
-        console.log(biographyText.value);
-    });
-
 });
