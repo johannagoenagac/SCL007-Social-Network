@@ -256,7 +256,7 @@ body{
     justify-content: center;
 }
 
-#send, #logout, #sendBiography{
+#send, #logout, #biography{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
