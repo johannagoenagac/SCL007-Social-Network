@@ -23,6 +23,28 @@ export const checkAuthStatus = (callback) => {
   });
 };
 
+export const registerUser = (email, password) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+   .then((user)=>{
+     registerForm.style.display = "none";
+     login.style.display = "block";
+     console.log("Usuario registrado > "+JSON.stringify(user));
+   })
+   .catch((error) => {
+     console.error("Error > "+error.message);
+   });
+}
+
+export const loginUser = (email, password) => {
+ firebase.auth().signInWithEmailAndPassword(email, password)
+   .then((user)=>{
+     console.log("Usuario logueado > "+JSON.stringify(user));
+   })
+   .catch((error) => {
+     console.error("Error > "+error.message);
+   });
+}
+
 export const registerUserGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithRedirect(provider)

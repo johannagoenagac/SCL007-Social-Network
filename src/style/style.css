@@ -128,17 +128,21 @@ body{
 
 }
 
-#signInBtn{
-    text-align: center;
-}
 
-.signInBtn{
+.signInBtn, #goRegister{
     background: #BDBDBD;
     border: 0px;
     border-radius: 5px;
     padding: 15px;
     margin: 0px auto;
-    max-width: 100%;
+   max-width: 100%;
+   text-align: center;
+   
+}
+
+#signInBtn, #register{
+    text-align: center;
+    display: initial;
 }
 
 .forget{
@@ -156,6 +160,12 @@ body{
 #registry{
     text-align: center;
 }
+
+#emailTextfield, #passwordTextfield{
+    width: 60%;
+}
+
+
 
 .loginBtn {
     box-sizing: border-box;
@@ -285,6 +295,15 @@ body{
     max-width: 80%;
 }
 
+#comments{
+    background-image: url("http://subirimagen.me/uploads/20190206145624.png");
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background-position: left center;
+}
+
 main{
     padding-bottom: 3.5rem;
 }
@@ -346,4 +365,64 @@ h1{
 
 .alignment{
     align-self: center;
+}
+
+#register-form{
+    max-width: 50%;
+    display: block;
+    margin: 0 auto;
+   justify-content: center;
+   margin-top: 100px;
+}
+
+#registerButton{
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px;
+  width: 100px;
+  height: 25px;
+  border-radius: 4px;
+  color:#212121;
+  background-color: #fafafa;
+  font-family: sans-serif;
+}
+
+#welcomeText{
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  margin-top:-20px;
+  
+}
+
+#registerEmail, #registerPassword{
+  width: 100%;
+  height: 25px;
+  margin:10px;
+  border-radius: 5px;
+  text-align: center;
+   
+}
+
+#registerEmail{
+  background-image:url("http://subirimagen.me/uploads/20190206075753.png");
+ background-repeat: no-repeat;
+ background-size: 20px;
+ background-position: left center;
+}
+
+#registerPassword{
+  background-image: url("http://subirimagen.me/uploads/20190206080036.png");
+  background-repeat: no-repeat; 
+  background-size: 20px;
+  background-position: left center;
+}
+
+.formStyle{
+  display:block;
+  margin: 0 auto;
+  background-color: #B71C1C;
+  padding-bottom: 20%;
+  padding-top: 3%;
+  margin-top: 15px;
 }
