@@ -135,12 +135,14 @@ const homeFinishedLoading = () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 }
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 });
 
 searchLogo.addEventListener("click", () => {
@@ -164,7 +166,6 @@ addLogo.addEventListener("click", (event) => {
                 filePreview.setAttribute("class", "cardImage");
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
-                console.log(e.target.result);
                 let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             };
@@ -253,7 +254,7 @@ userLogo.addEventListener("click", (event) => {
     function showProfile () {
         let showImg = '';
         if(userImg === undefined){
-            showImg = "style/img/user.png";
+            showImg = '../src/style/img/user.png';
         }else{
             showImg = userImg;
         };
@@ -308,7 +309,6 @@ userLogo.addEventListener("click", (event) => {
                 console.log('Aqui edito');
             }
         });
-        
         //Llama a la función de cierre sesión
         const logoutUsers = () => { logoutUser(); }
         //Si hace click al botón Logout, llama a la función Logout
