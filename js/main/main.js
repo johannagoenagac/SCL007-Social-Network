@@ -41,24 +41,18 @@ window.onload = () => {
     });
     //Llama a la función registro con Google, facebook
     const registerWithFacebook = () => { registerUserFacebook(); }
-
     const registerWithGoogle = () => { registerUserGoogle(); }
-
 
     //Si hace click al botón Google, llama a la función registro con Google
     googleRegistry.addEventListener('click', registerWithGoogle);
-
     //Si hace click al botón Facebook, llama a la función registro con Facebook
     facebookRegistry.addEventListener('click', registerWithFacebook);
 };
-
-
 
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
    const passwordFromUser = registerPassword.value;
    registerUser(emailFromUser, passwordFromUser);
-   
 };
 
 const loginUserWithEmailAndPassword = () => {
@@ -67,14 +61,11 @@ const loginUserWithEmailAndPassword = () => {
     loginUser(emailFromUser, passwordFromUser);
 };
 
-
 registerButton.addEventListener('click', (event)=>{
 event.preventDefault();
 registerWithEmailAndPassword();
 // registerWithUserName();
 });
-
-
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
 
@@ -83,8 +74,6 @@ goRegister.addEventListener("click", (event)=>{
     registerForm.style.display = "block";
     loginPage.style.display = "none";
     });
-
-
 
 const readPostFromDatabase = () => {
     readPost((posts) => {
@@ -158,19 +147,18 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-addLogo.addEventListener("click", () => {
+addLogo.addEventListener("click", (event) => {
+    event.preventDefault();
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
     post.style.display = "block";
     profile.style.display = "none";
-    clearPostInformation();  
+    
     let filePreview = document.createElement('img');
-
     //Funcion para cargar la imagen del post
     function readFile(input) {
         if (input.files && input.files[0]) {
             let reader = new FileReader();
-
             reader.onload = function (e) {
                 filePreview.id = 'saveFilePreview';
                 filePreview.setAttribute("class", "cardImage");
@@ -179,31 +167,28 @@ addLogo.addEventListener("click", () => {
                 console.log(e.target.result);
                 let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
-            }
+            };
             reader.readAsDataURL(input.files[0]);
-        }
-    }
-
+        };
+    };
     let fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
-    }
-    function clearPostInformation(){
-        saveFilePreview.src = "";
-        postText.value = "";
     };
+
     //Funcion para subir la informacion del post a Firebase
     const savePostIntoDatabase = () => {
-
         const postImage = saveFilePreview.src;
         const fullPostText = postText.value;
         const userID = firebase.auth().currentUser.uid;
         savePost(postImage, fullPostText, userID);
-    }
+        postText.value = '';
+        document.getElementById('file-upload').value = '';
+        document.getElementById('file-preview-zone').removeChild(filePreview);
+    };
     send.addEventListener("click", (event) => {
         event.preventDefault();
         savePostIntoDatabase();
-        clearPostInformation();
     });
 });
 
@@ -236,7 +221,6 @@ userLogo.addEventListener("click", (event) => {
             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;  
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
         }else{
-            console.log(bioText);
             bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
             bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
