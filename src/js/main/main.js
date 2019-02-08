@@ -6,6 +6,7 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 
 let nameUser = '';
 let userImg = '';
+const logoutUsers = () => { logoutUser(); }
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -59,6 +60,7 @@ const loginUserWithEmailAndPassword = () => {
     const emailFromUser = emailTextfield.value;
     const passwordFromUser = passwordTextfield.value;
     loginUser(emailFromUser, passwordFromUser);
+    
 };
 
 
@@ -328,7 +330,6 @@ userLogo.addEventListener("click", (event) => {
             }
         });
         //Llama a la función de cierre sesión
-        const logoutUsers = () => { logoutUser(); }
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
