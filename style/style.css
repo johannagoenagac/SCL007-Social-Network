@@ -63,10 +63,11 @@
     bottom: 0;
 }
 
-.iconList{
+.iconList, .btnsLoginPage{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin: 0 auto;
 }
 
 .icon{
@@ -94,7 +95,6 @@ body{
     padding-top: 4%;
     color: #FCE4EC;
     display: block;
-    max-width: 10%;
     text-align: center;
 }
 
@@ -102,7 +102,7 @@ body{
     margin: 0px auto;
     color: #FCE4EC;
     display: block;
-    max-width: 30%;
+    max-width: 100%;
     text-align: center;
 }
 
@@ -121,20 +121,14 @@ body{
     outline: none;
     max-width: 100%;
     margin-bottom: 20px;
-
 }
 
 #loginButton, #goRegister{
     display: block;
     margin: 0 auto;
-    max-width: 50%;
-    width: 5rem;
     height: 2rem;
     border-radius: 3px;
     font-family: sans-serif;
-    
-   
-
 }
 
 
@@ -148,10 +142,6 @@ body{
     padding: 30px 0 20px 0;
     display: block;
     margin: 0 auto;
-}
-
-#registry{
-    text-align: center;
 }
 
 #emailTextfield, #passwordTextfield{
@@ -192,13 +182,12 @@ body{
 .loginBtn:active {
     box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
 }
-  
-  
-  /* Facebook */
+
+/* Facebook */
 .loginBtn--facebook {
     background-color: #4C69BA;
     background-image: linear-gradient(#4C69BA, #3B55A0);
-    /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+    font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
     text-shadow: 0 -1px 0 #354C8C;
 }
 
@@ -215,7 +204,7 @@ body{
 
   /* Google */
 .loginBtn--google {
-    /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+    font-family: "Roboto", sans-serif;;
     background: #DD4B39;
 }
 
@@ -232,7 +221,7 @@ body{
 #loginPage{
     background-color: #B71C1C;
     background-repeat: no-repeat;
-    min-height: 100%;
+    min-height: 100vh;
     background-size: cover;
 }
 
@@ -249,7 +238,6 @@ body{
     display: block;
     margin: 0 auto;
     justify-content: center;
-    
 }
 
 
@@ -287,8 +275,9 @@ body{
 
 #logout{
     height: 2rem;
-    text-align: :center;
+    text-align: center;
 }
+
 .formPost{
     border: 1px solid #9e9e9e ;
     margin:1rem auto;
@@ -303,10 +292,6 @@ body{
     height: 100%;
     width: 100%;
     background-position: left center;
-}
-
-main{
-    padding-bottom: 3.5rem;
 }
 
 #content-image{
@@ -344,7 +329,6 @@ h1{
     max-width: 100%;
     margin: 0 auto;
     border-radius: 100%;
-    
 }
 
 
@@ -358,6 +342,7 @@ h1{
 
 .flexRow{
     display: flex;
+    margin: 0 auto;
 }
 
 .inlineFlexRow{
@@ -372,58 +357,56 @@ h1{
     max-width: 50%;
     display: block;
     margin: 0 auto;
-   justify-content: center;
-   margin-top: 100px;
+    justify-content: center;
+    margin-top: 100px;
 }
 
 #registerButton{
-  margin: 0 auto;
-  display: block;
-  margin-top: 20px;
-  width: 100px;
-  height: 25px;
-  border-radius: 4px;
-  color:#212121;
-  background-color: #fafafa;
-  font-family: sans-serif;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    width: 100px;
+    height: 25px;
+    border-radius: 4px;
+    color:#212121;
+    background-color: #fafafa;
+    font-family: sans-serif;
 }
 
 #welcomeText{
-  color: white;
-  font-size: 25px;
-  text-align: center;
-  margin-top:-20px;
-  
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top:-20px;
 }
 
 #registerEmail, #registerPassword{
-  width: 100%;
-  height: 25px;
-  margin:10px;
-  border-radius: 5px;
-  text-align: center;
-   
+    width: 100%;
+    height: 25px;
+    margin:10px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 #registerEmail{
-  background-image:url("http://subirimagen.me/uploads/20190206075753.png");
- background-repeat: no-repeat;
- background-size: 20px;
- background-position: left center;
+    background-image:url("http://subirimagen.me/uploads/20190206075753.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: left center;
 }
 
 #registerPassword{
-  background-image: url("http://subirimagen.me/uploads/20190206080036.png");
-  background-repeat: no-repeat; 
-  background-size: 20px;
-  background-position: left center;
+    background-image: url("http://subirimagen.me/uploads/20190206080036.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: left center;
 }
 
 .formStyle{
-  display:block;
-  margin: 0 auto;
-  background-color: #B71C1C;
-  padding-bottom: 20%;
-  padding-top: 3%;
-  margin-top: 15px;
+    display:block;
+    margin: 0 auto;
+    background-color: #B71C1C;
+    padding-bottom: 20%;
+    padding-top: 3%;
+    margin-top: 15px;
 }

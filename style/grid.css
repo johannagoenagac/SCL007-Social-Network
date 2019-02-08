@@ -95,9 +95,11 @@
         margin: 0 auto;
         display: block;
         margin-left:30%;
-       
     }
 
+    .indexLogo{
+        max-width: 100%;
+    } 
 }
 
 @media only screen and (min-width: 576px) {
@@ -160,6 +162,10 @@
     .menuTabs{
         display: none;
     }
+
+    .indexLogo{
+        max-width: 100%;
+    } 
 }
 
 @media only screen and (min-width: 768px) {
@@ -221,7 +227,11 @@
 
     .menuTabs{
         display: none;
-}
+    }
+
+    .indexLogo{
+        max-width: 100%;
+    } 
 }
 
 @media only screen and (min-width: 992px) {
@@ -292,4 +302,8 @@
     .pageGuide{
         display: none;
     }
+
+    .indexLogo{
+        max-width: 70%;
+    }   
 }
