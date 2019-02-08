@@ -127,14 +127,9 @@ body{
 #loginButton, #goRegister{
     display: block;
     margin: 0 auto;
-    max-width: 50%;
-    width: 5rem;
     height: 2rem;
     border-radius: 3px;
     font-family: sans-serif;
-    
-   
-
 }
 
 
@@ -281,13 +276,13 @@ body{
     font-size: 16px;
 }
 
-#sendBiography{
+#biography{
     margin-top: 1rem;
 }
 
 #logout{
     height: 2rem;
-    text-align: :center;
+    text-align: center;
 }
 .formPost{
     border: 1px solid #9e9e9e ;
