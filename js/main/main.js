@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography} from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost} from '../data/data.js';
 
 
 let nameUser = '';
@@ -243,7 +243,6 @@ userLogo.addEventListener("click", (event) => {
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
-
                 <div class="row flexrow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
                 <button type="button" id="logout">
@@ -264,9 +263,52 @@ userLogo.addEventListener("click", (event) => {
                 </div>
             </div>
         </section>
-        <section id = "">
+        <section id = "postsUser">
+            
         </section>`;
+
+        const readPostOneUser = () => { readUserPost((post) => {
+            //Lo que tengo que mostrar
+
+        });};
+        readPostOneUser();
+
+        // postContainer.innerHTML =
+        //             `<div class="formPost">
+        //             <div class="container">
+        //             <div class="row">
+        //                 <div class="col-l-12 centered">
+        //                     <img class="cardImage" src="${extractedData.image}"/>
+        //                 </div>
+        //             </div>
+        //             </div>
+        //             <div class="container">
+        //                 <div class="row inlineFlexRow">
+        //                     <div class="col-l-4">
+        //                         <i class="fas fa-heart cardIcons" id="${id}"><a>${likes}</a></i>
+        //                     </div>
+        //                     <div class="col-l-4">
+        //                         <i class="far fa-comment cardIcons"></i>
+        //                     </div>
+        //                     <div class="col-l-4">
+        //                         <i class="fas fa-share cardIcons"></i>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //             <div class="container">
+        //             <div class="row">
+        //                 <div class="col-l-12">
+        //                     <p>${extractedData.text}</p>
+        //                 </div>
+        //             </div>
+        //             </div>
+        //         </div>` + postContainer.innerHTML;
         
+
+
+
+
+
         //Si no tiene biografía, agrega una a firebase
         biography.addEventListener("click",(event) => {
             event.preventDefault();
