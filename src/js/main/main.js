@@ -271,17 +271,10 @@ userLogo.addEventListener("click", (event) => {
     
     function showProfile () {
         let showImg = '';
-<<<<<<< HEAD
-        if(userImg === undefined){
-            showImg = `<img class="cardProfileImage" src="../style/img/user.png"></img>`;
-        }else{
-            showImg = `<img class="cardProfileImage" src="${userImg}"></img>`;
-=======
         if (userImg === undefined) {
             showImg = "style/img/user.png";
         } else {
             showImg = userImg;
->>>>>>> 14f9233107a321420a290798852abc417ecd3ac2
         };
         
         profile.innerHTML = `
