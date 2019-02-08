@@ -338,14 +338,11 @@ h1{
     margin: 0 auto;
 }
 
-
 .cardProfileImage{
     max-width: 100%;
     margin: 0 auto;
     border-radius: 100%;
-    
 }
-
 
 .cardIcons{
     cursor: pointer;
