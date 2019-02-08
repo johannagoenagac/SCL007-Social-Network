@@ -6,6 +6,8 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 
 let nameUser = '';
 let userImg = '';
+ //Llama a la función de cierre sesión
+ const logoutUsers = () => { logoutUser(); }
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -66,6 +68,9 @@ registerButton.addEventListener('click', (event) => {
     event.preventDefault();
     registerWithEmailAndPassword();
     // registerWithUserName();
+    loginPage.style.display = "block"
+    registerForm.style.display = "none"
+    logoutUsers();
 });
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
@@ -328,8 +333,7 @@ userLogo.addEventListener("click", (event) => {
             }
         });
 
-        //Llama a la función de cierre sesión
-        const logoutUsers = () => { logoutUser(); }
+       
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
