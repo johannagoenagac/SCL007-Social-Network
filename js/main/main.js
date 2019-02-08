@@ -11,6 +11,8 @@ window.onload = () => {
     //Verifica estado de conexión del usuario
     checkAuthStatus((user) => {
         if (user) {
+            //Llama a la funcion que muestra los posts
+            readPostFromDatabase();
             //Usuario logeado, muestra menú y home
             header.style.display = "block";
             footer.style.display = "block";
@@ -26,17 +28,15 @@ window.onload = () => {
                 let name = user.displayName.split(" ");
                 document.getElementById('user-name').innerHTML = name[0];
             }
-            
-            readPostFromDatabase();
         } else {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
+            footer.style.display = "none"
             loginPage.style.display = "block";
             root.style.display = "none";
-            footer.style.display = "none"
             post.style.display = "none";
             profile.style.display = "none";
-            registerForm.style.display ="none";
+            registerForm.style.display = "none";
         }
     });
     //Llama a la función registro con Google, facebook
@@ -61,31 +61,38 @@ const loginUserWithEmailAndPassword = () => {
     loginUser(emailFromUser, passwordFromUser);
 };
 
-registerButton.addEventListener('click', (event)=>{
-event.preventDefault();
-registerWithEmailAndPassword();
-// registerWithUserName();
+
+registerButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    registerWithEmailAndPassword();
+    // registerWithUserName();
 });
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
 
-goRegister.addEventListener("click", (event)=>{
+goRegister.addEventListener("click", (event) => {
     event.preventDefault();
     registerForm.style.display = "block";
     loginPage.style.display = "none";
-    });
+});
 
+
+//Lee la data guardada en Firebase, la recorre y agrega a cada post individualmente
 const readPostFromDatabase = () => {
     readPost((posts) => {
         postContainer.innerHTML = "";
 
         const printPosts = (posts) => {
             Object.entries(posts.val()).forEach(post => {
+                //Toma el ID de post
                 let id = Object.values(post)[0];
+                //Toma el objeto que contiene la imagen, el texto y la cantidad de likes y lo convierte en un array
                 let extractedData = Object.values(post)[1];
-                const extractedLikes =  extractedData.likes ? Object.entries(extractedData.likes) : 0;
+                //Confirma si hay un collection likes y trae sus entries, de lo contrario retorna 0
+                const extractedLikes = extractedData.likes ? Object.entries(extractedData.likes) : 0;
+                //Confirma si existe una cantidad mayor a 0 de likes y retorna el total, de lo contrario retorna 0
                 const likes = extractedLikes.length ? extractedLikes.length : 0;
-
+                //Genera cada post con la informacion requerida
                 postContainer.innerHTML =
                     `<div class="formPost">
                     <div class="container">
@@ -117,11 +124,13 @@ const readPostFromDatabase = () => {
                     </div>
                 </div>` + postContainer.innerHTML;
             });
-
+            //Extrae la clase de los corazones
             const like = document.getElementsByClassName("fa-heart");
-
+            //Recorre la cantidad de corazones en home
             for (let i = 0; i < like.length; i++) {
+                //Funcion que se ejecuta cuando se le da click al corazon sin importar cual
                 like[i].addEventListener("click", () => {
+                    //Funcion que lleva el ID del post al cual se le dio click en el corazon
                     saveLikePost(like[i].id);
                 });
             }
@@ -137,6 +146,10 @@ const homeFinishedLoading = () => {
     post.style.display = "none";
     profile.style.display = "none";
 }
+
+homeTab.addEventListener("click", () => {
+    homeLogo.click();
+})
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -197,9 +210,13 @@ recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
 });
 
+profileTab.addEventListener("click", () => {
+    userLogo.click();
+})
+
 userLogo.addEventListener("click", (event) => {
     event.preventDefault();
-    
+
     pageGuide.innerHTML = "Perfil";
     home.style.display = "none";
     post.style.display = "none";
@@ -241,21 +258,22 @@ userLogo.addEventListener("click", (event) => {
     readPostOneUser();
     function asigna() {  
         if (bioText === null){
+
             bioContentProfile = `
-            <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;  
+            <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
         }else{
             bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
             bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
-        showProfile(); 
+        showProfile();
     }
     
     function showProfile () {
         let showImg = '';
-        if(userImg === undefined){
-            showImg = '../src/style/img/user.png';
-        }else{
+        if (userImg === undefined) {
+            showImg = "style/img/user.png";
+        } else {
             showImg = userImg;
         };
         
@@ -292,23 +310,27 @@ userLogo.addEventListener("click", (event) => {
         </section>`;
 
         //Si no tiene biografía, agrega una a firebase
-        biography.addEventListener("click",(event) => {
+        biography.addEventListener("click", (event) => {
             event.preventDefault();
-            if (textAtButton.innerHTML === 'Agregar biografía'){
-                if(biographyText.value === ''){
+            if (textAtButton.innerHTML === 'Agregar biografía') {
+                if (biographyText.value === '') {
                     alert("Por favor, ¡escríbenos de ti!");
                 } else {
                     //Llamo a la función que agrega la biografía
                     //Tiene que mostrar la bio y boton editar
-                    const addingBio = () => { addBiography(biographyText.value);}
+                    const addingBio = () => { addBiography(biographyText.value); }
                     addingBio();
                     searchBiography();
                     readPostOneUser();
                 };
-            }else{
+            } else {
                 console.log('Aqui edito');
             }
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 14f9233107a321420a290798852abc417ecd3ac2
         //Llama a la función de cierre sesión
         const logoutUsers = () => { logoutUser(); }
         //Si hace click al botón Logout, llama a la función Logout
