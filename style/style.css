@@ -16,10 +16,6 @@
     margin-right: .5rem;
 }
 
-#logout{
-    margin-left: auto;
-}
-
 .menuTabs{
     font-size: 20px;
     list-style: none;
@@ -117,22 +113,19 @@ body{
 
 }
 
-
-.signInBtn, #goRegister{
-    background: #BDBDBD;
-    border: 0px;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 0px auto;
-   max-width: 100%;
-   text-align: center;
+#loginButton, #goRegister{
+    display: block;
+    margin: 0 auto;
+    max-width: 50%;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 3px;
+    font-family: sans-serif;
+    
    
+
 }
 
-#signInBtn, #register{
-    text-align: center;
-    display: initial;
-}
 
 .forget{
     max-width: 100%;
@@ -152,8 +145,8 @@ body{
 
 #emailTextfield, #passwordTextfield{
     width: 60%;
+    text-align: center;
 }
-
 
 
 .loginBtn {
@@ -279,6 +272,14 @@ body{
     font-size: 16px;
 }
 
+#sendBiography{
+    margin-top: 1rem;
+}
+
+#logout{
+    height: 2rem;
+    text-align: :center;
+}
 .formPost{
     border: 1px solid #9e9e9e ;
     margin:1rem auto;

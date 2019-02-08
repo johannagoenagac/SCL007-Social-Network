@@ -142,19 +142,6 @@ const homeFinishedLoading = () => {
     post.style.display = "none";
 }
 
-// const likePost = (postID, userID) => {
-
-//     console.log(postID)
-
-//     like.addEventListener("click",() => {
-//         console.log("click" + like)
-//         saveLikePost(postID, userID)
-//     })
-// }
-//     for (let i = 0; i < like.length; i++) {
-
-
-// }
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
@@ -263,15 +250,17 @@ userLogo.addEventListener("click", (event) => {
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
-            </div>
-        </div>
-        <div class="row flexrow">
+
+                <div class="row flexrow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
                 <button type="button" id="logout">
                     <span>Cierra sesión <span id="user-name-marker"></span></span>
                 </button>
             </div>
         </div>
+            </div>
+        </div>
+       
         </section>
         <section id = "userbiography">
             <div class="row container">
