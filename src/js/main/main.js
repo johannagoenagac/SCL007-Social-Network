@@ -156,6 +156,10 @@ const homeFinishedLoading = () => {
     post.style.display = "none";
 }
 
+homeTab.addEventListener("click", () => {
+    homeLogo.click();
+})
+
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
@@ -212,6 +216,10 @@ addLogo.addEventListener("click", () => {
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
 });
+
+profileTab.addEventListener("click", () => {
+    userLogo.click();
+})
 
 userLogo.addEventListener("click", (event) => {
     event.preventDefault();
