@@ -206,6 +206,28 @@ userLogo.addEventListener("click", (event) => {
     let bioContentProfile = '';
     let bioTextButton = '';
     let bioText = null;
+    let postImageUser = '';
+
+    const readPostOneUser = () => { readUserPost((userPosts) => {
+        //Lo que tengo que mostrar
+        const userShowPosts = (posts) => {
+            Object.entries(userPosts.val()).forEach(post => {
+                let idPostUser = Object.values(post)[0];
+                let contentPostUser = Object.values(post)[1];
+
+                postImageUser = `
+                    <div class="row">
+                        <div class="col-l-12 centered">
+                            <img class="cardImage" src="${contentPostUser.image}"/>
+                        </div>
+                    </div>
+                    </div>` + postImageUser;
+            });
+        };
+        userShowPosts(userPosts);
+    });};        
+    
+
     const searchBiography = () => { searchForBiography((bio) =>{
         if (bio !== null){
             //Hay bio
@@ -213,8 +235,9 @@ userLogo.addEventListener("click", (event) => {
         }
         asigna();        
     });};
+    
     searchBiography();
-
+    readPostOneUser();
     function asigna() {  
         if (bioText === null){
             bioContentProfile = `
@@ -226,7 +249,7 @@ userLogo.addEventListener("click", (event) => {
         }
         showProfile(); 
     }
-
+    
     function showProfile () {
         let showImg = '';
         if(userImg === undefined){
@@ -263,51 +286,9 @@ userLogo.addEventListener("click", (event) => {
                 </div>
             </div>
         </section>
-        <section id = "postsUser">
-            
+        <section id = "postsUserImage">
+        <div class="container" id ="postsUser">${postImageUser}</div>
         </section>`;
-
-        const readPostOneUser = () => { readUserPost((post) => {
-            //Lo que tengo que mostrar
-
-        });};
-        readPostOneUser();
-
-        // postContainer.innerHTML =
-        //             `<div class="formPost">
-        //             <div class="container">
-        //             <div class="row">
-        //                 <div class="col-l-12 centered">
-        //                     <img class="cardImage" src="${extractedData.image}"/>
-        //                 </div>
-        //             </div>
-        //             </div>
-        //             <div class="container">
-        //                 <div class="row inlineFlexRow">
-        //                     <div class="col-l-4">
-        //                         <i class="fas fa-heart cardIcons" id="${id}"><a>${likes}</a></i>
-        //                     </div>
-        //                     <div class="col-l-4">
-        //                         <i class="far fa-comment cardIcons"></i>
-        //                     </div>
-        //                     <div class="col-l-4">
-        //                         <i class="fas fa-share cardIcons"></i>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //             <div class="container">
-        //             <div class="row">
-        //                 <div class="col-l-12">
-        //                     <p>${extractedData.text}</p>
-        //                 </div>
-        //             </div>
-        //             </div>
-        //         </div>` + postContainer.innerHTML;
-        
-
-
-
-
 
         //Si no tiene biografía, agrega una a firebase
         biography.addEventListener("click",(event) => {
@@ -321,6 +302,7 @@ userLogo.addEventListener("click", (event) => {
                     const addingBio = () => { addBiography(biographyText.value);}
                     addingBio();
                     searchBiography();
+                    readPostOneUser();
                 };
             }else{
                 console.log('Aqui edito');
