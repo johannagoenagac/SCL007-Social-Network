@@ -281,7 +281,7 @@ userLogo.addEventListener("click", (event) => {
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                ${showImg}
+                <img class="cardProfileImage" src="${showImg}"></img>
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
