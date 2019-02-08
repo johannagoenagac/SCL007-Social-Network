@@ -51,7 +51,7 @@ window.onload = () => {
 
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
-   const passwordFromUser = registerPassword.value;
+    const passwordFromUser = registerPassword.value;
    registerUser(emailFromUser, passwordFromUser);
 };
 
@@ -135,12 +135,14 @@ const homeFinishedLoading = () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 }
 
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 });
 
 searchLogo.addEventListener("click", () => {
@@ -164,7 +166,6 @@ addLogo.addEventListener("click", (event) => {
                 filePreview.setAttribute("class", "cardImage");
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
-                console.log(e.target.result);
                 let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             };
@@ -253,16 +254,16 @@ userLogo.addEventListener("click", (event) => {
     function showProfile () {
         let showImg = '';
         if(userImg === undefined){
-            showImg = "style/img/user.png";
+            showImg = `<img class="cardProfileImage" src="../style/img/user.png"></img>`;
         }else{
-            showImg = userImg;
+            showImg = `<img class="cardProfileImage" src="${userImg}"></img>`;
         };
         
         profile.innerHTML = `
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img class="cardProfileImage" src=${showImg}></img>
+                ${showImg}
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
