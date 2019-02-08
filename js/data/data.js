@@ -1,3 +1,12 @@
+//Muestra todos los post del usuario
+export const readUserPost = (personalPost) => {
+  const uid = firebase.auth().currentUser.uid;
+  let onlyUserPost = firebase.database().ref(`profile/${uid}/post`);
+  onlyUserPost.on('value', (userPosts) => {
+    personalPost(userPosts);
+  });
+};
+
 //Agrega biografía a perfil de usuario
 export const addBiography = (textBio) => {
   const uid = firebase.auth().currentUser.uid;
@@ -6,8 +15,6 @@ export const addBiography = (textBio) => {
   });
   console.log('Agregado??');
 };
-
-
 
 //Verifica si hay una biografía en la data
 export const searchForBiography = (textBio) => {

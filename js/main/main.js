@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography } from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost} from '../data/data.js';
 
 
 let nameUser = '';
@@ -41,24 +41,18 @@ window.onload = () => {
     });
     //Llama a la función registro con Google, facebook
     const registerWithFacebook = () => { registerUserFacebook(); }
-
     const registerWithGoogle = () => { registerUserGoogle(); }
-
 
     //Si hace click al botón Google, llama a la función registro con Google
     googleRegistry.addEventListener('click', registerWithGoogle);
-
     //Si hace click al botón Facebook, llama a la función registro con Facebook
     facebookRegistry.addEventListener('click', registerWithFacebook);
 };
 
-
-
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
-    const passwordFromUser = registerPassword.value;
-    registerUser(emailFromUser, passwordFromUser);
-
+   const passwordFromUser = registerPassword.value;
+   registerUser(emailFromUser, passwordFromUser);
 };
 
 const loginUserWithEmailAndPassword = () => {
@@ -73,8 +67,6 @@ registerButton.addEventListener('click', (event) => {
     registerWithEmailAndPassword();
     // registerWithUserName();
 });
-
-
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
 
@@ -143,9 +135,7 @@ const readPostFromDatabase = () => {
                 });
             }
         }
-
-        printPosts(posts)
-
+        printPosts(posts);
         homeFinishedLoading();
     });
 }
@@ -170,18 +160,18 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-addLogo.addEventListener("click", () => {
+addLogo.addEventListener("click", (event) => {
+    event.preventDefault();
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
     post.style.display = "block";
     profile.style.display = "none";
+    
     let filePreview = document.createElement('img');
-
     //Funcion para cargar la imagen del post
     function readFile(input) {
         if (input.files && input.files[0]) {
             let reader = new FileReader();
-
             reader.onload = function (e) {
                 filePreview.id = 'saveFilePreview';
                 filePreview.setAttribute("class", "cardImage");
@@ -190,23 +180,25 @@ addLogo.addEventListener("click", () => {
                 console.log(e.target.result);
                 let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
-            }
+            };
             reader.readAsDataURL(input.files[0]);
-        }
-    }
-
+        };
+    };
     let fileUpload = document.getElementById('file-upload');
     fileUpload.onchange = function (e) {
         readFile(e.srcElement);
-    }
+    };
+
     //Funcion para subir la informacion del post a Firebase
     const savePostIntoDatabase = () => {
-
         const postImage = saveFilePreview.src;
         const fullPostText = postText.value;
         const userID = firebase.auth().currentUser.uid;
         savePost(postImage, fullPostText, userID);
-    }
+        postText.value = '';
+        document.getElementById('file-upload').value = '';
+        document.getElementById('file-preview-zone').removeChild(filePreview);
+    };
     send.addEventListener("click", (event) => {
         event.preventDefault();
         savePostIntoDatabase();
@@ -231,38 +223,59 @@ userLogo.addEventListener("click", (event) => {
     let bioContentProfile = '';
     let bioTextButton = '';
     let bioText = null;
-    const searchBiography = () => {
-        searchForBiography((bio) => {
-            if (bio !== null) {
-                //Hay bio
-                bioText = bio.texto;
-            }
-            asign();
-        });
-    };
-    searchBiography();
+    let postImageUser = '';
 
-    function asign() {
-        if (bioText === null) {
+    const readPostOneUser = () => { readUserPost((userPosts) => {
+        //Lo que tengo que mostrar
+        const userShowPosts = (posts) => {
+            Object.entries(userPosts.val()).forEach(post => {
+                let idPostUser = Object.values(post)[0];
+                let contentPostUser = Object.values(post)[1];
+
+                postImageUser = `
+                    <div class="row">
+                        <div class="col-l-12 centered">
+                            <img class="cardImage" src="${contentPostUser.image}"/>
+                        </div>
+                    </div>
+                    </div>` + postImageUser;
+            });
+        };
+        userShowPosts(userPosts);
+    });};        
+    
+
+    const searchBiography = () => { searchForBiography((bio) =>{
+        if (bio !== null){
+            //Hay bio
+            bioText = bio.texto;
+        }
+        asigna();        
+    });};
+    
+    searchBiography();
+    readPostOneUser();
+    function asigna() {  
+        if (bioText === null){
+
             bioContentProfile = `
             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
-        } else {
-            console.log(bioText);
-            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;
+        }else{
+            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
             bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
         showProfile();
     }
-
-    function showProfile() {
+    
+    function showProfile () {
         let showImg = '';
         if (userImg === undefined) {
             showImg = "style/img/user.png";
         } else {
             showImg = userImg;
-        }
-
+        };
+        
         profile.innerHTML = `
         <section id = "userInfo">
         <div class="row flexRow">
@@ -271,7 +284,6 @@ userLogo.addEventListener("click", (event) => {
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
-
                 <div class="row flexrow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
                 <button type="button" id="logout">
@@ -281,7 +293,6 @@ userLogo.addEventListener("click", (event) => {
         </div>
             </div>
         </div>
-       
         </section>
         <section id = "userbiography">
             <div class="row container">
@@ -293,7 +304,8 @@ userLogo.addEventListener("click", (event) => {
                 </div>
             </div>
         </section>
-        <section id = "">
+        <section id = "postsUserImage">
+        <div class="container" id ="postsUser">${postImageUser}</div>
         </section>`;
 
         //Si no tiene biografía, agrega una a firebase
@@ -308,6 +320,7 @@ userLogo.addEventListener("click", (event) => {
                     const addingBio = () => { addBiography(biographyText.value); }
                     addingBio();
                     searchBiography();
+                    readPostOneUser();
                 };
             } else {
                 console.log('Aqui edito');
@@ -319,7 +332,4 @@ userLogo.addEventListener("click", (event) => {
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
-
-
-
 });
