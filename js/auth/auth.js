@@ -70,6 +70,7 @@ export const registerUserGoogle = () => {
         // ...
         if(errorCode === 'auth/account-exists-with-different-credential'){
           alert('Usuario ya está registrado');
+
         }
      });
 };
