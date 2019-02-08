@@ -95,7 +95,15 @@
         margin: 0 auto;
         display: block;
         margin-left:30%;
-       
+    }
+
+    #indexLogo{
+       max-width: 15%;
+        
+    }
+
+    #indexTittle{
+        max-width: 50%;
     }
 
 }
