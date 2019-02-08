@@ -51,7 +51,7 @@ window.onload = () => {
 
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
-   const passwordFromUser = registerPassword.value;
+    const passwordFromUser = registerPassword.value;
    registerUser(emailFromUser, passwordFromUser);
 };
 
