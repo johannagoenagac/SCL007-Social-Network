@@ -281,7 +281,7 @@ userLogo.addEventListener("click", (event) => {
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img class="cardProfileImage" src=${showImg}></img>
+                <img class="cardProfileImage" src="${showImg}"></img>
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
@@ -327,10 +327,6 @@ userLogo.addEventListener("click", (event) => {
                 console.log('Aqui edito');
             }
         });
-<<<<<<< HEAD
-=======
-
->>>>>>> 14f9233107a321420a290798852abc417ecd3ac2
         //Llama a la función de cierre sesión
         const logoutUsers = () => { logoutUser(); }
         //Si hace click al botón Logout, llama a la función Logout
