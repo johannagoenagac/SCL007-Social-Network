@@ -3,15 +3,10 @@
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
 import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost} from '../data/data.js';
 
-
 let nameUser = '';
 let userImg = '';
-<<<<<<< HEAD
+//Llama a la función de cierre sesión
 const logoutUsers = () => { logoutUser(); }
-=======
- //Llama a la función de cierre sesión
- const logoutUsers = () => { logoutUser(); }
->>>>>>> 8dfad5a8afd4f65f5b020dc25ea5c045e3c5aac0
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -58,14 +53,13 @@ window.onload = () => {
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
-   registerUser(emailFromUser, passwordFromUser);
+   registerUser(emailFromUser, passwordFromUser);   
 };
 
 const loginUserWithEmailAndPassword = () => {
     const emailFromUser = emailTextfield.value;
     const passwordFromUser = passwordTextfield.value;
     loginUser(emailFromUser, passwordFromUser);
-    
 };
 
 
@@ -75,7 +69,6 @@ registerButton.addEventListener('click', (event) => {
     // registerWithUserName();
     loginPage.style.display = "block"
     registerForm.style.display = "none"
-    logoutUsers();
 });
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
@@ -255,7 +248,6 @@ userLogo.addEventListener("click", (event) => {
         userShowPosts(userPosts);
     });};        
     
-
     const searchBiography = () => { searchForBiography((bio) =>{
         if (bio !== null){
             //Hay bio
@@ -337,12 +329,6 @@ userLogo.addEventListener("click", (event) => {
                 console.log('Aqui edito');
             }
         });
-<<<<<<< HEAD
-        //Llama a la función de cierre sesión
-=======
-
-       
->>>>>>> 8dfad5a8afd4f65f5b020dc25ea5c045e3c5aac0
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }

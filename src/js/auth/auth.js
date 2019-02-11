@@ -28,7 +28,14 @@ export const registerUser = (email, password) => {
    .then((user)=>{
      registerForm.style.display = "none";
      login.style.display = "block";
-     console.log("Usuario registrado > "+JSON.stringify(user));
+    //  console.log("Usuario registrado > "+JSON.stringify(user));
+     firebase.auth().signOut()
+      .then(function() {
+        // Sign-out successful.        
+      })
+      .catch(function(error) {
+        alert('Ha ocurrido un error. Intenta nuevamente');
+      });
    })
    .catch((error) => {
      console.error("Error > "+error.message);
