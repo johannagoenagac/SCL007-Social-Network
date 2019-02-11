@@ -6,6 +6,8 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 
 let nameUser = '';
 let userImg = '';
+ //Llama a la función de cierre sesión
+ const logoutUsers = () => { logoutUser(); }
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -53,6 +55,7 @@ const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
     registerUser(emailFromUser, passwordFromUser);
+
 };
 
 const loginUserWithEmailAndPassword = () => {
@@ -66,6 +69,9 @@ registerButton.addEventListener('click', (event) => {
     event.preventDefault();
     registerWithEmailAndPassword();
     // registerWithUserName();
+    loginPage.style.display = "block"
+    registerForm.style.display = "none"
+    logoutUsers();
 });
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
@@ -177,6 +183,7 @@ const homeFinishedLoading = () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 }
 
 homeTab.addEventListener("click", () => {
@@ -211,7 +218,6 @@ addLogo.addEventListener("click", (event) => {
                 filePreview.setAttribute("class", "cardImage");
                 //e.target.result contents the base64 data from the image uploaded
                 filePreview.src = e.target.result;
-                console.log(e.target.result);
                 let previewZone = document.getElementById('file-preview-zone');
                 previewZone.appendChild(filePreview);
             };
@@ -318,7 +324,7 @@ userLogo.addEventListener("click", (event) => {
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img class="cardProfileImage" src=${showImg}></img>
+                <img class="cardProfileImage" src="${showImg}"></img>
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
@@ -365,8 +371,7 @@ userLogo.addEventListener("click", (event) => {
             }
         });
 
-        //Llama a la función de cierre sesión
-        const logoutUsers = () => { logoutUser(); }
+       
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
