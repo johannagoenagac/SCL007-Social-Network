@@ -102,6 +102,7 @@ const readPostFromDatabase = () => {
                     `<div class="formPost">
                     <div class="container">
                     <div class="row">
+
                         <div class="col-l-12 centered">
                             <img class="cardImage" src="${extractedData.image}"/>
                         </div>
@@ -128,7 +129,10 @@ const readPostFromDatabase = () => {
                     </div>
                     </div>
                 </div>` + postContainer.innerHTML;
-            });
+
+});
+
+    
             //Extrae la clase de los corazones
             const like = document.getElementsByClassName("fa-heart");
             //Recorre la cantidad de corazones en home
@@ -337,4 +341,4 @@ userLogo.addEventListener("click", (event) => {
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
-});
+})
