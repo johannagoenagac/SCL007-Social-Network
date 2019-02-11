@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost} from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost } from '../data/data.js';
 
 
 let nameUser = '';
@@ -32,11 +32,11 @@ window.onload = () => {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
             footer.style.display = "none"
+            registerForm.style.display = "none";
             loginPage.style.display = "block";
             root.style.display = "none";
             post.style.display = "none";
             profile.style.display = "none";
-            registerForm.style.display = "none";
         }
     });
     //Llama a la función registro con Google, facebook
@@ -51,8 +51,8 @@ window.onload = () => {
 
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
-   const passwordFromUser = registerPassword.value;
-   registerUser(emailFromUser, passwordFromUser);
+    const passwordFromUser = registerPassword.value;
+    registerUser(emailFromUser, passwordFromUser);
 };
 
 const loginUserWithEmailAndPassword = () => {
@@ -105,14 +105,16 @@ const readPostFromDatabase = () => {
                     <div class="container">
                         <div class="row inlineFlexRow">
                             <div class="col-l-4">
-                                <i class="fas fa-heart cardIcons" id="${id}"><a>${likes}</a></i>
+                                <i class="fas fa-heart cardIcons" id="like${id}"><a>${likes}</a></i>
                             </div>
-                            <div class="col-l-4">
-                                <i class="far fa-comment cardIcons"></i>
-                            </div>
-                            <div class="col-l-4">
-                                <i class="fas fa-share cardIcons"></i>
-                            </div>
+                            <section id="private${id}">
+                                <div class="col-l-4">
+                                    <i class="fas fa-edit cardIcons" id="edit${id}"></i>
+                                </div>
+                                <div class="col-l-4">
+                                    <i class="fas fa-trash-alt cardIcons" id="delete${id}"></i>
+                                </div>
+                            </section>
                         </div>
                     </div>
                     <div class="container">
@@ -124,20 +126,51 @@ const readPostFromDatabase = () => {
                     </div>
                 </div>` + postContainer.innerHTML;
             });
-            //Extrae la clase de los corazones
-            const like = document.getElementsByClassName("fa-heart");
-            //Recorre la cantidad de corazones en home
-            for (let i = 0; i < like.length; i++) {
-                //Funcion que se ejecuta cuando se le da click al corazon sin importar cual
-                like[i].addEventListener("click", () => {
-                    //Funcion que lleva el ID del post al cual se le dio click en el corazon
-                    saveLikePost(like[i].id);
-                });
+            let entries = Object.entries(posts.val())
+
+            for(let i = 0; i < entries.length; i++){
+                let entryID = entries[i][0]
+                postOptions(entryID);
+            }
+            
+            for(let i = 0; i < entries.length; i++){
+                let userUID = entries[i][1].useruid;
+                let currentUser = firebase.auth().currentUser.uid;
+                let id = entries[i][0]
+                let ownPosts = document.getElementById("private" + id)
+
+                if(userUID === currentUser){
+                    ownPosts.setAttribute("class", "inlineFlexRow");
+                }else{
+                    ownPosts.style.display = "none";
+                }
             }
         }
         printPosts(posts);
         homeFinishedLoading();
     });
+}
+
+const postOptions = (id) => {
+
+    const likeID = document.getElementById("like" + id);
+    //const editID = document.getElementById("edit" + id);
+    const deleteID = document.getElementById("delete" + id);
+
+    likeID.addEventListener("click", ()=> {
+        saveLikePost(id);
+    })
+
+    // editID.addEventListener("click", ()=> {
+    //     editPost(id);
+    // })
+
+    deleteID.addEventListener("click", ()=> {
+        let confirmation = confirm("¿Estas seguro que quieres eliminar este post?")
+        if (confirmation === true){
+            deletePost(id);
+        }
+    })
 }
 
 const homeFinishedLoading = () => {
@@ -154,6 +187,7 @@ homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
+    profile.style.display = "none";
 });
 
 searchLogo.addEventListener("click", () => {
@@ -166,7 +200,7 @@ addLogo.addEventListener("click", (event) => {
     home.style.display = "none";
     post.style.display = "block";
     profile.style.display = "none";
-    
+
     let filePreview = document.createElement('img');
     //Funcion para cargar la imagen del post
     function readFile(input) {
@@ -225,57 +259,61 @@ userLogo.addEventListener("click", (event) => {
     let bioText = null;
     let postImageUser = '';
 
-    const readPostOneUser = () => { readUserPost((userPosts) => {
-        //Lo que tengo que mostrar
-        const userShowPosts = (posts) => {
-            Object.entries(userPosts.val()).forEach(post => {
-                let idPostUser = Object.values(post)[0];
-                let contentPostUser = Object.values(post)[1];
+    const readPostOneUser = () => {
+        readUserPost((userPosts) => {
+            //Lo que tengo que mostrar
+            const userShowPosts = (posts) => {
+                Object.entries(userPosts.val()).forEach(post => {
+                    let idPostUser = Object.values(post)[0];
+                    let contentPostUser = Object.values(post)[1];
 
-                postImageUser = `
+                    postImageUser = `
                     <div class="row">
                         <div class="col-l-12 centered">
                             <img class="cardImage" src="${contentPostUser.image}"/>
                         </div>
                     </div>
                     </div>` + postImageUser;
-            });
-        };
-        userShowPosts(userPosts);
-    });};        
-    
+                });
+            };
+            userShowPosts(userPosts);
+        });
+    };
 
-    const searchBiography = () => { searchForBiography((bio) =>{
-        if (bio !== null){
-            //Hay bio
-            bioText = bio.texto;
-        }
-        asigna();        
-    });};
-    
+
+    const searchBiography = () => {
+        searchForBiography((bio) => {
+            if (bio !== null) {
+                //Hay bio
+                bioText = bio.texto;
+            }
+            asigna();
+        });
+    };
+
     searchBiography();
     readPostOneUser();
-    function asigna() {  
-        if (bioText === null){
+    function asigna() {
+        if (bioText === null) {
 
             bioContentProfile = `
             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
-        }else{
-            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;  
+        } else {
+            bioContentProfile = `<span class = "showBiography">${bioText}</span>`;
             bioTextButton = `<span id="textAtButton">Editar biografía</span>`;
         }
         showProfile();
     }
-    
-    function showProfile () {
+
+    function showProfile() {
         let showImg = '';
         if (userImg === undefined) {
             showImg = "style/img/user.png";
         } else {
             showImg = userImg;
         };
-        
+
         profile.innerHTML = `
         <section id = "userInfo">
         <div class="row flexRow">

@@ -95,7 +95,8 @@
         margin: 0 auto;
         display: block;
         margin-left:30%;
-      
+    }
+    
     .indexLogo{
         max-width: 100%;
     } 
@@ -282,7 +283,7 @@
         height: 25px;
     }
 
-    main{
+    #root{
         padding-bottom: 0;
     }
   
