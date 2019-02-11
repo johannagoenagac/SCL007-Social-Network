@@ -53,15 +53,18 @@ window.onload = () => {
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
-   registerUser(emailFromUser, passwordFromUser);   
+    registerUser(emailFromUser, passwordFromUser); 
+    registerEmail.value = '';
+    registerPassword.value = '';
 };
 
 const loginUserWithEmailAndPassword = () => {
     const emailFromUser = emailTextfield.value;
     const passwordFromUser = passwordTextfield.value;
     loginUser(emailFromUser, passwordFromUser);
+    emailTextfield.value = '';
+    passwordTextfield.value = '';
 };
-
 
 registerButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -78,7 +81,6 @@ goRegister.addEventListener("click", (event) => {
     registerForm.style.display = "block";
     loginPage.style.display = "none";
 });
-
 
 //Lee la data guardada en Firebase, la recorre y agrega a cada post individualmente
 const readPostFromDatabase = () => {
