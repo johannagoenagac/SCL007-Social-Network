@@ -69,3 +69,8 @@ export const saveLikePost = (postID) => {
     }
   });
 }
+
+export const deletePost = (postID) => {
+  let postRef = firebase.database().ref(`timeline`);
+  postRef.child(postID).remove();
+}
