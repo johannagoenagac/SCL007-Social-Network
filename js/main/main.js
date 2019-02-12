@@ -23,6 +23,7 @@ window.onload = () => {
             post.style.display = "none";
             profile.style.display = "none";
             registerForm.style.display = "none";
+            recipe.style.display = "none";
             //Muestra nombre del usuario
             if (user !== null) {
                 nameUser = user.displayName;
@@ -39,6 +40,7 @@ window.onload = () => {
             root.style.display = "none";
             post.style.display = "none";
             profile.style.display = "none";
+            recipe.style.display = "none";
         }
     });
     //Llama a la función registro con Google, facebook
@@ -197,11 +199,20 @@ homeLogo.addEventListener("click", () => {
     home.style.display = "block";
     post.style.display = "none";
     profile.style.display = "none";
+    recipe.style.display = "none";
 });
 
 searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
+
+recipeLogo.addEventListener("click", ()=>{
+    recipe.style.display = "block";
+    home.style.display ="none";
+    post.style.display = "none";
+    profile.style.display = "none";
+
+})
 
 addLogo.addEventListener("click", (event) => {
     event.preventDefault();
@@ -209,6 +220,7 @@ addLogo.addEventListener("click", (event) => {
     home.style.display = "none";
     post.style.display = "block";
     profile.style.display = "none";
+    recipe.style.display = "none";
 
     let filePreview = document.createElement('img');
     //Funcion para cargar la imagen del post

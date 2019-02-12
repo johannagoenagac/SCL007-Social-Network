@@ -82,7 +82,7 @@
 body{
     display: flex;
     flex-direction: column;
-    background-color: #E5E5E5;
+    background-color: #fafafa;
     font-family: 'Hind', sans-serif;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -257,16 +257,28 @@ body{
     font-family: sans-serif;
 }
 
-#postText, #biographyText{
+#postText, #biographyText, #recipePostText{
     width: 90%;
     height: 150px;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     justify-content: center;
+    border: #bdbdbd solid 1px;
 }
 
-#send, #logout, #biography{
+#send, #logout, #sendRecipe{
+    background-color: #B71C1C;
+    color: white;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+    height: 2rem;
+    width: 7rem;
+    font-size: 16px;
+}
+
+#biography{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
@@ -275,6 +287,23 @@ body{
     height: 3rem;
     width: 7rem;
     font-size: 16px;
+}
+
+#nameRecipe{
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#ingredientsRecipe{
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    height: 100px;
+    border: #bdbdbd solid 1px;
+    
 }
 
 #biography{
@@ -308,6 +337,10 @@ body{
 }
 
 #post{
+    display: none;
+}
+
+#recipe{
     display: none;
 }
 
