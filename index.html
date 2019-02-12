@@ -69,7 +69,7 @@
         <form action="javascript:void(0)">
           <div class="container">
             <div class="row flexRow">
-              <div class="col-xs-12 col-s-10 col-m-8 col-l-6 info-login">
+              <div class="col-xs-12 col-s-10 col-m-8 col-l-6 info-login">                
                 <input placeholder="Correo Electrónico" id="emailTextfield" type="email">
                 <input placeholder="Contraseña" id="passwordTextfield" type="password">
 
@@ -94,25 +94,23 @@
                   <div class="forget">
                     <a href="#">¿Olvidaste tu contraseña?</a>
                   </div>
-                  
+
                   <div class="container">
-                      <div class="row">
-                        <div class="col-xs-12 centered">
-                          <button id="facebookRegistry" type="submit" class="loginBtn loginBtn--facebook">Facebook</button>
-                          <span> o </span>
-                          <button id="googleRegistry" type="submit" class="loginBtn loginBtn--google">Google</button>
-                        </div>
+                    <div class="row">
+                      <div class="col-xs-12 centered">
+                        <button id="facebookRegistry" type="submit" class="loginBtn loginBtn--facebook">Facebook</button>
+                        <span> o </span>
+                        <button id="googleRegistry" type="submit" class="loginBtn loginBtn--google">Google</button>
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
           </div>
        </form>
       </div>
-
-
 
     <!--Formulario de Registro-->
 
@@ -124,6 +122,7 @@
 
             <form id='register-form' action="javascript:void(0)" method='post'>
               <h1 id="welcomeText">Bienvenidos!</h1>
+              <input placeholder="Nombre" id="nameManualUser" type="text" requires>
               <!--<input id="registerUser"type="text" placeholder="Username" required>-->
               <input id="registerEmail" type="email" placeholder="Ingresa tu email" required>
               <input id="registerPassword" type="password" placeholder="Crea tu password" required>
@@ -154,12 +153,11 @@
 
       <!--Post - página4-->
       <div id="post">
-
         <!--Post create-->
         <div class="container">
           <div class="row">
             <div class="col-s-12 col-m-12 col-l-12">
-              <form class="formPost" name="formulario" method="post" action="" autocomplete="off">
+              <form class="formPost" name="formulario" action="javascript:void(0)" autocomplete="off">
                 <div class="container">
                   <div class="row flexRow">
                     <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
@@ -181,7 +179,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-xs-12" id="file-preview-zone">
-                      <input id="file-upload" type="file" accept="image/*">
+                      <input id="file-upload" type="file" accept="image/*"></input>
                     </div>
                   </div>
                 </div>
@@ -195,7 +193,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
-                      <button id="send">Enviar</button>
+                      <button id="send" type="button">Enviar</button>
                     </div>
                   </div>
                 </div>

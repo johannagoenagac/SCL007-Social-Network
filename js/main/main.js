@@ -1,13 +1,14 @@
 //Manejo del DOM
 
-import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost } from '../data/data.js';
+
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser, updateManualUser } from '../auth/auth.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost, editPost } from '../data/data.js';
 
 
 let nameUser = '';
 let userImg = '';
- //Llama a la función de cierre sesión
- const logoutUsers = () => { logoutUser(); }
+//Llama a la función de cierre sesión
+const logoutUsers = () => { logoutUser(); }
 
 window.onload = () => {
     //Verifica estado de conexión del usuario
@@ -25,7 +26,11 @@ window.onload = () => {
             registerForm.style.display = "none";
             recipe.style.display = "none";
             //Muestra nombre del usuario
-            if (user !== null) {
+            if (user === null) {
+                const nameUserInput = nameManualUser.value;
+                updateManualUser(nameUserInput);
+                nameManualUser.value = '';
+            }else{
                 nameUser = user.displayName;
                 userImg = user.photoURL;
                 let name = user.displayName.split(" ");
@@ -56,7 +61,9 @@ window.onload = () => {
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
-    registerUser(emailFromUser, passwordFromUser);
+    registerUser(emailFromUser, passwordFromUser); 
+    registerEmail.value = '';
+    registerPassword.value = '';
 
 };
 
@@ -64,8 +71,9 @@ const loginUserWithEmailAndPassword = () => {
     const emailFromUser = emailTextfield.value;
     const passwordFromUser = passwordTextfield.value;
     loginUser(emailFromUser, passwordFromUser);
+    emailTextfield.value = '';
+    passwordTextfield.value = '';
 };
-
 
 registerButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -73,7 +81,6 @@ registerButton.addEventListener('click', (event) => {
     // registerWithUserName();
     loginPage.style.display = "block"
     registerForm.style.display = "none"
-    logoutUsers();
 });
 
 loginButton.addEventListener('click', loginUserWithEmailAndPassword);
@@ -83,7 +90,6 @@ goRegister.addEventListener("click", (event) => {
     registerForm.style.display = "block";
     loginPage.style.display = "none";
 });
-
 
 //Lee la data guardada en Firebase, la recorre y agrega a cada post individualmente
 const readPostFromDatabase = () => {
@@ -101,8 +107,8 @@ const readPostFromDatabase = () => {
                 //Confirma si existe una cantidad mayor a 0 de likes y retorna el total, de lo contrario retorna 0
                 const likes = extractedLikes.length ? extractedLikes.length : 0;
                 //Genera cada post con la informacion requerida
-                postContainer.innerHTML =
-                    `<div class="formPost">
+                postContainer.innerHTML = `
+                    <div class="formPost">
                     <div class="container">
                     <div class="row">
 
@@ -128,8 +134,8 @@ const readPostFromDatabase = () => {
                     </div>
                     <div class="container">
                     <div class="row">
-                        <div class="col-l-12">
-                            <p>${extractedData.text}</p>
+                        <div id="textArea${id}" class="col-l-12">
+                            <p id="text${id}">${extractedData.text}</p>
                         </div>
                     </div>
                     </div>
@@ -157,23 +163,50 @@ const readPostFromDatabase = () => {
             }
         }
         printPosts(posts);
-        homeFinishedLoading();
     });
 }
 
 const postOptions = (id) => {
 
     const likeID = document.getElementById("like" + id);
-    //const editID = document.getElementById("edit" + id);
+    const editID = document.getElementById("edit" + id);
+    const textID = document.getElementById("text" + id);
+    const textAreaID = document.getElementById("textArea" + id);
     const deleteID = document.getElementById("delete" + id);
 
     likeID.addEventListener("click", ()=> {
         saveLikePost(id);
     })
 
-    // editID.addEventListener("click", ()=> {
-    //     editPost(id);
-    // })
+    editID.addEventListener("click", ()=> {
+        
+        let originalText = textID.textContent;
+        let saveBtn = document.createElement("input");
+        saveBtn.setAttribute("type", "button")
+        saveBtn.setAttribute("value", "Guardar")
+        let cancelBtn = document.createElement("input");
+        cancelBtn.setAttribute("type", "button")
+        cancelBtn.setAttribute("value", "Cancelar")
+        let inputBox = document.createElement("textarea")
+        inputBox.setAttribute("wrap", "hard")
+        inputBox.value = originalText;
+        textAreaID.removeChild(textID);
+        textAreaID.appendChild(inputBox);
+        textAreaID.appendChild(saveBtn);
+        textAreaID.appendChild(cancelBtn);
+
+        saveBtn.addEventListener("click", () => {
+            let newText = inputBox.value
+            editPost(id, newText);
+        })
+
+        cancelBtn.addEventListener("click", () => {
+            textAreaID.removeChild(inputBox);
+            textAreaID.removeChild(saveBtn);
+            textAreaID.removeChild(cancelBtn);
+            textAreaID.appendChild(textID);
+        })
+    })
 
     deleteID.addEventListener("click", ()=> {
         let confirmation = confirm("¿Estas seguro que quieres eliminar este post?")
@@ -181,13 +214,6 @@ const postOptions = (id) => {
             deletePost(id);
         }
     })
-}
-
-const homeFinishedLoading = () => {
-    pageGuide.innerHTML = "Home";
-    home.style.display = "block";
-    post.style.display = "none";
-    profile.style.display = "none";
 }
 
 homeTab.addEventListener("click", () => {
@@ -206,15 +232,18 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
+
 recipeLogo.addEventListener("click", ()=>{
     recipe.style.display = "block";
     home.style.display ="none";
     post.style.display = "none";
     profile.style.display = "none";
-
 })
 
-addLogo.addEventListener("click", (event) => {
+
+    let eventListener = [];
+
+    addLogo.addEventListener("click", (event) => {
     event.preventDefault();
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
@@ -244,7 +273,8 @@ addLogo.addEventListener("click", (event) => {
     };
 
     //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = () => {
+    const savePostIntoDatabase = function(event){
+        event.stopPropagation();
         const postImage = saveFilePreview.src;
         const fullPostText = postText.value;
         const userID = firebase.auth().currentUser.uid;
@@ -253,10 +283,12 @@ addLogo.addEventListener("click", (event) => {
         document.getElementById('file-upload').value = '';
         document.getElementById('file-preview-zone').removeChild(filePreview);
     };
-    send.addEventListener("click", (event) => {
-        event.preventDefault();
-        savePostIntoDatabase();
-    });
+    
+    if(eventListener.length > 0){
+        eventListener.forEach( evl => send.removeEventListener("click", evl));
+    }
+    send.addEventListener("click", savePostIntoDatabase);
+    eventListener.push(savePostIntoDatabase);
 });
 
 recipeLogo.addEventListener("click", () => {
@@ -294,7 +326,7 @@ userLogo.addEventListener("click", (event) => {
                         </div>
                     </div>
                     </div>` + postImageUser;
-                });
+               });
             };
             userShowPosts(userPosts);
         });
@@ -310,6 +342,7 @@ userLogo.addEventListener("click", (event) => {
             asigna();
         });
     };
+
 
     searchBiography();
     readPostOneUser();
@@ -329,7 +362,7 @@ userLogo.addEventListener("click", (event) => {
     function showProfile() {
         let showImg = '';
         if (userImg === undefined) {
-            showImg = "style/img/user.png";
+            showImg = "./style/img/user.png";
         } else {
             showImg = userImg;
         };
@@ -384,8 +417,6 @@ userLogo.addEventListener("click", (event) => {
                 console.log('Aqui edito');
             }
         });
-
-       
         //Si hace click al botón Logout, llama a la función Logout
         logout.addEventListener('click', logoutUsers);
     }
