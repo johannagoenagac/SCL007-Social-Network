@@ -1,6 +1,6 @@
 //Manejo del DOM
 
-import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
+import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser, updateManualUser } from '../auth/auth.js';
 import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost} from '../data/data.js';
 
 let nameUser = '';
@@ -23,7 +23,11 @@ window.onload = () => {
             profile.style.display = "none";
             registerForm.style.display = "none";
             //Muestra nombre del usuario
-            if (user !== null) {
+            if (user === null) {
+                const nameUserInput = nameManualUser.value;
+                updateManualUser(nameUserInput);
+                nameManualUser.value = '';
+            }else{
                 nameUser = user.displayName;
                 userImg = user.photoURL;
                 let name = user.displayName.split(" ");
@@ -98,8 +102,8 @@ const readPostFromDatabase = () => {
                 //Confirma si existe una cantidad mayor a 0 de likes y retorna el total, de lo contrario retorna 0
                 const likes = extractedLikes.length ? extractedLikes.length : 0;
                 //Genera cada post con la informacion requerida
-                postContainer.innerHTML =
-                    `<div class="formPost">
+                postContainer.innerHTML = `
+                    <div class="formPost">
                     <div class="container">
                     <div class="row">
                         <div class="col-l-12 centered">
@@ -167,6 +171,7 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
+let eventListener = [];
 addLogo.addEventListener("click", (event) => {
     event.preventDefault();
     pageGuide.innerHTML = "Post";
@@ -196,7 +201,8 @@ addLogo.addEventListener("click", (event) => {
     };
 
     //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = () => {
+    const savePostIntoDatabase = function(event){
+        event.stopPropagation();
         const postImage = saveFilePreview.src;
         const fullPostText = postText.value;
         const userID = firebase.auth().currentUser.uid;
@@ -205,10 +211,12 @@ addLogo.addEventListener("click", (event) => {
         document.getElementById('file-upload').value = '';
         document.getElementById('file-preview-zone').removeChild(filePreview);
     };
-    send.addEventListener("click", (event) => {
-        event.preventDefault();
-        savePostIntoDatabase();
-    });
+    
+    if(eventListener.length > 0){
+        eventListener.forEach( evl => send.removeEventListener("click", evl));
+    }
+    send.addEventListener("click", savePostIntoDatabase);
+    eventListener.push(savePostIntoDatabase);
 });
 
 recipeLogo.addEventListener("click", () => {
@@ -276,7 +284,7 @@ userLogo.addEventListener("click", (event) => {
     function showProfile () {
         let showImg = '';
         if (userImg === undefined) {
-            showImg = "style/img/user.png";
+            showImg = "./style/img/user.png";
         } else {
             showImg = userImg;
         };

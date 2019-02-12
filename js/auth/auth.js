@@ -1,5 +1,19 @@
 //Funciones - Aquí va la lógica
 //callback - función que se llamará dsps
+
+export const updateManualUser = (name) => {
+  const user = firebase.auth().currentUser;
+  console.log(name);
+  user.updateProfile({
+    displayName: name,
+    photoURL: "./style/img/user.png"
+  }).then(function() {
+    // Update successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+};
+
 export const logoutUser = () =>{
   firebase.auth().signOut()
   .then(function() {
@@ -9,7 +23,7 @@ export const logoutUser = () =>{
   .catch(function(error) {
     alert('Ha ocurrido un error. Intenta nuevamente');
   });
-}
+};
 
 export const checkAuthStatus = (callback) => {
   firebase.auth().onAuthStateChanged((user)=>{
@@ -40,7 +54,7 @@ export const registerUser = (email, password) => {
    .catch((error) => {
      console.error("Error > "+error.message);
    });
-}
+};
 
 export const loginUser = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
@@ -50,7 +64,7 @@ export const loginUser = (email, password) => {
     .catch((error) => {
       console.error("Error > "+error.message);
     });
-}
+};
 
 export const registerUserGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
