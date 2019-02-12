@@ -113,11 +113,11 @@ Luego de publicar, podrás ver tu publicación en el home donde se encuentran to
 
 ### Funcionalidad
 Para el desarrollo de esta página se utilizó lenguaje JavaScript (ES6), Vanilla Javascript, HTML5 y CSS.
+Firebase como base de datos.
 
 ### Resultados Testeo Usabilidad
-.
 
-## ¿Quiénes están detrás de este proyecto?
+
 
 ### Equipo de Producción y Desarrollo
 
