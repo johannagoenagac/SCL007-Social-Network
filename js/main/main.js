@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost } from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost, editPost } from '../data/data.js';
 
 
 let nameUser = '';
@@ -126,8 +126,8 @@ const readPostFromDatabase = () => {
                     </div>
                     <div class="container">
                     <div class="row">
-                        <div class="col-l-12">
-                            <p>${extractedData.text}</p>
+                        <div id="textArea${id}" class="col-l-12">
+                            <p id="text${id}">${extractedData.text}</p>
                         </div>
                     </div>
                     </div>
@@ -155,23 +155,50 @@ const readPostFromDatabase = () => {
             }
         }
         printPosts(posts);
-        homeFinishedLoading();
     });
 }
 
 const postOptions = (id) => {
 
     const likeID = document.getElementById("like" + id);
-    //const editID = document.getElementById("edit" + id);
+    const editID = document.getElementById("edit" + id);
+    const textID = document.getElementById("text" + id);
+    const textAreaID = document.getElementById("textArea" + id);
     const deleteID = document.getElementById("delete" + id);
 
     likeID.addEventListener("click", ()=> {
         saveLikePost(id);
     })
 
-    // editID.addEventListener("click", ()=> {
-    //     editPost(id);
-    // })
+    editID.addEventListener("click", ()=> {
+        
+        let originalText = textID.textContent;
+        let saveBtn = document.createElement("input");
+        saveBtn.setAttribute("type", "button")
+        saveBtn.setAttribute("value", "Guardar")
+        let cancelBtn = document.createElement("input");
+        cancelBtn.setAttribute("type", "button")
+        cancelBtn.setAttribute("value", "Cancelar")
+        let inputBox = document.createElement("textarea")
+        inputBox.setAttribute("wrap", "hard")
+        inputBox.value = originalText;
+        textAreaID.removeChild(textID);
+        textAreaID.appendChild(inputBox);
+        textAreaID.appendChild(saveBtn);
+        textAreaID.appendChild(cancelBtn);
+
+        saveBtn.addEventListener("click", () => {
+            let newText = inputBox.value
+            editPost(id, newText);
+        })
+
+        cancelBtn.addEventListener("click", () => {
+            textAreaID.removeChild(inputBox);
+            textAreaID.removeChild(saveBtn);
+            textAreaID.removeChild(cancelBtn);
+            textAreaID.appendChild(textID);
+        })
+    })
 
     deleteID.addEventListener("click", ()=> {
         let confirmation = confirm("¿Estas seguro que quieres eliminar este post?")
@@ -179,13 +206,6 @@ const postOptions = (id) => {
             deletePost(id);
         }
     })
-}
-
-const homeFinishedLoading = () => {
-    pageGuide.innerHTML = "Home";
-    home.style.display = "block";
-    post.style.display = "none";
-    profile.style.display = "none";
 }
 
 homeTab.addEventListener("click", () => {

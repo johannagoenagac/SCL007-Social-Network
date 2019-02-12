@@ -361,6 +361,10 @@ h1{
     align-self: center;
 }
 
+textarea{
+    width: 100%;
+}
+
 #register-form{
     max-width: 50%;
     display: block;
