@@ -90,6 +90,10 @@ body{
     min-height: 100%;
 }
 
+#root{
+    padding-bottom: 3.5rem;
+}
+
 .indexLogo{
     margin: 0px auto;
     padding-top: 4%;
@@ -98,6 +102,7 @@ body{
     text-align: center;
     height: 100%;
     width: 100%;
+
 }
 
 .indexTitle{
@@ -106,6 +111,7 @@ body{
     display: block;
     max-width: 100%;
     text-align: center;
+    height: 50px;
 }
 
 .info-login{
@@ -351,6 +357,10 @@ h1{
 
 .alignment{
     align-self: center;
+}
+
+textarea{
+    width: 100%;
 }
 
 #register-form{
