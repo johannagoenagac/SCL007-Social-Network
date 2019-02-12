@@ -70,7 +70,14 @@ export const saveLikePost = (postID) => {
   });
 }
 
-export const deletePost = (postID) => {
+export const editPost = (postID, text) => {
   let postRef = firebase.database().ref(`timeline`);
+  postRef.child(postID).update({text: text});
+}
+
+export const deletePost = (postID) => {
+  let profileRef = firebase.database().ref(`profile`);
+  let postRef = firebase.database().ref(`timeline`);
+  profileRef.child(postID).remove();
   postRef.child(postID).remove();
 }
