@@ -90,6 +90,10 @@ body{
     min-height: 100%;
 }
 
+#root{
+    padding-bottom: 3.5rem;
+}
+
 .indexLogo{
     margin: 0px auto;
     padding-top: 4%;
