@@ -332,7 +332,6 @@ userLogo.addEventListener("click", (event) => {
         });
     };
 
-
     const searchBiography = () => {
         searchForBiography((bio) => {
             if (bio !== null) {
@@ -343,12 +342,10 @@ userLogo.addEventListener("click", (event) => {
         });
     };
 
-
     searchBiography();
     readPostOneUser();
     function asigna() {
         if (bioText === null) {
-
             bioContentProfile = `
             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
