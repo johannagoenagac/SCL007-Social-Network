@@ -30,7 +30,7 @@ window.onload = () => {
                 const nameUserInput = nameManualUser.value;
                 updateManualUser(nameUserInput);
                 nameManualUser.value = '';
-            }else{
+            } else {
                 nameUser = user.displayName;
                 userImg = user.photoURL;
                 let name = user.displayName.split(" ");
@@ -61,7 +61,7 @@ window.onload = () => {
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
-    registerUser(emailFromUser, passwordFromUser); 
+    registerUser(emailFromUser, passwordFromUser);
     registerEmail.value = '';
     registerPassword.value = '';
 
@@ -144,20 +144,20 @@ const readPostFromDatabase = () => {
 
             let entries = Object.entries(posts.val())
 
-            for(let i = 0; i < entries.length; i++){
+            for (let i = 0; i < entries.length; i++) {
                 let entryID = entries[i][0]
                 postOptions(entryID);
             }
-            
-            for(let i = 0; i < entries.length; i++){
+
+            for (let i = 0; i < entries.length; i++) {
                 let userUID = entries[i][1].useruid;
                 let currentUser = firebase.auth().currentUser.uid;
                 let id = entries[i][0]
                 let ownPosts = document.getElementById("private" + id)
 
-                if(userUID === currentUser){
+                if (userUID === currentUser) {
                     ownPosts.setAttribute("class", "inlineFlexRow");
-                }else{
+                } else {
                     ownPosts.style.display = "none";
                 }
             }
@@ -174,12 +174,12 @@ const postOptions = (id) => {
     const textAreaID = document.getElementById("textArea" + id);
     const deleteID = document.getElementById("delete" + id);
 
-    likeID.addEventListener("click", ()=> {
+    likeID.addEventListener("click", () => {
         saveLikePost(id);
     })
 
-    editID.addEventListener("click", ()=> {
-        
+    editID.addEventListener("click", () => {
+
         let originalText = textID.textContent;
         let saveBtn = document.createElement("input");
         saveBtn.setAttribute("type", "button")
@@ -208,9 +208,9 @@ const postOptions = (id) => {
         })
     })
 
-    deleteID.addEventListener("click", ()=> {
+    deleteID.addEventListener("click", () => {
         let confirmation = confirm("¿Estas seguro que quieres eliminar este post?")
-        if (confirmation === true){
+        if (confirmation === true) {
             deletePost(id);
         }
     })
@@ -233,17 +233,17 @@ searchLogo.addEventListener("click", () => {
 });
 
 
-recipeLogo.addEventListener("click", ()=>{
+recipeLogo.addEventListener("click", () => {
     recipe.style.display = "block";
-    home.style.display ="none";
+    home.style.display = "none";
     post.style.display = "none";
     profile.style.display = "none";
 })
 
 
-    let eventListener = [];
+let eventListener = [];
 
-    addLogo.addEventListener("click", (event) => {
+addLogo.addEventListener("click", (event) => {
     event.preventDefault();
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
@@ -273,7 +273,7 @@ recipeLogo.addEventListener("click", ()=>{
     };
 
     //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = function(event){
+    const savePostIntoDatabase = function (event) {
         event.stopPropagation();
         const postImage = saveFilePreview.src;
         const fullPostText = postText.value;
@@ -283,9 +283,9 @@ recipeLogo.addEventListener("click", ()=>{
         document.getElementById('file-upload').value = '';
         document.getElementById('file-preview-zone').removeChild(filePreview);
     };
-    
-    if(eventListener.length > 0){
-        eventListener.forEach( evl => send.removeEventListener("click", evl));
+
+    if (eventListener.length > 0) {
+        eventListener.forEach(evl => send.removeEventListener("click", evl));
     }
     send.addEventListener("click", savePostIntoDatabase);
     eventListener.push(savePostIntoDatabase);
@@ -293,6 +293,10 @@ recipeLogo.addEventListener("click", ()=>{
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
+})
+
+sendRecipe.addEventListener("click", () => {
+    saveRecipeIntoDatabase();
 });
 
 profileTab.addEventListener("click", () => {
@@ -326,7 +330,7 @@ userLogo.addEventListener("click", (event) => {
                         </div>
                     </div>
                     </div>` + postImageUser;
-               });
+                });
             };
             userShowPosts(userPosts);
         });
@@ -421,3 +425,110 @@ userLogo.addEventListener("click", (event) => {
         logout.addEventListener('click', logoutUsers);
     }
 })
+
+
+recipe.innerHTML = `
+<div class="container">
+              <div class="row">
+                <div class="col-s-12 col-m-12 col-l-12">
+                  <form class="formRecipe" name="formulario" action="javascript:void(0)" autocomplete="off">
+                    <div class="container">
+                      <div class="row flexRow">
+                        <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                          <img id="icon-user" class="responsive-img" src="https://subirimagen.me/uploads/20190131084141.png"
+                            alt="icon user">
+                        </div>
+                        <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
+                          <h1 id="user-name">Nombre usuario</h1>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 centered" id="file-preview-zone-recipe"></div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12" id="file-preview-zone-recipe">
+                          <input id="file-upload-recipe" type="file" accept="image/*">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input id="tittleRecipe" type="text" placeholder="Nombre de la receta">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="container">
+                          <div class="row">
+                            <div class="col-xs-12">
+                                <textarea id="ingredientsRecipe">Ingredientes:</textarea>
+                            </div>
+                          </div>
+                        </div>
+  
+
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-s-12 m-12 l-12">
+                          <textarea id="recipePostText">Preparación:</textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
+                          <button id="sendRecipe">Enviar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>`
+
+
+//captura de imagenes para recetas
+let filePreview = document.createElement('img');
+//Funcion para cargar la imagen del post
+function readFile(input) {
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            filePreview.id = 'saveFilePreviewRecipe';
+            filePreview.setAttribute("class", "cardImage");
+            //e.target.result contents the base64 data from the image uploaded
+            filePreview.src = e.target.result;
+            let previewZone = document.getElementById('file-preview-zone-recipe');
+            previewZone.appendChild(filePreview);
+        };
+        reader.readAsDataURL(input.files[0]);
+    };
+};
+let fileUpload = document.getElementById('file-upload-recipe');
+fileUpload.onchange = function (e) {
+    readFile(e.srcElement);
+};
+
+//Funcion para subir la informacion de las recetas a Firebase
+const saveRecipeIntoDatabase = function (event) {
+    event.stopPropagation();
+    const recipeImage = saveFilePreviewRecipe.src;//guardando imagen
+    const recipeTittle = tittleRecipe.value;
+    const recipeIngredients = ingredientsRecipe.value;
+    const recipeText = recipePostText.value;//guardando texto del post
+    const userID = firebase.auth().currentUser.uid;
+    savePost(recipeImage, recipeText, userID, recipeTittle, recipeIngredients);
+    postText.value = '';
+    document.getElementById('file-upload-recipe').value = '';
+    document.getElementById('file-preview-zone-recipe').removeChild(filePreview);
+
+};
+
