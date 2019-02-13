@@ -8,6 +8,7 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 let nameUser = '';
 let userImg = '';
 let firstName = '';
+
 //Llama a la función de cierre sesión
 const logoutUsers = () => { logoutUser(); }
 
@@ -26,17 +27,23 @@ window.onload = () => {
             profile.style.display = "none";
             registerForm.style.display = "none";
             recipe.style.display = "none";
+            console.log(user.displayName);
             //Muestra nombre del usuario
-            if (user === null) {
-                const nameUserInput = nameManualUser.value;
-                updateManualUser(nameUserInput);
-                nameManualUser.value = '';
+            if (user.displayName === null) {
+                // const nameUserInput = nameManualUser.value;
+                // updateManualUser(nameUserInput);
+                // nameManualUser.value = '';
+                userImg = `https://subirimagen.me/uploads/20190131084141.png`;
+                firstName = 'Usuario';
+                nameUser = 'Usuario';
             }else{
+                //Asigna nombre completo, imagen y primer nombre, en variables globales, para el uso en distintas partes de la app
                 nameUser = user.displayName;
-                userImg = user.photoURL;
                 let name = user.displayName.split(" ");
                 firstName = name[0];
+                userImg = user.photoURL;
             }
+            
         } else {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
@@ -277,8 +284,7 @@ addLogo.addEventListener("click", (event) => {
             <div class="container">
             <div class="row flexRow">
                 <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img id="icon-user" class="responsive-img" src="https://subirimagen.me/uploads/20190131084141.png"
-                    alt="icon user">
+                <img id="icon-user" class="responsive-img" src=${userImg} alt="icon user">
                 </div>
                 <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
                 <h1 id="user-name">${firstName}</h1>
@@ -401,6 +407,7 @@ userLogo.addEventListener("click", (event) => {
     let bioText = null;
     let postImageUser = '';
 
+    //Muestra los post solo del usuario 
     const readPostOneUser = () => {
         readUserPost((userPosts) => {
             //Lo que tengo que mostrar
@@ -447,18 +454,11 @@ userLogo.addEventListener("click", (event) => {
     }
 
     function showProfile() {
-        let showImg = '';
-        if (userImg === undefined) {
-            showImg = "./style/img/user.png";
-        } else {
-            showImg = userImg;
-        };
-
         profile.innerHTML = `
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img class="cardProfileImage" src="${showImg}"></img>
+                <img class="cardProfileImage" src="${userImg}"></img>
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
