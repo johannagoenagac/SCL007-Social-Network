@@ -27,18 +27,32 @@ export const searchForBiography = (textBio) => {
 };
 
 //Sube información de post a firebase database
-export const savePost = (postImage, fullPostText, userID, recipeTittle,recipeIngredients) => {  
+export const savePost = (postImage, fullPostText, userID, recipeTitle,recipeIngredients) => {  
 
   const newPostKey = firebase.database().ref('post').push().key;
 
-  //sube información a firebase database de los post
+  if (recipeTitle && recipeIngredients === undefined){
+   //sube información a firebase database de los post
   firebase.database().ref(`timeline/${newPostKey}`).set({
     image: postImage,
     text: fullPostText,
     useruid: userID,
+  });
+
+  }else{
+    //subiendo información de recetas a database
+  firebase.database().ref(`timeline/${newPostKey}`).set({
+    image: postImage ,
+    title: recipeTitle,
+    ingredients: recipeIngredients,
+    text: fullPostText,
+    useruid: userID,
  
   });
- 
+
+  }
+  
+
   //subiendo información del perfil a database
   firebase.database().ref(`profile/${userID}/post`).child(`${newPostKey}`).set({
 
@@ -47,15 +61,7 @@ export const savePost = (postImage, fullPostText, userID, recipeTittle,recipeIng
 
   });
 
-  //subiendo información de recetas a database
-  firebase.database().ref(`timeline/${newPostKey}`).set({
-    image: postImage ,
-    tittle: recipeTittle,
-    ingredients: recipeIngredients,
-    text: fullPostText,
-    useruid: userID,
- 
-  });
+  
 };
 
 export const readPost = (onPostChange) => {
