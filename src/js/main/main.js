@@ -7,6 +7,7 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 
 let nameUser = '';
 let userImg = '';
+let firstName = '';
 //Llama a la función de cierre sesión
 const logoutUsers = () => { logoutUser(); }
 
@@ -34,7 +35,7 @@ window.onload = () => {
                 nameUser = user.displayName;
                 userImg = user.photoURL;
                 let name = user.displayName.split(" ");
-                document.getElementById('user-name').innerHTML = name[0];
+                firstName = name[0];
             }
         } else {
             //Muestra el login, ya que usuario no está logeado
@@ -232,64 +233,153 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-
 recipeLogo.addEventListener("click", ()=>{
     recipe.style.display = "block";
     home.style.display ="none";
     post.style.display = "none";
     profile.style.display = "none";
-})
+});
 
 
-    let eventListener = [];
 
-    addLogo.addEventListener("click", (event) => {
-    event.preventDefault();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let eventListener = [];
+addLogo.addEventListener("click", (event) => {
+    event.stopPropagation();
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
-    post.style.display = "block";
     profile.style.display = "none";
     recipe.style.display = "none";
+    post.style.display = "block";
 
-    let filePreview = document.createElement('img');
-    //Funcion para cargar la imagen del post
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                filePreview.id = 'saveFilePreview';
-                filePreview.setAttribute("class", "cardImage");
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                let previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
-            };
-            reader.readAsDataURL(input.files[0]);
-        };
-    };
-    let fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    };
+    post.innerHTML= `
+    <!--Post create-->
+    <div class="container">
+    <div class="row">
+        <div class="col-s-12 col-m-12 col-l-12">
+        <form class="formPost" name="formulario" action="javascript:void(0)" autocomplete="off">
+            <div class="container">
+            <div class="row flexRow">
+                <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                <img id="icon-user" class="responsive-img" src="https://subirimagen.me/uploads/20190131084141.png"
+                    alt="icon user">
+                </div>
+                <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
+                <h1 id="user-name">${firstName}</h1>
+                </div>
+            </div>
+            </div>
 
-    //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = function(event){
-        event.stopPropagation();
-        const postImage = saveFilePreview.src;
-        const fullPostText = postText.value;
-        const userID = firebase.auth().currentUser.uid;
-        savePost(postImage, fullPostText, userID);
-        postText.value = '';
-        document.getElementById('file-upload').value = '';
-        document.getElementById('file-preview-zone').removeChild(filePreview);
-    };
+            <!--Subir foto-->
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12 centered" id="file-preview-zone"></div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12" id="file-preview-zone">
+                <input id="file-upload" type="file" accept="image/*"></input>
+                </div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-s-12 m-12 l-12">
+                <textarea id="postText" placeholder="Escribe tu post"></textarea>
+                </div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
+                <button id="send" type="button">Enviar</button>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>`;
+
+
+
+
+// let filePreview = document.createElement('img');
+// //Funcion para cargar la imagen del post
+// function readFile(input) {
+//     if (input.files && input.files[0]) {
+//         let reader = new FileReader();
+//         reader.onload = function (e) {
+//             filePreview.id = 'saveFilePreview';
+//             filePreview.setAttribute("class", "cardImage");
+//             //e.target.result contents the base64 data from the image uploaded
+//             filePreview.src = e.target.result;
+//             let previewZone = document.getElementById('file-preview-zone');
+//             previewZone.appendChild(filePreview);
+//         };
+//         reader.readAsDataURL(input.files[0]);
+//     };
+// };
+// let fileUpload = document.getElementById('file-upload');
+// fileUpload.onchange = function (e) {
+//     readFile(e.srcElement);
+// };
+
+// //Funcion para subir la informacion del post a Firebase
+// const savePostIntoDatabase = function(event){
+//     event.stopPropagation();
+//     const postImage = saveFilePreview.src;
+//     const fullPostText = postText.value;
+//     const userID = firebase.auth().currentUser.uid;
+//     savePost(postImage, fullPostText, userID);
+//     postText.value = '';
+//     document.getElementById('file-upload').value = '';
+//     document.getElementById('file-preview-zone').removeChild(filePreview);
+// };
     
-    if(eventListener.length > 0){
-        eventListener.forEach( evl => send.removeEventListener("click", evl));
-    }
-    send.addEventListener("click", savePostIntoDatabase);
-    eventListener.push(savePostIntoDatabase);
+// if(eventListener.length > 0){
+//     eventListener.forEach( evl => send.removeEventListener("click", evl));
+// }
+// send.addEventListener("click", savePostIntoDatabase);
+// eventListener.push(savePostIntoDatabase);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
@@ -316,7 +406,7 @@ userLogo.addEventListener("click", (event) => {
             //Lo que tengo que mostrar
             const userShowPosts = (posts) => {
                 Object.entries(userPosts.val()).forEach(post => {
-                    let idPostUser = Object.values(post)[0];
+                    // let idPostUser = Object.values(post)[0];
                     let contentPostUser = Object.values(post)[1];
 
                     postImageUser = `
