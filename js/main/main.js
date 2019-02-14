@@ -323,6 +323,37 @@ addLogo.addEventListener("click", (event) => {
     </div>
     </div>`;
 
+    const uploadImage = document.getElementById("file-upload");
+    uploadImage.addEventListener('change', uploadImgStorage,false);
+    
+    function uploadImgStorage(){
+        const file = uploadImage.target.files[0];
+        console.log(file);
+        // const storageRef = firebase.storage().ref('images/' + file.name);
+        // const uploadTask = storageRef.put(file);
+    
+        // uploadTask.on('state_changed', function (snapshot) { },
+        // function error(err) { },
+        // function complete() {
+        //     storageRef.getDownloadURL().then(function (url) {
+        //     const imgKey = firebase.database().ref('myImages/').push().key;
+        //     const updates = {};
+        //     const dataImg = {
+        //         url: url,
+        //         data: document.getElementById('dataInput').value,
+        //     };
+        //     updates['/myImages/' + imgKey] = dataImg;
+        //     firebase.database().ref().update(updates);
+        //     document.getElementById('container').innerHTML = `
+        // <div>
+        // <h1>${dataImg.data}</h1>
+        //     <img src="${url}"/>
+        // </div>
+        // ` + document.getElementById('container').innerHTML;
+        //     });
+        // });
+    };
+
 
 
 
