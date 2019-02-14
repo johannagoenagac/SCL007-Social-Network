@@ -27,17 +27,21 @@ window.onload = () => {
             registerForm.style.display = "none";
             recipe.style.display = "none";
             //Muestra nombre del usuario
-            if (user === null) {
-                const nameUserInput = nameManualUser.value;
-                updateManualUser(nameUserInput);
-                nameManualUser.value = '';
-            } else {
+            if (user.displayName === null) {
+                // const nameUserInput = nameManualUser.value;
+                // updateManualUser(nameUserInput);
+                // nameManualUser.value = '';
+                userImg = `https://subirimagen.me/uploads/20190131084141.png`;
+                firstName = 'Usuario';
+                nameUser = 'Usuario';
+            }else{
+                //Asigna nombre completo, imagen y primer nombre, en variables globales, para el uso en distintas partes de la app
                 nameUser = user.displayName;
-                userImg = user.photoURL;
                 let name = user.displayName.split(" ");
                 firstName = name[0];
-                // document.getElementById('user-name').innerHTML = name[0];
+                userImg = user.photoURL;
             }
+            
         } else {
             //Muestra el login, ya que usuario no está logeado
             header.style.display = "none";
@@ -271,55 +275,77 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-
-let eventListener = [];
-
 addLogo.addEventListener("click", (event) => {
-    event.preventDefault();
+    event.stopPropagation();
+
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
-    post.style.display = "block";
     profile.style.display = "none";
     recipe.style.display = "none";
+    post.style.display = "block";
 
-    let filePreview = document.createElement('img');
-    //Funcion para cargar la imagen del post
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                filePreview.id = 'saveFilePreview';
-                filePreview.setAttribute("class", "cardImage");
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                let previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
-            };
-            reader.readAsDataURL(input.files[0]);
-        };
-    };
-    let fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    };
+    post.innerHTML= `
+    <!--Post create-->
+    <div class="container">
+    <div class="row">
+        <div class="col-s-12 col-m-12 col-l-12">
+        <form class="formPost" name="formulario" action="javascript:void(0)" autocomplete="off">
+            <div class="container">
+            <div class="row flexRow">
+                <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                <img id="icon-user" class="responsive-img" src=${userImg} alt="icon user">
+                </div>
+                <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
+                <h1 id="user-name">${firstName}</h1>
+                </div>
+            </div>
+            </div>
 
-    //Funcion para subir la informacion del post a Firebase
-    const savePostIntoDatabase = function (event) {
-        event.stopPropagation();
-        const postImage = saveFilePreview.src;
-        const fullPostText = postText.value;
-        const userID = firebase.auth().currentUser.uid;
-        savePost(postImage, fullPostText, userID);
-        postText.value = '';
-        document.getElementById('file-upload').value = '';
-        document.getElementById('file-preview-zone').removeChild(filePreview);
-    };
+            <!--Subir foto-->
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12 centered" id="file-preview-zone"></div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12" id="file-preview-zone">
+                <input id="file-upload" type="file" accept="image/*"></input>
+                </div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-s-12 m-12 l-12">
+                <textarea id="postText" placeholder="Escribe tu post"></textarea>
+                </div>
+            </div>
+            </div>
+            <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
+                <button id="send" type="button">Enviar</button>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>`;
 
-    if (eventListener.length > 0) {
-        eventListener.forEach(evl => send.removeEventListener("click", evl));
-    }
-    send.addEventListener("click", savePostIntoDatabase);
-    eventListener.push(savePostIntoDatabase);
+    const uploadImage = document.getElementById("file-upload");
+    uploadImage.addEventListener('change', uploadImgStorage,false); //Llama a la funcion para obtener el valor de la imagen
+    function uploadImgStorage(){ 
+        const file = uploadImage.files[0]; //Obtengo el valor de la imagen
+        //Función para subir la info a Firebase
+        const savePostIntoDatabase = function(event){
+            event.stopPropagation();
+            const postImage = file;
+            const fullPostText = postText.value;            
+            savePost(postImage, fullPostText);
+        }
+        send.addEventListener("click", savePostIntoDatabase); //Si hago click en el botón "Save", se llama a función para subir el post
+    };
 });
 
 recipeLogo.addEventListener("click", () => {
@@ -328,8 +354,6 @@ recipeLogo.addEventListener("click", () => {
     post.style.display = "none";
     profile.style.display = "none";
     recipe.style.display = "block";
-
-
 
     recipe.innerHTML = `
         <div class="container">
@@ -429,8 +453,6 @@ function sendButtonRecipe() {
         saveRecipeIntoDatabase();
     });
 
-
-
     //Funcion para subir la informacion de las recetas a Firebase
     const saveRecipeIntoDatabase = function (event) {
 
@@ -438,17 +460,13 @@ function sendButtonRecipe() {
         const recipeTitle = titleRecipe.value;//guardando el titulo
         const recipeIngredients = ingredientsRecipe.value;//guardando los ingredientes
         const recipeText = recipePostText.value;//guardando texto del post
-        const userID = firebase.auth().currentUser.uid;
-        savePost(recipeImage, recipeText, userID, recipeTitle, recipeIngredients);
+        savePost(recipeImage, recipeText, recipeTitle, recipeIngredients);
         postText.value = '';
         recipeTitle
         document.getElementById('file-upload-recipe').value = '';//para limpiar formulario
         document.getElementById('file-preview-zone-recipe').removeChild(filePreviewRecipe);
-
     };
-
 }
-
 
 profileTab.addEventListener("click", () => {
     userLogo.click();
@@ -466,27 +484,35 @@ userLogo.addEventListener("click", (event) => {
     let bioText = null;
     let postImageUser = '';
 
+    //Muestra los post solo del usuario 
     const readPostOneUser = () => {
         readUserPost((userPosts) => {
-            //Lo que tengo que mostrar
+            //Muestro los post del usuario en Sección Perfil
             const userShowPosts = (posts) => {
-                Object.entries(userPosts.val()).forEach(post => {
-                    let idPostUser = Object.values(post)[0];
-                    let contentPostUser = Object.values(post)[1];
-
-                    postImageUser = `
-                    <div class="row">
-                        <div class="col-l-12 centered">
-                            <img class="cardImage" src="${contentPostUser.image}"/>
+                if (userPosts.val() !== null){
+                    Object.entries(userPosts.val()).forEach(post => {
+                        // let idPostUser = Object.values(post)[0];
+                        let contentPostUser = Object.values(post)[1];
+                        postImageUser = `
+                        <div class="row">
+                            <div class="col-l-12 centered">
+                                <img class="cardImage" src="${contentPostUser.image}"/>
+                            </div>
                         </div>
-                    </div>
-                    </div>` + postImageUser;
-                });
+                        </div>` + postImageUser;
+                    });
+                }else{
+                    postImageUser = `
+                        <div class="row">
+                            <div class="col-l-12 centered">
+                                <span>No hay post que mostrar</span>
+                            </div>
+                        </div>`
+                }
             };
             userShowPosts(userPosts);
         });
     };
-
 
     const searchBiography = () => {
         searchForBiography((bio) => {
@@ -498,12 +524,10 @@ userLogo.addEventListener("click", (event) => {
         });
     };
 
-
     searchBiography();
     readPostOneUser();
     function asigna() {
         if (bioText === null) {
-
             bioContentProfile = `
             <textarea id="biographyText" class = "biography" placeholder="Escribenos de ti"></textarea>`;
             bioTextButton = `<span id="textAtButton">Agregar biografía</span>`;
@@ -515,18 +539,11 @@ userLogo.addEventListener("click", (event) => {
     }
 
     function showProfile() {
-        let showImg = '';
-        if (userImg === undefined) {
-            showImg = "./style/img/user.png";
-        } else {
-            showImg = userImg;
-        };
-
         profile.innerHTML = `
         <section id = "userInfo">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <img class="cardProfileImage" src="${showImg}"></img>
+                <img class="cardProfileImage" src="${userImg}"></img>
             </div>
             <div id="userInfo" class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">    
                 <span id="fullName">${nameUser}</span>
