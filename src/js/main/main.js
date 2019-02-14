@@ -1,7 +1,7 @@
 //Manejo del DOM
 
 import { checkAuthStatus, registerUserGoogle, registerUserFacebook, logoutUser, registerUser, loginUser } from '../auth/auth.js';
-import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost, editPost } from '../data/data.js';
+import { savePost, readPost, saveLikePost, searchForBiography, addBiography, readUserPost, deletePost, editPost, saveComment } from '../data/data.js';
 
 
 let nameUser = '';
@@ -100,38 +100,86 @@ const readPostFromDatabase = () => {
                 const likes = extractedLikes.length ? extractedLikes.length : 0;
                 //Genera cada post con la informacion requerida
                 postContainer.innerHTML =
-                    `<div class="formPost">
-                    <div class="container">
-                    <div class="row">
-
-                        <div class="col-l-12 centered">
-                            <img class="cardImage" src="${extractedData.image}"/>
+                `<div class="col-l-12">
+                    <div class="formPost">
+                      <div class="container">
+                        <div class="row">
+                          <div class="centered">
+                            <img class="cardImage" src="${extractedData.image}" />
+                          </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="container">
+                      </div>
+                      <div class="container">
                         <div class="row inlineFlexRow">
+                          <div class="col-l-4">
+                            <i class="fas fa-heart cardIcons" id="like${id}"><a>${likes}</a></i>
+                          </div>
+                          <section id="private${id}">
                             <div class="col-l-4">
-                                <i class="fas fa-heart cardIcons" id="like${id}"><a>${likes}</a></i>
+                              <i class="fas fa-edit cardIcons" id="edit${id}"></i>
                             </div>
-                            <section id="private${id}">
-                                <div class="col-l-4">
-                                    <i class="fas fa-edit cardIcons" id="edit${id}"></i>
-                                </div>
-                                <div class="col-l-4">
-                                    <i class="fas fa-trash-alt cardIcons" id="delete${id}"></i>
-                                </div>
-                            </section>
+                            <div class="col-l-4">
+                              <i class="fas fa-trash-alt cardIcons" id="delete${id}"></i>
+                            </div>
+                          </section>
                         </div>
-                    </div>
-                    <div class="container">
-                    <div class="row">
-                        <div id="textArea${id}" class="col-l-12">
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <div id="textArea${id}" class="col-l-12">
                             <p id="text${id}">${extractedData.text}</p>
+                          </div>
                         </div>
+                      </div>
+                      <div class="container bottomBorder">
+                        <div class="row">
+                          <div class="col-l-12">
+                            <textarea id="comment${id}"></textarea>
+                            <button class="buttons endLine" id="commentBtn${id}">Comentar</button>
+                            <h4>Comentarios</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-l-12" id="allComments${id}">
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    </div>
-                </div>` + postContainer.innerHTML;
+                  </div>` + postContainer.innerHTML;
+
+                  const extractedComments = extractedData.comments ? Object.entries(extractedData.comments) : 0;
+                  
+                  if(extractedComments !== 0 ){
+
+                    extractedComments.forEach(element => {
+                        let currentUser = firebase.auth().currentUser.uid;
+                        let userID = Object.values(element)[1].useruid;
+                        let everyComment = Object.values(element)[1].comment;
+                        let allCommentsArea = document.getElementById("allComments" + id);
+                        allCommentsArea.innerHTML += 
+                            `<div class="bottomBorder">
+                                <h5>${userID}</h5>
+                                <span class="comments">${everyComment}</span>
+                                <section class="inlineFlexRow" id="privateComment${id}">
+                                    <div class="col-l-4">
+                                        <i class="fas fa-edit cardIcons" id="edit${id}"></i>
+                                    </div>
+                                    <div class="col-l-4">
+                                        <i class="fas fa-trash-alt cardIcons" id="delete${id}"></i>
+                                    </div>
+                                </section>
+                            </div>`;
+                        
+                        let ownComments = document.getElementById("privateComment" + id)
+                        if(currentUser === userID){
+                            ownComments.setAttribute("class", "inlineFlexRow");
+                        }else{
+                            ownComments.style.display = "none";
+                        }
+                      })
+                  }
             });
 
             let entries = Object.entries(posts.val())
@@ -139,6 +187,7 @@ const readPostFromDatabase = () => {
             for(let i = 0; i < entries.length; i++){
                 let entryID = entries[i][0]
                 postOptions(entryID);
+                commentOnPost(entryID);
             }
             
             for(let i = 0; i < entries.length; i++){
@@ -206,6 +255,18 @@ const postOptions = (id) => {
             deletePost(id);
         }
     })
+}
+
+const commentOnPost = (id) =>{
+    let comment = document.getElementById("comment" + id);
+    let commentBtn = document.getElementById("commentBtn" + id);
+
+    commentBtn.addEventListener("click", () => {
+        
+        if(comment.value !== ""){
+            saveComment(id, comment.value);
+        }
+    });
 }
 
 homeTab.addEventListener("click", () => {
@@ -352,7 +413,7 @@ userLogo.addEventListener("click", (event) => {
                 <span id="fullName">${nameUser}</span>
                 <div class="row flexrow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                <button type="button" id="logout">
+                <button type="button" class="buttons" id="logout">
                     <span>Cierra sesión <span id="user-name-marker"></span></span>
                 </button>
             </div>
