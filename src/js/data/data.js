@@ -72,6 +72,16 @@ export const savePost = (postImage, fullPostText, recipeTitle, recipeIngredients
     });
 };
 
+export const saveComment = (postID, comment) =>{
+  const newCommentKey = firebase.database().ref(`timeline/${postID}/comments`).push().key;
+  let userID = firebase.auth().currentUser.uid;
+
+  firebase.database().ref(`timeline/${postID}/comments/${newCommentKey}`).set({
+    comment: comment,
+    useruid: userID,
+  });
+}
+
 export const readPost = (onPostChange) => {
   let postRef = firebase.database().ref('timeline');
   postRef.on('value', (posts) => {
