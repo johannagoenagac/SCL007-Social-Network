@@ -187,7 +187,7 @@ const readPostFromDatabase = () => {
             <div class="container">
                 <div class="row">
                     <div id="textArea${id}" class="col-l-12">
-                        <h5 id="text${id}">${title}</h5>
+                        <h3 id="text${id}">${title}</h3>
                     </div>
                 </div>
             </div>
@@ -421,9 +421,11 @@ recipeLogo.addEventListener("click", () => {
 
     sendButtonRecipe();
 })
+
+
 function sendButtonRecipe() {
     sendRecipe.addEventListener("click", () => {
-        console.log("hola");
+        // console.log("hola");
         saveRecipeIntoDatabase();
     });
 
