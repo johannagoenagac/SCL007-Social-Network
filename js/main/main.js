@@ -389,7 +389,7 @@ addLogo.addEventListener("click", (event) => {
             <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
-                <button id="send" type="button">Enviar</button>
+                <button id="send" class="buttons" type="button">Enviar</button>
                 </div>
             </div>
             </div>
@@ -544,6 +544,7 @@ userLogo.addEventListener("click", (event) => {
     home.style.display = "none";
     post.style.display = "none";
     profile.style.display = "block";
+    recipe.style.display ="none";
     let bioContentProfile = '';
     let bioTextButton = '';
     let bioText = null;
