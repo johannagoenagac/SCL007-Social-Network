@@ -27,41 +27,49 @@ export const searchForBiography = (textBio) => {
 };
 
 //Sube información de post a firebase database
-export const savePost = (postImage, fullPostText, userID, recipeTitle,recipeIngredients) => {  
-
+export const savePost = (postImage, fullPostText, recipeTitle, recipeIngredients) => {
+  const userID = firebase.auth().currentUser.uid;
   const newPostKey = firebase.database().ref('post').push().key;
 
-  if (recipeTitle && recipeIngredients === undefined){
-   //sube información a firebase database de los post
-  firebase.database().ref(`timeline/${newPostKey}`).set({
-    image: postImage,
-    text: fullPostText,
-    useruid: userID,
-  });
+  //Subo la imagen a Storage
+  const storageRef = firebase.storage().ref('images/' + postImage.name);
+  const uploadTask = storageRef.put(postImage);
 
-  }else{
-    //subiendo información de recetas a database
-  firebase.database().ref(`timeline/${newPostKey}`).set({
-    image: postImage ,
-    title: recipeTitle,
-    ingredients: recipeIngredients,
-    text: fullPostText,
-    useruid: userID,
- 
-  });
-
-  }
-  
-
-  //subiendo información del perfil a database
-  firebase.database().ref(`profile/${userID}/post`).child(`${newPostKey}`).set({
-
-    image : postImage,
-    text : fullPostText,
-
-  });
-
-  
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+      console.log(err);
+    },
+    function complete() {
+      //Obtengo la URL de firebase de la imagen
+      storageRef.getDownloadURL().then(function (url) {
+        console.log(recipeTitle);
+        if (recipeTitle === undefined){
+          //sube información a firebase database de los post
+          console.log("Post?");
+          firebase.database().ref(`timeline/${newPostKey}`).set({
+           image: url,
+           text: fullPostText,
+           useruid: userID,
+          });
+        }else{
+          //Subiendo información de recetas a database
+          console.log("Receta");
+          firebase.database().ref(`timeline/${newPostKey}`).set({
+            image: url ,
+            title: recipeTitle,
+            ingredients: recipeIngredients,
+            text: fullPostText,
+            useruid: userID,
+          });
+        }
+         //subiendo información del perfil a database
+         firebase.database().ref(`profile/${userID}/post`).child(`${newPostKey}`).set({
+           image : url,
+           text : fullPostText,
+         });
+      });
+    });
 };
 
 export const readPost = (onPostChange) => {
