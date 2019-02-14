@@ -8,7 +8,10 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 let nameUser = '';
 let userImg = '';
 let firstName = '';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
 //Llama a la función de cierre sesión
 const logoutUsers = () => { logoutUser(); }
 
@@ -28,6 +31,7 @@ window.onload = () => {
             registerForm.style.display = "none";
             recipe.style.display = "none";
             //Muestra nombre del usuario
+<<<<<<< HEAD
             if (user.displayName === null) {
                 // const nameUserInput = nameManualUser.value;
                 // updateManualUser(nameUserInput);
@@ -37,10 +41,21 @@ window.onload = () => {
                 nameUser = 'Usuario';
             }else{
                 //Asigna nombre completo, imagen y primer nombre, en variables globales, para el uso en distintas partes de la app
+=======
+            if (user === null) {
+                const nameUserInput = nameManualUser.value;
+                updateManualUser(nameUserInput);
+                nameManualUser.value = '';
+            } else {
+>>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
                 nameUser = user.displayName;
                 let name = user.displayName.split(" ");
                 firstName = name[0];
+<<<<<<< HEAD
                 userImg = user.photoURL;
+=======
+                // document.getElementById('user-name').innerHTML = name[0];
+>>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
             }
             
         } else {
@@ -68,7 +83,7 @@ window.onload = () => {
 const registerWithEmailAndPassword = () => {
     const emailFromUser = registerEmail.value;
     const passwordFromUser = registerPassword.value;
-    registerUser(emailFromUser, passwordFromUser); 
+    registerUser(emailFromUser, passwordFromUser);
     registerEmail.value = '';
     registerPassword.value = '';
 
@@ -100,6 +115,7 @@ goRegister.addEventListener("click", (event) => {
 
 //Lee la data guardada en Firebase, la recorre y agrega a cada post individualmente
 const readPostFromDatabase = () => {
+
     readPost((posts) => {
         postContainer.innerHTML = "";
 
@@ -139,6 +155,11 @@ const readPostFromDatabase = () => {
                             </section>
                         </div>
                     </div>
+
+                    <div id="agreeRecipe">
+                    </div>
+
+
                     <div class="container">
                     <div class="row">
                         <div id="textArea${id}" class="col-l-12">
@@ -147,31 +168,62 @@ const readPostFromDatabase = () => {
                     </div>
                     </div>
                 </div>` + postContainer.innerHTML;
+
+                if (extractedData.title !== undefined) {
+                    printRecipe(extractedData.title, extractedData.ingredients, id)
+                }
+
             });
 
             let entries = Object.entries(posts.val())
 
-            for(let i = 0; i < entries.length; i++){
+            for (let i = 0; i < entries.length; i++) {
                 let entryID = entries[i][0]
                 postOptions(entryID);
             }
-            
-            for(let i = 0; i < entries.length; i++){
+
+            for (let i = 0; i < entries.length; i++) {
                 let userUID = entries[i][1].useruid;
                 let currentUser = firebase.auth().currentUser.uid;
                 let id = entries[i][0]
                 let ownPosts = document.getElementById("private" + id)
 
-                if(userUID === currentUser){
+                if (userUID === currentUser) {
                     ownPosts.setAttribute("class", "inlineFlexRow");
-                }else{
+                } else {
                     ownPosts.style.display = "none";
                 }
             }
         }
         printPosts(posts);
+
     });
+
+    //función para agregar contenedores faltantes a recetas, 
+    //la cual llamare dentro de la estrcutura de los post
+    function printRecipe(title, ingredients, id) {
+
+        document.getElementById("agreeRecipe").innerHTML = `
+            <div class="container">
+                <div class="row">
+                    <div id="textArea${id}" class="col-l-12">
+                        <h5 id="text${id}">${title}</h5>
+                    </div>
+                </div>
+            </div>
+                
+        
+            <div class="container">
+                <div class="row">
+                    <div id="textArea${id}" class="col-l-12">
+                        <p id="text${id}">${ingredients}</p>
+                    </div>
+                </div>
+            </div>`
+    }
 }
+
+
 
 const postOptions = (id) => {
 
@@ -181,12 +233,12 @@ const postOptions = (id) => {
     const textAreaID = document.getElementById("textArea" + id);
     const deleteID = document.getElementById("delete" + id);
 
-    likeID.addEventListener("click", ()=> {
+    likeID.addEventListener("click", () => {
         saveLikePost(id);
     })
 
-    editID.addEventListener("click", ()=> {
-        
+    editID.addEventListener("click", () => {
+
         let originalText = textID.textContent;
         let saveBtn = document.createElement("input");
         saveBtn.setAttribute("type", "button")
@@ -215,9 +267,9 @@ const postOptions = (id) => {
         })
     })
 
-    deleteID.addEventListener("click", ()=> {
+    deleteID.addEventListener("click", () => {
         let confirmation = confirm("¿Estas seguro que quieres eliminar este post?")
-        if (confirmation === true){
+        if (confirmation === true) {
             deletePost(id);
         }
     })
@@ -238,14 +290,6 @@ homeLogo.addEventListener("click", () => {
 searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
-
-recipeLogo.addEventListener("click", ()=>{
-    recipe.style.display = "block";
-    home.style.display ="none";
-    post.style.display = "none";
-    profile.style.display = "none";
-});
-
 
 
 
@@ -268,6 +312,7 @@ recipeLogo.addEventListener("click", ()=>{
 // let eventListener = [];
 addLogo.addEventListener("click", (event) => {
     event.stopPropagation();
+
     pageGuide.innerHTML = "Post";
     home.style.display = "none";
     profile.style.display = "none";
@@ -419,7 +464,129 @@ addLogo.addEventListener("click", (event) => {
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
-});
+    home.style.display = "none";
+    post.style.display = "none";
+    profile.style.display = "none";
+    recipe.style.display = "block";
+
+
+
+    recipe.innerHTML = `
+        <div class="container">
+              <div class="row">
+                <div class="col-s-12 col-m-12 col-l-12">
+                  <form class="formRecipe" name="formulario" action="javascript:void(0)" autocomplete="off">
+                    <div class="container">
+                      <div class="row flexRow">
+                        <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
+                          <img id="icon-user" class="responsive-img" src="https://subirimagen.me/uploads/20190131084141.png"
+                            alt="icon user">
+                        </div>
+                        <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
+                          <h1 id="user-name-recipe">${firstName}</h1>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 centered" id="file-preview-zone-recipe"></div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12" id="file-preview-zone-recipe">
+                          <input id="file-upload-recipe" type="file" accept="image/*">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <input id="titleRecipe" type="text" placeholder="Nombre de la receta">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="container">
+                          <div class="row">
+                            <div class="col-xs-12">
+                                <textarea id="ingredientsRecipe">Ingredientes:</textarea>
+                            </div>
+                          </div>
+                        </div>
+  
+
+                     <div class="container">
+                      <div class="row">
+                        <div class="col-s-12 m-12 l-12">
+                          <textarea id="recipePostText">Preparación:</textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-xs-12 col-s-12 col-m-12 col-l-12">
+                          <button id="sendRecipe">Enviar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>`
+
+    //captura de imagenes para recetas
+    let filePreviewRecipe = document.createElement('img');
+    //Funcion para cargar la imagen del post
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                filePreviewRecipe.id = 'saveFilePreviewRecipe';
+                filePreviewRecipe.setAttribute("class", "cardImage");
+                //e.target.result contents the base64 data from the image uploaded
+                filePreviewRecipe.src = e.target.result;
+                let previewZone = document.getElementById('file-preview-zone-recipe');
+                previewZone.appendChild(filePreviewRecipe);
+            };
+            reader.readAsDataURL(input.files[0]);
+        };
+    };
+    let fileUpload = document.getElementById('file-upload-recipe');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    };
+
+    sendButtonRecipe();
+})
+function sendButtonRecipe() {
+    sendRecipe.addEventListener("click", () => {
+        console.log("hola");
+        saveRecipeIntoDatabase();
+    });
+
+
+
+    //Funcion para subir la informacion de las recetas a Firebase
+    const saveRecipeIntoDatabase = function (event) {
+
+        const recipeImage = saveFilePreviewRecipe.src;//guardando imagen
+        const recipeTitle = titleRecipe.value;//guardando el titulo
+        const recipeIngredients = ingredientsRecipe.value;//guardando los ingredientes
+        const recipeText = recipePostText.value;//guardando texto del post
+        const userID = firebase.auth().currentUser.uid;
+        savePost(recipeImage, recipeText, userID, recipeTitle, recipeIngredients);
+        postText.value = '';
+        recipeTitle
+        document.getElementById('file-upload-recipe').value = '';//para limpiar formulario
+        document.getElementById('file-preview-zone-recipe').removeChild(filePreviewRecipe);
+
+    };
+
+}
+
 
 profileTab.addEventListener("click", () => {
     userLogo.click();
@@ -460,7 +627,6 @@ userLogo.addEventListener("click", (event) => {
                             <div class="col-l-12 centered">
                                 <span>No hay post que mostrar</span>
                             </div>
-                        </div>
                         </div>`
                 }
             };
@@ -547,3 +713,11 @@ userLogo.addEventListener("click", (event) => {
         logout.addEventListener('click', logoutUsers);
     }
 })
+
+
+
+
+
+
+
+
