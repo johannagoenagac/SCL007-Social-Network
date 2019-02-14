@@ -247,7 +247,11 @@ body{
     margin: 0 auto;
     justify-content: center;
 }
+input#file-upload-recipe{
+    display: block;
+    margin: 0 auto;
 
+}
 
 #user-name, #fullName{
     font-size: 150%;
@@ -268,7 +272,7 @@ body{
 }
 
 
-.buttons{
+.buttons, #sendRecipe{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
@@ -285,7 +289,7 @@ body{
     border-radius: 5px;
     margin: 0 auto;
     display: block;
-    height: 2rem;
+    height: 3rem;
     width: 7rem;
     font-size: 16px;
     margin-top: 1rem;
@@ -296,7 +300,7 @@ body{
     float: inline-end;
 }
 
-#tittleRecipe{
+input#titleRecipe{
     margin: 0 auto;
     display: block;
     width: 80%;
@@ -358,7 +362,6 @@ body{
 
 #recipe{
     display: none;
-
 }
 
 #go-up-text{
