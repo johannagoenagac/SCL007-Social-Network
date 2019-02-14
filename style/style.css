@@ -82,7 +82,7 @@
 body{
     display: flex;
     flex-direction: column;
-    background-color: #E5E5E5;
+    background-color: #fafafa;
     font-family: 'Hind', sans-serif;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -100,8 +100,9 @@ body{
     color: #FCE4EC;
     display: block;
     text-align: center;
-    max-width: 100%;
-   
+    height: 100%;
+    width: 100%;
+
 }
 
 .indexTitle{
@@ -110,6 +111,7 @@ body{
     display: block;
     max-width: 100%;
     text-align: center;
+    height: 50px;
 }
 
 .info-login{
@@ -255,16 +257,18 @@ body{
     font-family: sans-serif;
 }
 
-#postText, #biographyText{
+#postText, #biographyText, #recipePostText{
     width: 90%;
     height: 150px;
     max-width: 100%;
     display: block;
     margin: 0 auto;
     justify-content: center;
+    border: #bdbdbd solid 1px;
 }
 
-.buttons, #biography{
+
+.buttons{
     background-color: #B71C1C;
     color: white;
     border-radius: 5px;
@@ -275,12 +279,39 @@ body{
     font-size: 16px;
 }
 
+#biography{
+    background-color: #B71C1C;
+    color: white;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+    height: 2rem;
+    width: 7rem;
+    font-size: 16px;
+    margin-top: 1rem;
+}
+
+
 .endLine{
     float: inline-end;
 }
 
-#biography{
-    margin-top: 1rem;
+#tittleRecipe{
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#ingredientsRecipe{
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    height: 100px;
+    border: #bdbdbd solid 1px;
+    
+
 }
 
 #logout{
@@ -319,9 +350,15 @@ body{
     display: none;
 }
 
+
 #postContainer{
     margin: 0 auto;
     float: inherit;
+}
+
+#recipe{
+    display: none;
+
 }
 
 #go-up-text{
@@ -359,13 +396,11 @@ p{
     margin: 0 auto;
 }
 
-
 .cardProfileImage{
     max-width: 100%;
     margin: 0 auto;
     border-radius: 100%;
 }
-
 
 .cardIcons{
     cursor: pointer;
