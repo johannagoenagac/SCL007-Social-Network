@@ -5,6 +5,15 @@
  **Food & Travel** Es una red social que ha sido creada para todos aquellos viajeros amantes de la comida y de ir siempre probando nuevos sabores, y que quieren compartir fotografias de lo que van probando en su camino, así como tambien la ubicación de estos lugares para que otras personas puedan también llegar a probarlas.
 
 ## Investigación
+
+Para la investigación hemos visitado variados sitios de recetas y publicaciones similares, de aquí hemos tomado los principales colores que usan la mayoria de los sitios junto con lo que más publican las personas y es por eso que tenemos los siguientes resultado en las decisisones del diseño:
+
+###Deciisones de diseño basados en la investigación
+
+-Hemos decidido usar el color rojo ya que este llama al sabor de las comidas y es muy usado en sitios de recetas y en contraste usamos el blanco y colores grises claros, asi contrastamos con los variados colores de las comidas y nuestro color principal.
+
+-En base a lo investigado hemos decidido tambien crear una sección para publicar recetas ya que nuestros encuestados lo pidideron y por que es común que las personas quieran ver recetas y publicarlas, con esto le damos un plus a nuestro sitio.
+
 ### Encuesta
 Realizamos una encuesta mediante formulario de Google y luego la compartimos de manera pública.
 
@@ -63,22 +72,26 @@ Realizamos la interfaz de usuario en la aplicación Figma, puedes verla e intera
 #### Versión Desktop
 
 <p align="center">
-<img src="">
+<img src="http://subirimagen.me/uploads/20190214132727.24">
 </p>
 
 <p align="center">
-<img src="">
+<img src="http://subirimagen.me/uploads/20190214133124.26">
 </p>
 
 
 #### Versión Mobile
 
 <p align="center">
-<img src="">
+<img src="http://subirimagen.me/uploads/20190214132156.21">
 </p>
 
 <p align="center">
-<img src="">
+<img src="http://subirimagen.me/uploads/20190214132301.06">
+</p>
+
+<p align="center">
+<img src="http://subirimagen.me/uploads/20190214132024.38">
 </p>
 
 ### Fundamentos Prototipo
@@ -90,7 +103,7 @@ Realizamos la interfaz de usuario en la aplicación Figma, puedes verla e intera
 ## SOBRE EL SITIO WEB
 
 ### ¿Por qué Food & Travel?
-El nombre nace por ambos conceptos que se serán empleados en nuestro sitio y que tiene justamente que ver con los viajeros que van probando nuevos sabores de comida y quieren compartirlos.
+El nombre nace por ambos conceptos que serán empleados en nuestro sitio y que tiene justamente que ver con los viajeros que van probando nuevos sabores de comida y quieren compartirlos con otras personas.
 
 ¡Te invitamos a **viajar por los sabores** en nuestra página web!
 Link página
@@ -98,7 +111,7 @@ Link página
 Es gratuita y no necesitas registrarte.
 
 ### ¿Cómo se usa?
-- Debes abrir el navegador y escribir el sitio [www.food&travel.cl](url).
+- Debes abrir el navegador y escribir el sitio [www.food&travel.cl](https://johannagoenagac.github.io/SCL007-Social-Network/).
 
 - Primero tendrás un formulario para registrarte en nuestro sitio, es necesario ya que necesitaras una cuenta para poder ver y generar publicaciones.
 Podrás hacerlo con tu cuenta de google o facebook.
@@ -112,10 +125,31 @@ Luego de publicar, podrás ver tu publicación en el home donde se encuentran to
 
 
 ### Funcionalidad
-Para el desarrollo de esta página se utilizó lenguaje JavaScript (ES6), Vanilla Javascript, HTML5 y CSS.
+
+-Para el desarrollo de esta página se utilizó lenguaje JavaScript (ES6), Vanilla Javascript, HTML5 y CSS.
 Firebase como base de datos.
 
 ### Resultados Testeo Usabilidad
+
+Se realiza test de usabilidad con un usuario, Gonzalo de 26 años le encanta viajar e ir probando nuevos sabores le hemos presentado nuestra página y de esto nos ha dicho lo siguiente:
+
+-Entiende la finalidad de nuestro producto y que en esta página podrá publicar fotografías de comidas y lugares en donde las ha probado.
+
+-Encuentra amigable la sección de los post y la forma de subir las fotografías.
+
+-Sección del perfil al entrar con email y contraseña, presenta problemas.
+
+-Encuentra confuso al entrar a sus carpetas para seleccionar una fotografía
+
+-Sugiere que al dar click en el logo este lo lleve al home.
+
+###Iteración luego de los resultados del test de usabilidad
+
+-Se corrige error al entrar con email y contraseña.
+
+-En una proxima iteración se considera implementar una manera más clara de subir imagenes.
+
+-En una proxima iteración se considera que al dar click en el logo este me envie al home.
 
 
 
