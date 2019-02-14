@@ -8,10 +8,6 @@ import { savePost, readPost, saveLikePost, searchForBiography, addBiography, rea
 let nameUser = '';
 let userImg = '';
 let firstName = '';
-<<<<<<< HEAD
-
-=======
->>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
 //Llama a la función de cierre sesión
 const logoutUsers = () => { logoutUser(); }
 
@@ -31,7 +27,6 @@ window.onload = () => {
             registerForm.style.display = "none";
             recipe.style.display = "none";
             //Muestra nombre del usuario
-<<<<<<< HEAD
             if (user.displayName === null) {
                 // const nameUserInput = nameManualUser.value;
                 // updateManualUser(nameUserInput);
@@ -41,21 +36,10 @@ window.onload = () => {
                 nameUser = 'Usuario';
             }else{
                 //Asigna nombre completo, imagen y primer nombre, en variables globales, para el uso en distintas partes de la app
-=======
-            if (user === null) {
-                const nameUserInput = nameManualUser.value;
-                updateManualUser(nameUserInput);
-                nameManualUser.value = '';
-            } else {
->>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
                 nameUser = user.displayName;
                 let name = user.displayName.split(" ");
                 firstName = name[0];
-<<<<<<< HEAD
                 userImg = user.photoURL;
-=======
-                // document.getElementById('user-name').innerHTML = name[0];
->>>>>>> 79ea50f2474287d5a1f5d65401d11cf92c5c5b04
             }
             
         } else {
@@ -291,25 +275,6 @@ searchLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Buscar";
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let eventListener = [];
 addLogo.addEventListener("click", (event) => {
     event.stopPropagation();
 
@@ -369,98 +334,19 @@ addLogo.addEventListener("click", (event) => {
     </div>`;
 
     const uploadImage = document.getElementById("file-upload");
-    uploadImage.addEventListener('change', uploadImgStorage,false);
-    
-    function uploadImgStorage(){
-        const file = uploadImage.target.files[0];
-        console.log(file);
-        // const storageRef = firebase.storage().ref('images/' + file.name);
-        // const uploadTask = storageRef.put(file);
-    
-        // uploadTask.on('state_changed', function (snapshot) { },
-        // function error(err) { },
-        // function complete() {
-        //     storageRef.getDownloadURL().then(function (url) {
-        //     const imgKey = firebase.database().ref('myImages/').push().key;
-        //     const updates = {};
-        //     const dataImg = {
-        //         url: url,
-        //         data: document.getElementById('dataInput').value,
-        //     };
-        //     updates['/myImages/' + imgKey] = dataImg;
-        //     firebase.database().ref().update(updates);
-        //     document.getElementById('container').innerHTML = `
-        // <div>
-        // <h1>${dataImg.data}</h1>
-        //     <img src="${url}"/>
-        // </div>
-        // ` + document.getElementById('container').innerHTML;
-        //     });
-        // });
+    uploadImage.addEventListener('change', uploadImgStorage,false); //Llama a la funcion para obtener el valor de la imagen
+    function uploadImgStorage(){ 
+        const file = uploadImage.files[0]; //Obtengo el valor de la imagen
+        //Función para subir la info a Firebase
+        const savePostIntoDatabase = function(event){
+            event.stopPropagation();
+            const postImage = file;
+            const fullPostText = postText.value;            
+            savePost(postImage, fullPostText);
+        }
+        send.addEventListener("click", savePostIntoDatabase); //Si hago click en el botón "Save", se llama a función para subir el post
     };
-
-
-
-
-// let filePreview = document.createElement('img');
-// //Funcion para cargar la imagen del post
-// function readFile(input) {
-//     if (input.files && input.files[0]) {
-//         let reader = new FileReader();
-//         reader.onload = function (e) {
-//             filePreview.id = 'saveFilePreview';
-//             filePreview.setAttribute("class", "cardImage");
-//             //e.target.result contents the base64 data from the image uploaded
-//             filePreview.src = e.target.result;
-//             let previewZone = document.getElementById('file-preview-zone');
-//             previewZone.appendChild(filePreview);
-//         };
-//         reader.readAsDataURL(input.files[0]);
-//     };
-// };
-// let fileUpload = document.getElementById('file-upload');
-// fileUpload.onchange = function (e) {
-//     readFile(e.srcElement);
-// };
-
-// //Funcion para subir la informacion del post a Firebase
-// const savePostIntoDatabase = function(event){
-//     event.stopPropagation();
-//     const postImage = saveFilePreview.src;
-//     const fullPostText = postText.value;
-//     const userID = firebase.auth().currentUser.uid;
-//     savePost(postImage, fullPostText, userID);
-//     postText.value = '';
-//     document.getElementById('file-upload').value = '';
-//     document.getElementById('file-preview-zone').removeChild(filePreview);
-// };
-    
-// if(eventListener.length > 0){
-//     eventListener.forEach( evl => send.removeEventListener("click", evl));
-// }
-// send.addEventListener("click", savePostIntoDatabase);
-// eventListener.push(savePostIntoDatabase);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 recipeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Receta";
@@ -468,8 +354,6 @@ recipeLogo.addEventListener("click", () => {
     post.style.display = "none";
     profile.style.display = "none";
     recipe.style.display = "block";
-
-
 
     recipe.innerHTML = `
         <div class="container">
@@ -567,8 +451,6 @@ function sendButtonRecipe() {
         saveRecipeIntoDatabase();
     });
 
-
-
     //Funcion para subir la informacion de las recetas a Firebase
     const saveRecipeIntoDatabase = function (event) {
 
@@ -576,17 +458,13 @@ function sendButtonRecipe() {
         const recipeTitle = titleRecipe.value;//guardando el titulo
         const recipeIngredients = ingredientsRecipe.value;//guardando los ingredientes
         const recipeText = recipePostText.value;//guardando texto del post
-        const userID = firebase.auth().currentUser.uid;
-        savePost(recipeImage, recipeText, userID, recipeTitle, recipeIngredients);
+        savePost(recipeImage, recipeText, recipeTitle, recipeIngredients);
         postText.value = '';
         recipeTitle
         document.getElementById('file-upload-recipe').value = '';//para limpiar formulario
         document.getElementById('file-preview-zone-recipe').removeChild(filePreviewRecipe);
-
     };
-
 }
-
 
 profileTab.addEventListener("click", () => {
     userLogo.click();
