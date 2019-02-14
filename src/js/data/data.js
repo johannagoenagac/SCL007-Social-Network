@@ -27,8 +27,8 @@ export const searchForBiography = (textBio) => {
 };
 
 //Sube información de post a firebase database
-export const savePost = (postImage, fullPostText, userID, recipeTitle,recipeIngredients) => {  
-
+export const savePost = (postImage, fullPostText, recipeTitle, recipeIngredients) => {  
+  const userID = firebase.auth().currentUser.uid;
   const newPostKey = firebase.database().ref('post').push().key;
 
   if (recipeTitle && recipeIngredients === undefined){
