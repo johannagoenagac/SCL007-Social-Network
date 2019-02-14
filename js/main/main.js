@@ -27,7 +27,6 @@ window.onload = () => {
             profile.style.display = "none";
             registerForm.style.display = "none";
             recipe.style.display = "none";
-            console.log(user.displayName);
             //Muestra nombre del usuario
             if (user.displayName === null) {
                 // const nameUserInput = nameManualUser.value;
@@ -410,20 +409,29 @@ userLogo.addEventListener("click", (event) => {
     //Muestra los post solo del usuario 
     const readPostOneUser = () => {
         readUserPost((userPosts) => {
-            //Lo que tengo que mostrar
+            //Muestro los post del usuario en Sección Perfil
             const userShowPosts = (posts) => {
-                Object.entries(userPosts.val()).forEach(post => {
-                    // let idPostUser = Object.values(post)[0];
-                    let contentPostUser = Object.values(post)[1];
-
-                    postImageUser = `
-                    <div class="row">
-                        <div class="col-l-12 centered">
-                            <img class="cardImage" src="${contentPostUser.image}"/>
+                if (userPosts.val() !== null){
+                    Object.entries(userPosts.val()).forEach(post => {
+                        // let idPostUser = Object.values(post)[0];
+                        let contentPostUser = Object.values(post)[1];
+                        postImageUser = `
+                        <div class="row">
+                            <div class="col-l-12 centered">
+                                <img class="cardImage" src="${contentPostUser.image}"/>
+                            </div>
                         </div>
-                    </div>
-                    </div>` + postImageUser;
-               });
+                        </div>` + postImageUser;
+                    });
+                }else{
+                    postImageUser = `
+                        <div class="row">
+                            <div class="col-l-12 centered">
+                                <span>No hay post que mostrar</span>
+                            </div>
+                        </div>
+                        </div>`
+                }
             };
             userShowPosts(userPosts);
         });
