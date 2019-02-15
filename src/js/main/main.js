@@ -425,6 +425,7 @@ addLogo.addEventListener("click", (event) => {
             const postImage = file;
             const fullPostText = postText.value;            
             savePost(postImage, fullPostText);
+            home.style.display = "block";
         }
         send.addEventListener("click", savePostIntoDatabase); //Si hago click en el botón "Save", se llama a función para subir el post
     };
@@ -577,20 +578,15 @@ userLogo.addEventListener("click", (event) => {
                         // let idPostUser = Object.values(post)[0];
                         let contentPostUser = Object.values(post)[1];
                         postImageUser = `
-                        <div class="row">
-                            <div class="col-l-12 centered">
-                                <img class="cardImage" src="${contentPostUser.image}"/>
-                            </div>
-                        </div>
+                        <div class="col-s-6 col-m-5 col-l-4 centered profilePosts">
+                            <img class="cardImage" src="${contentPostUser.image}"/>
                         </div>` + postImageUser;
                     });
                 }else{
                     postImageUser = `
-                        <div class="row">
-                            <div class="col-l-12 centered">
-                                <span>No hay post que mostrar</span>
-                            </div>
-                        </div>`
+                    <div class="col-l-12 centered">
+                        <span>No hay post que mostrar</span>
+                    </div>`
                 }
             };
             userShowPosts(userPosts);
@@ -652,8 +648,14 @@ userLogo.addEventListener("click", (event) => {
             </div>
         </section>
         <section id = "postsUserImage">
-        <div class="container" id ="postsUser">${postImageUser}</div>
+
+        <div class="container" id ="postsUser">
+            <div class="row">${postImageUser}</div>
+        </div>
+
+        
         </form>
+
         </section>`;
 
         //Si no tiene biografía, agrega una a firebase
