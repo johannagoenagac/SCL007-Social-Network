@@ -101,7 +101,7 @@ const readPostFromDatabase = () => {
 
     readPost((posts) => {
         postContainer.innerHTML = "";
-
+        pageGuide.innerHTML = "Home";
         const printPosts = (posts) => {
             Object.entries(posts.val()).forEach(post => {
                 //Toma el ID de post
@@ -177,29 +177,42 @@ const readPostFromDatabase = () => {
 
                     extractedComments.forEach(element => {
                         let currentUser = firebase.auth().currentUser.uid;
+                        let commentID = Object.values(element)[0];
                         let userID = Object.values(element)[1].useruid;
+                        let userName = Object.values(element)[1].userName;
                         let everyComment = Object.values(element)[1].comment;
                         let allCommentsArea = document.getElementById("allComments" + id);
                         allCommentsArea.innerHTML += 
                             `<div class="bottomBorder">
-                                <h5>${userID}</h5>
+                                <h5>${userName}</h5>
                                 <span class="comments">${everyComment}</span>
-                                <section class="inlineFlexRow" id="privateComment${id}">
+                                <section class="inlineFlexRow" id="privateComment${commentID}">
                                     <div class="col-l-4">
-                                        <i class="fas fa-edit cardIcons" id="edit${id}"></i>
+                                        <i class="fas fa-edit cardIcons" id="edit${commentID}"></i>
                                     </div>
                                     <div class="col-l-4">
-                                        <i class="fas fa-trash-alt cardIcons" id="delete${id}"></i>
+                                        <i class="fas fa-trash-alt cardIcons" id="delete${commentID}"></i>
                                     </div>
                                 </section>
                             </div>`;
                         
-                        let ownComments = document.getElementById("privateComment" + id)
+                        let ownComments = document.getElementById("privateComment" + commentID)
                         if(currentUser === userID){
-                            ownComments.setAttribute("class", "inlineFlexRow");
+                            ownComments.style.display = "none";
+                            //ownComments.setAttribute("class", "inlineFlexRow");
                         }else{
                             ownComments.style.display = "none";
                         }
+
+                        // for(let i = 0; i < everyComment.length; i++){
+
+                        //     let deleteComment = document.getElementById("delete" + commentID)
+                        
+                        //     deleteComment.addEventListener("click", () => {
+                        //         console.log("click")
+                        //         deleteComment(id, commentID);
+                        //     });
+                        // }
                       })
                   }
 
@@ -328,16 +341,20 @@ homeTab.addEventListener("click", () => {
     homeLogo.click();
 })
 
+mobileVersion.addEventListener("click", () => {
+    homeLogo.click();
+})
+
+webVersion.addEventListener("click", () => {
+    homeLogo.click();
+})
+
 homeLogo.addEventListener("click", () => {
     pageGuide.innerHTML = "Home";
     home.style.display = "block";
     post.style.display = "none";
     profile.style.display = "none";
     recipe.style.display = "none";
-});
-
-searchLogo.addEventListener("click", () => {
-    pageGuide.innerHTML = "Buscar";
 });
 
 addLogo.addEventListener("click", (event) => {

@@ -12,7 +12,7 @@
 .navbar{
     height: 4rem;
     min-width: 100%;
-    position: sticky;
+    position: fixed;
     z-index: 2;
     padding: .5rem;
     background-color: #B71C1C;
@@ -21,6 +21,7 @@
     align-items: center;
     display: flex;
     color: white;
+    top: 0;
 }
 
 .navbar > a{
@@ -92,6 +93,7 @@ body{
 
 #root{
     padding-bottom: 3.5rem;
+    padding-top: 4rem;
 }
 
 .indexLogo{
@@ -377,7 +379,6 @@ h1{
 h4{
     margin-bottom: 0;
     margin-top: 3rem;
-    background-color: #e5e5e5;
 }
 
 .bottomBorder{
