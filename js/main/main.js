@@ -442,11 +442,11 @@ recipeLogo.addEventListener("click", () => {
         <div class="container">
               <div class="row">
                 <div class="col-s-12 col-m-12 col-l-12">
-                  <form class="formRecipe" name="formulario" action="javascript:void(0)" autocomplete="off">
+                  <form class="formPost" name="formulario" action="javascript:void(0)" autocomplete="off">
                     <div class="container">
                       <div class="row flexRow">
                         <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
-                          <img id="icon-user" class="responsive-img" src="https://subirimagen.me/uploads/20190131084141.png"
+                          <img id="icon-user" class="responsive-img" src="${userImg}"
                             alt="icon user">
                         </div>
                         <div class="col-xs-7 col-s-8 col-m-8 col-l-8 alignment">
@@ -620,6 +620,7 @@ userLogo.addEventListener("click", (event) => {
     function showProfile() {
         profile.innerHTML = `
         <section id = "userInfo">
+        <form class="formProfile">
         <div class="row flexRow">
             <div class="col-xs-5 col-s-4 col-m-4 col-l-4">
                 <img class="cardProfileImage" src="${userImg}"></img>
@@ -647,9 +648,14 @@ userLogo.addEventListener("click", (event) => {
             </div>
         </section>
         <section id = "postsUserImage">
+
         <div class="container" id ="postsUser">
             <div class="row">${postImageUser}</div>
         </div>
+
+        
+        </form>
+
         </section>`;
 
         //Si no tiene biografía, agrega una a firebase
